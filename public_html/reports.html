@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Volunteers</title>
+        <title>Reports</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/bootstrap.min.css">        
@@ -48,7 +48,7 @@ and open the template in the editor.
                     </div>
                     <ul class="nav navbar-nav">
                         <li><a href=home.html>Home</a></li>
-                        <li class="active"><a href=Volunteers.html>Volunteers</a></li>
+                        <li><a href=Volunteers.html>Volunteers</a></li>
                         <li><a href=groups.html>Groups</a></li> 
                     </ul>
                     <div style="padding-top: 10px">
@@ -81,7 +81,7 @@ and open the template in the editor.
                                 <th>Delete</th>
                                 </thead>
                                 <tbody>
-      <input type="text" ng-model="test">
+
                                     <tr ng-repeat="x in volunteers| filter:test">
                                         <td><input type="checkbox" class="checkthis" /></td>
                                         <td>{{x.fName}}</td>
