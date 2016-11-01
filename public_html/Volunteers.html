@@ -70,6 +70,7 @@ and open the template in the editor.
                             </div>
                         </div>
                     </form>
+                    <button style="float: right" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#create" ><span class="glyphicon glyphicon-plus-sign">&nbsp;Create New Volunteer</span></button>
                     <div class="col-md-12">
                         <div class="table-responsive">                           
                             <table id="mytable" class="table table-bordered table-striped">
@@ -89,20 +90,49 @@ and open the template in the editor.
                                 <tbody>
                                     <tr ng-repeat="x in volunteers| filter:test">
                                         <td><input type="checkbox" class="checkthis" /></td>
-                                        <td ng-bind="x.fName" ng-model="fName"></td>
-                                        <td ng-bind="x.lName" ng-model="lName"></td>
-                                        <td ng-bind="x.profession" ng-model="profession"></td>
-                                        <td ng-bind="x.cert" ng-model="cert"></td>
-                                        <td ng-bind="x.age" ng-model="age"></td>
-                                        <td ng-bind="x.Address" ng-model="address"></td>
-                                        <td ng-bind="x.email" ng-model="email"></td>
-                                        <td ng-bind="x.contact" ng-model="contact"></td>                                        
-                                        <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                                        <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                                        <td>
+                                            <div ng-hide="editingData[x.id]" ng-bind="x.fName"></div>
+                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.fName" /></div>
+                                        </td>
+                                            <td>
+                                         <div ng-hide="editingData[x.id]" ng-bind="x.lName"></div>
+                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.lName" /></div>
+                                        </td>
+                                            <td>
+                                         <div ng-hide="editingData[x.id]" ng-bind="x.profession"></div>
+                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.profession" /></div>
+                                        </td>
+                                            <td>
+                                         <div ng-hide="editingData[x.id]" ng-bind="x.cert"></div>
+                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.cert" /></div>
+                                        </td>
+                                        <td> 
+                                            <div ng-hide="editingData[x.id]" ng-bind="x.age"></div>
+                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.age" /></div>
+                                        </td>
+                                            <td>
+                                         <div ng-hide="editingData[x.id]" ng-bind="x.Address"></div>
+                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.Address" /></div>
+                                        </td>
+                                            <td>
+                                         <div ng-hide="editingData[x.id]" ng-bind="x.email"></div>
+                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.email" /></div>
+                                        </td>
+                                            <td>
+                                         <div ng-hide="editingData[x.id]" ng-bind="x.contact"></div>
+                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.contact" /></div>
+                                        </td>                                        
+                                        <!--                                        <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                                                                                <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>-->
+                                        <td>
+                                            <button ng-hide="editingData[x.id]" ng-click="modify(x)" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>
+                                            <button ng-show="editingData[x.id]" ng-click="update(x)" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-ok-sign"></span>Update</button></td>
+                                        <td>   <button ng-hide="viewField" class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
+                                        </td>
                                     </tr>                            
-                                    <tr>
-                                <button style="float: right" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#create" ><span class="glyphicon glyphicon-plus-sign">&nbsp;Create New Volunteer</span></button>
-                                </tr>
+                                    
+                                
+                                
                                 </tbody>
                             </table>                            
                         </div>
@@ -220,14 +250,29 @@ and open the template in the editor.
             </div>
             <script>var app = angular.module('myApp', []);
                 app.controller('myCtrl', function ($scope) {
-                    $scope.volunteers = [{"fName": "Alfreds", "lName": "Futterkiste", "Address": "Berlin", "email": "ritish@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "21", "cert": "Level 1"},
-                        {"fName": "Ana Trujillo ", "lName": "Emparedados y helados", "Address": "México D.F.", "email": "harish@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "31", "cert": "Level 2"},
-                        {"fName": "Antonio Moreno", "lName": "Taquería", "Address": "México D.F.", "email": "anirudh@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "45", "cert": "Level 4"},
-                        {"fName": "Around", "lName": "Horn", "Address": "London", "email": "jean@gmail.com", "profession": "Student", "contact": "+923335456757", "age": "54", "cert": "Level 3"},
-                        {"fName": "B's", "lName": "Beverages", "Address": "London", "email": "tommy@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "23", "cert": "Level 4"},
-                        {"fName": "Berglunds", "lName": "snabbköp", "Address": "Luleå", "email": "duff@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "27", "cert": "Level 2"},
-                        {"fName": "Blauer See", "lName": "Delikatessen", "Address": "Mannheim", "email": "tough@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "26", "cert": "Level 1"}
+                    $scope.volunteers = [{"id":0,"fName": "Alfreds", "lName": "Futterkiste", "Address": "Berlin", "email": "ritish@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "21", "cert": "Level 1"},
+                        {"id":1,"fName": "Ana Trujillo ", "lName": "Emparedados y helados", "Address": "México D.F.", "email": "harish@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "31", "cert": "Level 2"},
+                        {"id":2,"fName": "Antonio Moreno", "lName": "Taquería", "Address": "México D.F.", "email": "anirudh@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "45", "cert": "Level 4"},
+                        {"id":3,"fName": "Around", "lName": "Horn", "Address": "London", "email": "jean@gmail.com", "profession": "Student", "contact": "+923335456757", "age": "54", "cert": "Level 3"},
+                        {"id":4,"fName": "B's", "lName": "Beverages", "Address": "London", "email": "tommy@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "23", "cert": "Level 4"},
+                        {"id":5,"fName": "Berglunds", "lName": "snabbköp", "Address": "Luleå", "email": "duff@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "27", "cert": "Level 2"},
+                        {"id":6,"fName": "Blauer See", "lName": "Delikatessen", "Address": "Mannheim", "email": "tough@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "26", "cert": "Level 1"}
                     ];
+                    $scope.editingData = {};
+
+                    for (var i = 0, length = $scope.volunteers.length; i < length; i++) {
+                        $scope.editingData[$scope.volunteers[i].id] = false;
+                    }
+
+
+                    $scope.modify = function (x) {
+                        $scope.editingData[x.id] = true;
+                    };
+
+
+                    $scope.update = function (x) {
+                        $scope.editingData[x.id] = false;
+                    };
                 });</script>
     </body>
 </html>
