@@ -9,7 +9,8 @@ and open the template in the editor.
         <title>Volunteers</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/bootstrap.min.css">        
+        <link rel="shortcut icon" href="hands.ico" />
+        <link rel="stylesheet" href="css/bootstrap.min.css">         
         <script src ="js/bootstrap.min.js"></script>    
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -59,16 +60,16 @@ and open the template in the editor.
                     </div>
                 </div>
             </nav>            
-            <div class="container" style="padding: 30px">
+            <div class="container">
                 <div class="row">
                     <form class="navbar-form" role="search">
-                <div class="input-group">
-                    <input type="text" class="form-control" ng-model="test" placeholder="Search" name="q">
-                    <div class="input-group-btn">
-                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                    </div>
-                </div>
-            </form>
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-model="test" placeholder="Search">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
                     <div class="col-md-12">
                         <div class="table-responsive">                           
                             <table id="mytable" class="table table-bordered table-striped">
@@ -88,14 +89,14 @@ and open the template in the editor.
                                 <tbody>
                                     <tr ng-repeat="x in volunteers| filter:test">
                                         <td><input type="checkbox" class="checkthis" /></td>
-                                        <td>{{x.fName}}</td>
-                                        <td>{{x.lName}}</td>
-                                        <td>{{x.profession}}</td>
-                                        <td>{{x.cert}}</td>
-                                        <td>{{x.age}}</td>
-                                        <td>{{x.Address}}</td>
-                                        <td>{{x.email}}</td>
-                                        <td>{{x.contact}}</td>                                        
+                                        <td ng-bind="x.fName" ng-model="fName"></td>
+                                        <td ng-bind="x.lName" ng-model="lName"></td>
+                                        <td ng-bind="x.profession" ng-model="profession"></td>
+                                        <td ng-bind="x.cert" ng-model="cert"></td>
+                                        <td ng-bind="x.age" ng-model="age"></td>
+                                        <td ng-bind="x.Address" ng-model="address"></td>
+                                        <td ng-bind="x.email" ng-model="email"></td>
+                                        <td ng-bind="x.contact" ng-model="contact"></td>                                        
                                         <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
                                         <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
                                     </tr>                            
@@ -116,7 +117,7 @@ and open the template in the editor.
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
-                                    First Name: <input class="form-control " type="text" >
+                                    First Name: <input class="form-control " type="text">
                                 </div>
                                 <div class="form-group">
 
@@ -155,11 +156,11 @@ and open the template in the editor.
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                                <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
+                                <h4 class="modal-title custom_align" id="Heading">Edit Volunteer Details</h4>
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
-                                    First Name: <input class="form-control " type="text" >
+                                    First Name: <input class="form-control " type="text" ng-bind="fName">
                                 </div>
                                 <div class="form-group">
 
