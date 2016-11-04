@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Volunteers</title>
+        <title>Reports</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="hands.ico" />
@@ -70,7 +70,7 @@ and open the template in the editor.
                 <div class="row"><br>
                     <form class="form-inline" role="search">
                         <div class="md-form form-group">
-                            <p> Fire Reports </p> <br>
+                            <h2><strong> Fire Reports </strong></h2> <br>
                             <input type="text" class="form-control" ng-model="test" placeholder="Search">
 
                             <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>                                                      
@@ -159,29 +159,15 @@ and open the template in the editor.
             </div>
             <script>var app = angular.module('myApp', []);
                 app.controller('myCtrl', function ($scope) {
-                    $scope.volunteers = [{"location": "1121 N college Dr.", "LOI": "Medium", "reportedBy": "Jhon", "cert": "Leve1", "contactNo": "923335586751", "date": "11-03-2016"},
-                        {"location": "N. Fillmore", "LOI": "High", "reportedBy": "Antonio Moreno", "cert": "Leve4", "contactNo": "923335586752", "date": "01-18-2016"},
-                        {"location": "120 S Main St.", "LOI": "Low", "reportedBy": "Alfreds", "cert": "Leve4", "contactNo": "923335586753", "date": "10-05-2016"},
-                        {"location": "N. Mulberry", "LOI": "Low", "reportedBy": "Berglunds", "cert": "Leve2", "contactNo": "923335586754", "date": "11-03-2016"},
-                        {"location": "1121 N college Dr.", "LOI": "High", "reportedBy": "Jhon", "cert": "Leve3", "contactNo": "923335586755", "date": "08-15-2016"},
-                        {"location": "Forest", "LOI": "Low", "reportedBy": "Alfreds", "cert": "Leve1", "contactNo": "923335586756", "date": "11-06-2016"},
-                        {"location": "N. Buchman", "LOI": "Medium", "reportedBy": "Berglunds", "cert": "Leve4", "contactNo": "923335586757", "date": "10-06-2016"}
+                    $scope.volunteers = [{"location": "1121 N college Dr.", "LOI": "Medium", "reportedBy": "Jhon", "cert": "Level 1", "contactNo": "923335586751", "date": "11-03-2016"},
+                        {"location": "N. Fillmore", "LOI": "High", "reportedBy": "Antonio Moreno", "cert": "Level 4", "contactNo": "923335586752", "date": "01-18-2016"},
+                        {"location": "120 S Main St.", "LOI": "Low", "reportedBy": "Alfreds", "cert": "Level 4", "contactNo": "923335586753", "date": "10-05-2016"},
+                        {"location": "N. Mulberry", "LOI": "Low", "reportedBy": "Berglunds", "cert": "Level 2", "contactNo": "923335586754", "date": "11-03-2016"},
+                        {"location": "1121 N college Dr.", "LOI": "High", "reportedBy": "Jhon", "cert": "Level 3", "contactNo": "923335586755", "date": "08-15-2016"},
+                        {"location": "Forest", "LOI": "Low", "reportedBy": "Alfreds", "cert": "Level 1", "contactNo": "923335586756", "date": "11-06-2016"},
+                        {"location": "N. Buchman", "LOI": "Medium", "reportedBy": "Berglunds", "cert": "Level 4", "contactNo": "923335586757", "date": "10-06-2016"}
                     ];
-                    $scope.editingData = {};
-
-                    for (var i = 0, length = $scope.volunteers.length; i < length; i++) {
-                        $scope.editingData[$scope.volunteers[i].id] = false;
-                    }
-
-
-                    $scope.modify = function (x) {
-                        $scope.editingData[x.id] = true;
-                    };
-
-
-                    $scope.update = function (x) {
-                        $scope.editingData[x.id] = false;
-                    };
+                   
                 });</script>
             <script>$(document).ready(function () {
                     $("#mytable #checkall").click(function () {
