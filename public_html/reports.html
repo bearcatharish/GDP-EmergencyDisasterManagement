@@ -79,18 +79,28 @@ and open the template in the editor.
                     </form>
 
 
-                    <div class="col-md-12">
+                    <div class="col-md-12 filterable" >
                         <div class="table-responsive">                           
-                            <table id="mytable" class="table table-bordered table-striped">
+                            <table id="mytable" class="table table-bordered table-striped table">
                                 <thead class="thead-inverse">
+                                    <tr class="filters">
                                 <th>Location</th>
-                                <th>Level Of Impact</th>
+                                <th>Level Of Impact
+                                    <select class="form-control">
+                                    <option></option>
+                                    <option>Low</option>
+                                    <option>Medium</option>
+                                    <option>High</option>
+                                    </select>
+                                </th>
                                 <th>Reported by</th>
-                                <th>Certification</th>
+                                <th>Certification
+                                    
+                                </th>
                                 <th>Contact Number</th>
                                 <th> Date </th>
                                 <th>Delete</th>
-                                
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="x in volunteers| filter:test">
@@ -123,7 +133,7 @@ and open the template in the editor.
                                         <!--                                        <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
                                                                                 <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>-->
                                        
-                                        <td>   <button ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="fa fa-trash"></span></button>
+                                        <td>   <button ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-id="x.reportedBy" data-toggle="modal" data-target="#delete"><span class="fa fa-trash"></span></button>
                                         </td>
                                     </tr>                            
 
@@ -148,7 +158,7 @@ and open the template in the editor.
 
                             </div>
                             <div class="modal-footer ">
-                                <button type="button" class="btn btn-success" ><span class="fa fa-check"></span> Yes</button>
+                                <button type="button" class="btn btn-success glyphicon glyphicon-remove row-remove" id="yesBtn" ><span class="fa fa-check"></span> Yes</button>
                                 <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="fa fa-remove"></span> No</button>
                             </div>
                         </div>
@@ -181,11 +191,47 @@ and open the template in the editor.
                                 $(this).prop("checked", false);
                             });
                         }
-                    });
+                    
 
                     $("[data-toggle=tooltip]").tooltip();
-                });
-            </script>
+                    });
+                    $('#yesBtn').click(function() {
+                        // handle deletion here
+                       // print("Hello");
+                        var id = $('#delete').data('x.reportedBy');
+                        $('[data-reportedBy='+id+']').parents('tr').remove();
+                        $('#delete').modal('hide');
+                    });
+                 
+    
+            $('.filterable .filters select').change(function(e){
+                /* Ignore tab key */
+            /* Useful DOM data and selectors */
+            var $input = $(this),
+            inputContent = $input.val(),
+            $panel = $input.parents('.filterable'),
+            column = $panel.find('.filters th').index($input.parents('th')),
+            $table = $panel.find('.table'),
+            $rows = $table.find('tbody tr');
+            /* Dirtiest filter function ever ;) */
+            var $filteredRows = $rows.filter(function(){
+            var value = $(this).find('td').eq(column).text();
+            return value.indexOf(inputContent) === -1;
+        });
+        /* Clean previous no-result if exist */
+        $table.find('tbody .no-result').remove();
+        /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+        $rows.show();
+        $filteredRows.hide();
+        /* Prepend no-result row if all rows are filtered */
+        if ($filteredRows.length === $rows.length) {
+            $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">No result found</td></tr>'));
+        }
+        });    
+    
+        });
+                
+         </script>
 
     </body>
 </html>
