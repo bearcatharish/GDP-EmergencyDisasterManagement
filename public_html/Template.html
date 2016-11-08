@@ -29,10 +29,10 @@
         /* Navigation*/
         
         .navbar {
-            background-color: #4285F4;
+            background-color: #373a3c;
         }
         .top-nav-collapse {
-            background-color: #4285F4;
+            background-color: #373a3c;
         }
 		
 		.nav-item1{
@@ -41,11 +41,15 @@
         
         footer.page-footer {
             background-color: #4285F4;
+            position:absolute;
+            width:100%;
+            bottom:0;
+            left:0;
         }
         
         @media only screen and (max-width: 768px) {
             .navbar {
-                background-color: #4285F4;
+                background-color: #373a3c;
             }
         }
                 
@@ -69,7 +73,7 @@
 
 
     <!--Navbar-->
-    <nav class="navbar navbar-dark navbar-fixed-top scrolling-navbar">
+    <nav class="navbar navbar-dark mdb-color navbar-fixed-top scrolling-navbar">
 
         <!-- Collapse button-->
         <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapseEx">
@@ -88,17 +92,25 @@
                         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href=reports.html>Reports</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#">Volunteer</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href=groups.html>Groups</a>
+                    </li> 
+                    <li class="nav-item">
                         <a class="nav-link" href="#">About Us</a>
                     </li>
-					<li class="nav-item" >
-                        <a class="nav-link" href="./index.html">Log out</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href=FAQ.html>FAQ's</a>
                     </li>
+                    
                 </ul>
                 <!--Search form-->
                 <form class="form-inline">
+                    <button class="btn btn-primary btn-sm" style="float: left" type="submit">Logout</button>
                     <input class="form-control" type="text" placeholder="Search">
                 </form>
             </div>
@@ -126,11 +138,13 @@
 
 
     <!--Footer-->
-    <footer class="page-footer center-on-small-only">
+    
+    <footer class="page-footer center-on-small-only dark mdb-color">
 
                 <!--Call to action-->
         <div class="call-to-action">
             <h4>CERT</h4>
+            <p>CERT educates individuals about disaster preparedness for hazards that may impact their area and trains them in basic disaster response skills, such as fire safety, light search and rescue, team organization, and disaster medical operations.</p>
             <ul>
                
             </ul>

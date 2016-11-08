@@ -75,6 +75,7 @@ and open the template in the editor.
                             <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>                                                      
                         </div><br>
                         <button style="float: right" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#create" ><span class="fa fa-plus">&nbsp;Create New Volunteer</span></button>
+                        <button style="float: right" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#createGroup" ><span class="fa fa-plus">&nbsp;Create Group</span></button>
                     </form>
 
 
@@ -86,7 +87,14 @@ and open the template in the editor.
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Profession</th>
-                                <th>Certification</th>
+                                <th> Certification
+                                    <select ng-model="test" class="selectpicker">        
+                                        <option>Level 1</option>
+                                        <option>Level 2</option>
+                                        <option>Level 3</option>
+                                        <option>Level 4</option>
+                                    </select>                        
+                                </th>
                                 <th>Age</th>
                                 <th>Address</th>
                                 <th>Email</th>
@@ -164,7 +172,7 @@ and open the template in the editor.
                                     Profession:  <input class="form-control " type="text">
                                 </div>
                                 <div class="form-group">
-                                    Certification:  <input class="form-control " type="text">
+                                    Certification:  <input class="form-control " type="text">                                
                                 </div>
                                 <div class="form-group">
                                     Age:  <input class="form-control " type="text">
@@ -185,7 +193,29 @@ and open the template in the editor.
                         </div>
                         <!-- /.modal-content --> 
                     </div>
+
                     <!-- /.modal-dialog --> 
+                </div>
+                <div class="modal fade" id="createGroup" tabindex="-1" role="dialog" aria-labelledby="createGroup" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
+                                <h4 class="modal-title custom_align" id="Heading">Create Group</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    Group Name: <input class="form-control " type="text">
+                                </div>
+                                <div class="form-group">
+                                    Description : <textarea type="text" class="md-textarea"></textarea>
+                                </div>
+                                <div class="modal-footer ">
+                                    <button type="button" class="btn btn-success btn-lg" style="width: 100%;"><span class="fa fa-check-square"></span>Add Group</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
                     <div class="modal-dialog">
@@ -209,15 +239,16 @@ and open the template in the editor.
                     <!-- /.modal-dialog --> 
                 </div>
             </div>
-            <script>var app = angular.module('myApp', []);
+            <script>
+                var app = angular.module('myApp', []);
                 app.controller('myCtrl', function ($scope) {
-                    $scope.volunteers = [{"id": 0, "fName": "Alfreds", "lName": "Futterkiste", "Address": "Berlin", "email": "ritish@gmail.com", "profession": "Student", "contact": "+923335586751", "age": "21", "cert": "Level 1"},
-                        {"id": 1, "fName": "Ana Trujillo ", "lName": "Emparedados y helados", "Address": "México D.F.", "email": "harish@gmail.com", "profession": "Student", "contact": "+923335586752", "age": "31", "cert": "Level 2"},
-                        {"id": 2, "fName": "Antonio Moreno", "lName": "Taquería", "Address": "México D.F.", "email": "anirudh@gmail.com", "profession": "Student", "contact": "+923335586753", "age": "45", "cert": "Level 4"},
-                        {"id": 3, "fName": "Around", "lName": "Horn", "Address": "London", "email": "jean@gmail.com", "profession": "Student", "contact": "+923335456754", "age": "54", "cert": "Level 3"},
-                        {"id": 4, "fName": "B's", "lName": "Beverages", "Address": "London", "email": "tommy@gmail.com", "profession": "Student", "contact": "+923335586755", "age": "23", "cert": "Level 4"},
-                        {"id": 5, "fName": "Berglunds", "lName": "snabbköp", "Address": "Luleå", "email": "duff@gmail.com", "profession": "Student", "contact": "+923335586756", "age": "27", "cert": "Level 2"},
-                        {"id": 6, "fName": "Blauer See", "lName": "Delikatessen", "Address": "Mannheim", "email": "tough@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "26", "cert": "Level 1"}
+                    $scope.volunteers = [{"id": 0, "fName": "Alfreds", "lName": "Futterkiste", "Address": "Berlin", "email": "ritish@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "21", "cert": "Level 1"},
+                        {"id": 1, "fName": "Ana Trujillo ", "lName": "Emparedados y helados", "Address": "México D.F.", "email": "harish@gmail.com", "profession": "Doctor", "contact": "+923335586757", "age": "31", "cert": "Level 2"},
+                        {"id": 2, "fName": "Antonio Moreno", "lName": "Taquería", "Address": "México D.F.", "email": "anirudh@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "45", "cert": "Level 4"},
+                        {"id": 3, "fName": "Around", "lName": "Horn", "Address": "London", "email": "jean@gmail.com", "profession": "Student", "contact": "+923335456757", "age": "54", "cert": "Level 3"},
+                        {"id": 4, "fName": "B's", "lName": "Beverages", "Address": "London", "email": "tommy@gmail.com", "profession": "Fire Fighter", "contact": "+923335586757", "age": "23", "cert": "Level 4"},
+                        {"id": 5, "fName": "Berglunds", "lName": "snabbköp", "Address": "Luleå", "email": "duff@gmail.com", "profession": "Doctor", "contact": "+923335586757", "age": "27", "cert": "Level 2"},
+                        {"id": 6, "fName": "Blauer See", "lName": "Delikatessen", "Address": "Mannheim", "email": "tough@gmail.com", "profession": "Fire Fighter", "contact": "+923335586757", "age": "26", "cert": "Level 1"}
                     ];
                     $scope.editingData = {};
 
@@ -234,8 +265,10 @@ and open the template in the editor.
                     $scope.update = function (x) {
                         $scope.editingData[x.id] = false;
                     };
-                });</script>
-            <script>$(document).ready(function () {
+                });
+            </script>
+            <script>
+                $(document).ready(function () {
                     $("#mytable #checkall").click(function () {
                         if ($("#mytable #checkall").is(':checked')) {
                             $("#mytable input[type=checkbox]").each(function () {
