@@ -133,7 +133,7 @@ and open the template in the editor.
                                         <!--                                        <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
                                                                                 <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>-->
                                        
-                                        <td>   <button ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-id="x.reportedBy" data-toggle="modal" data-target="#delete"><span class="fa fa-trash"></span></button>
+                                        <td>   <button ng-hide="viewField" class="btn btn-danger btn-sm confrimDelete" data-title="Delete" data-id="x.reportedBy" data-toggle="modal" data-target="#delete"><span class="fa fa-trash"></span></button>
                                         </td>
                                     </tr>                            
 
@@ -198,7 +198,8 @@ and open the template in the editor.
                     $('#yesBtn').click(function() {
                         // handle deletion here
                        // print("Hello");
-                        var id = $('#delete').data('x.reportedBy');
+                       // var id = $('.confrimDelete').data('title');
+                        var id = 'Jhon';
                         $('[data-reportedBy='+id+']').parents('tr').remove();
                         $('#delete').modal('hide');
                     });
