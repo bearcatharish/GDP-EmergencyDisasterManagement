@@ -99,6 +99,7 @@ and open the template in the editor.
                                 </th>
                                 <th>Contact Number</th>
                                 <th> Date </th>
+                                <th>Edit</th>
                                 <th>Delete</th>
                                     </tr>
                                 </thead>
@@ -132,8 +133,11 @@ and open the template in the editor.
                                                                               
                                         <!--                                        <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
                                                                                 <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>-->
-                                       
-                                        <td>   <button ng-hide="viewField" class="btn btn-danger btn-sm confrimDelete" data-title="Delete" data-id="x.reportedBy" data-toggle="modal" data-target="#delete"><span class="fa fa-trash"></span></button>
+                                        <td>
+                                            <button ng-hide="editingData[x.id]" ng-click="modify(x)" class="btn btn-primary btn-sm"><span class="fa fa-pencil"></span></button>
+                                            <button ng-show="editingData[x.id]" ng-click="update(x)" class="btn btn-warning btn-sm"><span class="fa fa-check-square"></span>Update</button>
+                                        </td>
+                                        <td>   <button ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="fa fa-trash"></span></button>
                                         </td>
                                     </tr>                            
 
@@ -177,7 +181,21 @@ and open the template in the editor.
                         {"location": "Forest", "LOI": "Low", "reportedBy": "Alfreds", "cert": "Level 1", "contactNo": "923335586756", "date": "11-06-2016"},
                         {"location": "N. Buchman", "LOI": "Medium", "reportedBy": "Berglunds", "cert": "Level 4", "contactNo": "923335586757", "date": "10-06-2016"}
                     ];
-                   
+                   $scope.editingData = {};
+
+                    for (var i = 0, length = $scope.volunteers.length; i < length; i++) {
+                        $scope.editingData[$scope.volunteers[i].id] = false;
+                    }
+
+
+                    $scope.modify = function (x) {
+                        $scope.editingData[x.id] = true;
+                    };
+
+
+                    $scope.update = function (x) {
+                        $scope.editingData[x.id] = false;
+                    };
                 });</script>
             <script>$(document).ready(function () {
                     $("#mytable #checkall").click(function () {
