@@ -196,7 +196,9 @@ and open the template in the editor.
                     $scope.update = function (x) {
                         $scope.editingData[x.id] = false;
                     };
-                });</script>
+                    });
+                    
+                </script>
             <script>$(document).ready(function () {
                     $("#mytable #checkall").click(function () {
                         if ($("#mytable #checkall").is(':checked')) {
@@ -213,18 +215,19 @@ and open the template in the editor.
 
                     $("[data-toggle=tooltip]").tooltip();
                     });
-                    $('#yesBtn').click(function() {
+                    
+                 $('#yesBtn').click(function() {
                         // handle deletion here
                        // print("Hello");
                        // var id = $('.confrimDelete').data('title');
 //                        var id = 'Jhon';
 //                        $('[data-reportedBy='+id+']').parents('tr').remove();
 //                        $('#delete').modal('hide');
-                        var id = $('.confrimDelete').data('id');
+                        var id = $scope.editingData[x.id];
+                        window.alert(id);
                         $('[data-id='+id+']').parents('tr').remove();
-                        $('#myModal').modal('hide');
+                        $('#delete').modal('hide');
                     });
-                 
     
             $('.filterable .filters select').change(function(e){
                 /* Ignore tab key */
