@@ -173,13 +173,13 @@ and open the template in the editor.
             </div>
             <script>var app = angular.module('myApp', []);
                 app.controller('myCtrl', function ($scope) {
-                    $scope.volunteers = [{"location": "1121 N college Dr.", "LOI": "Medium", "reportedBy": "Jhon", "cert": "Level 1", "contactNo": "923335586751", "date": "11-03-2016"},
-                        {"location": "N. Fillmore", "LOI": "High", "reportedBy": "Antonio Moreno", "cert": "Level 4", "contactNo": "923335586752", "date": "01-18-2016"},
-                        {"location": "120 S Main St.", "LOI": "Low", "reportedBy": "Alfreds", "cert": "Level 4", "contactNo": "923335586753", "date": "10-05-2016"},
-                        {"location": "N. Mulberry", "LOI": "Low", "reportedBy": "Berglunds", "cert": "Level 2", "contactNo": "923335586754", "date": "11-03-2016"},
-                        {"location": "1121 N college Dr.", "LOI": "High", "reportedBy": "Jhon", "cert": "Level 3", "contactNo": "923335586755", "date": "08-15-2016"},
-                        {"location": "Forest", "LOI": "Low", "reportedBy": "Alfreds", "cert": "Level 1", "contactNo": "923335586756", "date": "11-06-2016"},
-                        {"location": "N. Buchman", "LOI": "Medium", "reportedBy": "Berglunds", "cert": "Level 4", "contactNo": "923335586757", "date": "10-06-2016"}
+                    $scope.volunteers = [{"id":1,"location": "1121 N college Dr.", "LOI": "Medium", "reportedBy": "Jhon", "cert": "Level 1", "contactNo": "9233355867", "date": "11-03-2016"},
+                        {"id":2,"location": "N. Fillmore", "LOI": "High", "reportedBy": "Antonio Moreno", "cert": "Level 4", "contactNo": "9233355866", "date": "01-18-2016"},
+                        {"id":3,"location": "120 S Main St.", "LOI": "Low", "reportedBy": "Alfreds", "cert": "Level 4", "contactNo": "9233355864", "date": "10-05-2016"},
+                        {"id":4,"location": "N. Mulberry", "LOI": "Low", "reportedBy": "Berglunds", "cert": "Level 2", "contactNo": "9233355869", "date": "11-03-2016"},
+                        {"id":5,"location": "1121 N college Dr.", "LOI": "High", "reportedBy": "Jhon", "cert": "Level 3", "contactNo": "9233355870", "date": "08-15-2016"},
+                        {"id":6,"location": "Forest", "LOI": "Low", "reportedBy": "Alfreds", "cert": "Level 1", "contactNo": "9233355861", "date": "11-06-2016"},
+                        {"id":7,"location": "N. Buchman", "LOI": "Medium", "reportedBy": "Berglunds", "cert": "Level 4", "contactNo": "9233355868", "date": "10-06-2016"}
                     ];
                    $scope.editingData = {};
 
@@ -217,9 +217,12 @@ and open the template in the editor.
                         // handle deletion here
                        // print("Hello");
                        // var id = $('.confrimDelete').data('title');
-                        var id = 'Jhon';
-                        $('[data-reportedBy='+id+']').parents('tr').remove();
-                        $('#delete').modal('hide');
+//                        var id = 'Jhon';
+//                        $('[data-reportedBy='+id+']').parents('tr').remove();
+//                        $('#delete').modal('hide');
+                        var id = $('.confrimDelete').data('id');
+                        $('[data-id='+id+']').parents('tr').remove();
+                        $('#myModal').modal('hide');
                     });
                  
     
