@@ -197,6 +197,7 @@ and open the template in the editor.
                         $scope.editingData[x.id] = false;
                     };
                 });</script>
+          
             <script>$(document).ready(function () {
                     $("#mytable #checkall").click(function () {
                         if ($("#mytable #checkall").is(':checked')) {
@@ -225,7 +226,9 @@ and open the template in the editor.
                         $('#myModal').modal('hide');
                     });
                  
-    
+     $('#myTable').DataTable( {
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+    } );
             $('.filterable .filters select').change(function(e){
                 /* Ignore tab key */
             /* Useful DOM data and selectors */
@@ -240,6 +243,7 @@ and open the template in the editor.
             var value = $(this).find('td').eq(column).text();
             return value.indexOf(inputContent) === -1;
         });
+        
         /* Clean previous no-result if exist */
         $table.find('tbody .no-result').remove();
         /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
