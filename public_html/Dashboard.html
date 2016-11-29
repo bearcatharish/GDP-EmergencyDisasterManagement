@@ -21,7 +21,7 @@
 
     <!-- Material Design Bootstrap -->
     <link href="css/mdb.min.css" rel="stylesheet">
-
+    
     <!-- Template styles -->
     <style rel="stylesheet">
         /* TEMPLATE STYLES */
@@ -103,15 +103,20 @@
 }
     /*CSS styling for Add icon on Add a disaster card*/
    .glyphicon.glyphicon-plus-sign {
-    font-size: 57px;
-    top: 20px;
-   left: 125px;
+    font-size: 40px;
+/*    top: 20px;*/
+   left: 5px;
        
 }
 
-    </style>
 
-</head>
+/* CSS styling for aligning the text to center in inputbox*/
+input {
+text-align: center;
+}
+    </style>
+    
+    </head>
 
 <body>
 
@@ -201,155 +206,84 @@
 </div>
     <br>
 
-    <!--Content-->
     <div class="container">
-  <div class="row">
-    <div class="col-md-6">Welcome Admin</div>
-    
-     <div class="col-md-6">
-         <div class="profile-header-container">   
-    		<div class="profile-header-img">
-                <img class="img-circle" src="http://www.freeiconspng.com/uploads/blue-user-icon-32.jpg" />
-                </div>
-             </div>
-     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-        
-        <div class="card card-block">
-            <p align="right"><a href="#"><span class="glyphicon glyphicon-edit"></span></a>
-                             <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
-            </p>
-              <div class="bootstrap-demo">
-    
-              </div>
-                <h4 class="card-title" align="center">Fire</h4>
-                    
-                <p align="right"><a href="#"><span class="glyphicon glyphicon-bell"></span><span class="badge badge-notify">2</span></a></p>
+    <div class="row">
+    	<div class="col-md-12"><h3>Welcome Admin</h3></div>
+        <br>
+    </div>
+       
+    <ul class="row list-unstyled">
+        <li class="col-md-4"> 
+            <div class="card card-block"> <a class="close" href="#" ><span class="glyphicon glyphicon-trash"></span></a>
 
+                <!--<img src="http://powstudios.com/system/files/webupload/resources/Fire_pack/flames_1_.gif" class="img-responsive">-->
+                <br>
+                <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="FIRE" ></h4>
                 
+                <br>
                 
-        </div>
-        
-    </div>
- <div class="col-md-4">
-        
-        <div class="card card-block">
-            <p align="right"><a href="#"><span class="glyphicon glyphicon-edit"></span></a>
-                             <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
-            </p>
-              <div class="bootstrap-demo">
-    
-              </div>
-                <h4 class="card-title" align="center">Collapsed Building</h4>
-                    
-               <p align="right"><a href="#"><span class="glyphicon glyphicon-bell"></span><span class="badge badge-notify">2</span></a></p>
-
-        </div>
-        
-    </div>
-       <div class="col-md-4">
-        
-        <div class="card card-block">
-            <p align="right"><a href="#"><span class="glyphicon glyphicon-edit"></span></a>
-                             <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
-            </p>
-              <div class="bootstrap-demo">
-    
-              </div>
-                <h4 class="card-title" align="center">Tornado</h4>
-                    
-               <p align="right"><a href="#"><span class="glyphicon glyphicon-bell"></span><span class="badge badge-notify">2</span></a></p>
-
-        </div>
-        
-    </div>
-
-    <div class="col-md-4">
-        
-        <div class="card card-block">
-            <p align="right"><a href="#"><span class="glyphicon glyphicon-edit"></span></a>
-                             <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
-            </p>
-              <div class="bootstrap-demo">
-    
-              </div>
-                <h4 class="card-title" align="center">Floods</h4>
-                    
-                <p align="right"><a href="#"><span class="glyphicon glyphicon-bell"></span><span class="badge badge-notify">2</span></a></p>
-
-        </div>
-        
-    </div>
-      <div class="col-md-4">
-        
-        <div class="card card-block">
-            <p align="right"><a href="#"><span class="glyphicon glyphicon-edit"></span></a>
-                             <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
-            </p>
-              <div class="bootstrap-demo">
-    
-              </div>
-                <h4 class="card-title" align="center">Earthquake</h4>
-                    
-                <p align="right"><a href="#"><span class="glyphicon glyphicon-bell"></span><span class="badge badge-notify">2</span></a></p>
-
-        </div>
-        
-    </div>
-      
-      <div class="col-md-4">
-        
-        <div class="card card-block">
-            <p><a href="#"><span class="glyphicon glyphicon-plus-sign" style="color:orange"></span></a>
-                             
-            </p>
-              <div class="bootstrap-demo">
-    
-              </div>
-                <h4 class="card-title" align="center"></h4>
-                <h4 class="card-title" align="center">Add a disaster</h4>
-                    
-                
-
-        </div>
-        
-    </div>
-  </div>
-  
-</div>
-    <!--/.Content-->
-
-
-
-    <!--Footer-->
-    
-<footer class="page-footer center-on-small-only dark mdb-color">
-
-                <!--Call to action-->
-        <div class="call-to-action">
-            <h4>CERT</h4>
-            <p>CERT educates individuals about disaster preparedness for hazards that may impact their area and trains them in basic disaster response skills, such as fire safety, light search and rescue, team organization, and disaster medical operations.</p>
-            <ul>
-               
-            </ul>
-        </div>
-        <!--/.Call to action-->
-
-        <!--Copyright-->
-        <div class="footer-copyright">
-            <div class="container-fluid">
-                © 2017 Copyright: <a href="#"> Excelsior Tech Services </a>
-
             </div>
-        </div>
-        <!--/.Copyright-->
+        </li>
+        <li class="col-md-4">
+            <div class="card card-block">
+                <a class="close" href="#"><span class="glyphicon glyphicon-trash"></span></a>
+                 <!--<a class="add" href="#"><span class="glyphicon glyphicon-edit"></span></a>-->
+                 <br>
+                <!--<img src="http://i.imgur.com/Se4UqVC.gif" class="img-responsive">-->
+                <!--<img src="http://orig03.deviantart.net/3614/f/2013/001/f/b/smoke_fire_gif_3_by_prismsky-d5q07j3.gif" class="img-responsive">-->
+                 <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="COLLAPSED BUILDING" ></h4>
+                 
+                 <br>
+            </div>
+        </li>
+        <li class="col-md-4">
+            <div class="card card-block"> 
+                <a class="close" href="#"><span class="glyphicon glyphicon-trash" style="color:blue"></span></a>
 
-    </footer>
-    <!--/.Footer-->
+                <br>
+                <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="FLOODS" ></h4>
+                <br>
+                   
+            </div>
+        </li>
+        <li class="col-md-4">
+            <div class="card card-block"> 
+                <a class="close" href="#"><span class="glyphicon glyphicon-trash" style="color:blue"></span></a>
 
+                <br>
+                <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="EARTHQUAKE" ></h4>
+                <br>
+                   
+            </div>
+        </li>
+        <li class="col-md-4">
+            <div class="card card-block"> 
+                <a class="close" href="#"><span class="glyphicon glyphicon-trash" style="color:blue"></span></a>
 
+                <br>
+                <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="TORNADO" ></h4>
+                <br>
+                   
+            </div>
+        </li>
+        <li class="col-md-4">
+            
+            <div class="card card-block"> <a class="add" href="#"><span class="glyphicon glyphicon-plus-sign" style="color:orange"></span></a>
+              
+                
+                <h4 class="card-title" align="center"><strong>Add a disaster</strong></h4>
+                    <br>
+                
+            </div>
+            
+        </li>
+ 
+        
+       
+    </ul>
+        
+</div>
+    
     <!-- SCRIPTS -->
 
     <!-- JQuery -->
@@ -366,19 +300,37 @@
     
     <!-- Bootstrap Confirmation -->
     <script src="path/to/bootstrap-confirmation.js"></script>
-    
+   
+    <script>
+        $('.add').click(function(){
+  var $target = $(this).parents('ul');
+//  $target.append(); 
+$target.after('<li class="col-md-4"><div class="card card-block"> <a class="delete" href="#"><span class="glyphicon glyphicon-trash"></span></a><br><h4 class="card-title" align="center"><input type="text" class="form-control" id="type" placeholder="Type of disaster"></h4><br></div></li>');
 
-<!-- Popover for x button on the cards -->
-<script>
-//$(document).ready(function(){
-//    $('[data-toggle="tooltip"]').tooltip();
-//    $('[data-toggle="popover"]').popover();
+})
+
+
+
+$('.close').click(function(){
+  var $target = $(this).parents('li');
+  $target.hide('slow', function(){ $target.remove(); });
+})
+
+//$('.delete').click(function(){
+//  var $target = $(this).parents('li');
+//  $target.hide('slow', function(){ $target.remove(); });
 //});
 
-$('[data-toggle=confirmation]').confirmation({
-  rootSelector: '[data-toggle=confirmation]',
-  // other options
+$("body").on("click", ".delete", function (e) {
+	var $target = $(this).parents('li');
+  $target.hide('slow', function(){ $target.remove(); });
 });
+//$('.add').click(function(){
+//  var $target = $(this).parents('li');
+//  $target.append('slow', function(){ $target.append(); });
+//})
+
+
 </script>
 
 </body>
