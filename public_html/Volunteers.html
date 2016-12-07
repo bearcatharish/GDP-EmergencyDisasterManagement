@@ -87,14 +87,7 @@ and open the template in the editor.
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Profession</th>
-                                <th> Certification
-                                    <select ng-model="test" class="selectpicker">        
-                                        <option>CERT</option>
-                                        <option>EMR(Emergency Medical Resources)</option>
-                                        <option>EMT(Emergency Medical Technician)</option>
-                                        <option>Registered Nurse</option>
-                                    </select>                    
-                                </th>
+                               
                                 <th>Age</th>
                                 <th>Address</th>
                                 <th>Email</th>
@@ -117,10 +110,10 @@ and open the template in the editor.
                                             <div ng-hide="editingData[x.id]" ng-bind="x.profession"></div>
                                             <div ng-show="editingData[x.id]"><input type="text" ng-model="x.profession" /></div>
                                         </td>
-                                        <td>
+<!--                                        <td>
                                             <div ng-hide="editingData[x.id]" ng-bind="x.cert"></div>
                                             <div ng-show="editingData[x.id]"><input type="text" ng-model="x.cert" /></div>
-                                        </td>
+                                        </td>-->
                                         <td> 
                                             <div ng-hide="editingData[x.id]" ng-bind="x.age"></div>
                                             <div ng-show="editingData[x.id]"><input type="text" ng-model="x.age" /></div>
@@ -171,9 +164,9 @@ and open the template in the editor.
                                 <div class="form-group">
                                     Profession:  <input class="form-control " type="text">
                                 </div>
-                                <div class="form-group">
+<!--                                <div class="form-group">
                                     Certification:  <input class="form-control " type="text">                                
-                                </div>
+                                </div>-->
                                 <div class="form-group">
                                     Age:  <input class="form-control " type="text">
                                 </div>
@@ -234,6 +227,7 @@ and open the template in the editor.
                                 <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="fa fa-remove"></span> No</button>
                             </div>
                         </div>
+                        
                         <!-- /.modal-content --> 
                     </div>
                     <!-- /.modal-dialog --> 
@@ -242,13 +236,13 @@ and open the template in the editor.
             <script>
                 var app = angular.module('myApp', []);
                 app.controller('myCtrl', function ($scope) {
-                    $scope.volunteers = [{"id": 0, "fName": "Alfreds", "lName": "Futterkiste", "Address": "Berlin", "email": "ritish@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "21", "cert": "Level 1"},
-                        {"id": 1, "fName": "Ana Trujillo ", "lName": "Emparedados y helados", "Address": "México D.F.", "email": "harish@gmail.com", "profession": "Doctor", "contact": "+923335586757", "age": "31", "cert": "Level 2"},
-                        {"id": 2, "fName": "Antonio Moreno", "lName": "Taquería", "Address": "México D.F.", "email": "anirudh@gmail.com", "profession": "Registered Nurse", "contact": "+923335586757", "age": "45", "cert": "Level 4"},
-                        {"id": 3, "fName": "Around", "lName": "Horn", "Address": "London", "email": "jean@gmail.com", "profession": "EMR", "contact": "+923335456757", "age": "54", "cert": "Level 3"},
-                        {"id": 4, "fName": "B's", "lName": "Beverages", "Address": "London", "email": "tommy@gmail.com", "profession": "Fire Fighter", "contact": "+923335586757", "age": "23", "cert": "Level 4"},
-                        {"id": 5, "fName": "Berglunds", "lName": "snabbköp", "Address": "Luleå", "email": "duff@gmail.com", "profession": "EMT", "contact": "+923335586757", "age": "27", "cert": "Level 2"},
-                        {"id": 6, "fName": "Blauer See", "lName": "Delikatessen", "Address": "Mannheim", "email": "tough@gmail.com", "profession": "LEO(Law Enforcement Officer)", "contact": "+923335586757", "age": "26", "cert": "Level 1"}
+                    $scope.volunteers = [{"id": 0, "fName": "Alfreds", "lName": "Futterkiste", "Address": "Berlin", "email": "ritish@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "21" },
+                        {"id": 1, "fName": "Ana Trujillo ", "lName": "Emparedados y helados", "Address": "México D.F.", "email": "harish@gmail.com", "profession": "Doctor", "contact": "+923335586757", "age": "31"},
+                        {"id": 2, "fName": "Antonio Moreno", "lName": "Taquería", "Address": "México D.F.", "email": "anirudh@gmail.com", "profession": "Registered Nurse", "contact": "+923335586757", "age": "45"},
+                        {"id": 3, "fName": "Around", "lName": "Horn", "Address": "London", "email": "jean@gmail.com", "profession": "EMR", "contact": "+923335456757", "age": "54"},
+                        {"id": 4, "fName": "B's", "lName": "Beverages", "Address": "London", "email": "tommy@gmail.com", "profession": "Fire Fighter", "contact": "+923335586757", "age": "23"},
+                        {"id": 5, "fName": "Berglunds", "lName": "snabbköp", "Address": "Luleå", "email": "duff@gmail.com", "profession": "EMT", "contact": "+923335586757", "age": "27"},
+                        {"id": 6, "fName": "Blauer See", "lName": "Delikatessen", "Address": "Mannheim", "email": "tough@gmail.com", "profession": "LEO(Law Enforcement Officer)", "contact": "+923335586757", "age": "26"}
                     ];
                     $scope.editingData = {};
 
