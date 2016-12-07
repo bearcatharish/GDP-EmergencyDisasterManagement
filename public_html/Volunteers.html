@@ -77,8 +77,6 @@ and open the template in the editor.
                         <button style="float: right" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#create" ><span class="fa fa-plus">&nbsp;Create New Volunteer</span></button>
                         <button style="float: right" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#createGroup" ><span class="fa fa-plus">&nbsp;Create Group</span></button>
                     </form>
-
-
                     <div class="col-md-12">
                         <div class="table-responsive">                           
                             <table id="mytable" class="table table-bordered table-striped">
@@ -87,7 +85,6 @@ and open the template in the editor.
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Profession</th>
-                               
                                 <th>Age</th>
                                 <th>Address</th>
                                 <th>Email</th>
@@ -110,10 +107,10 @@ and open the template in the editor.
                                             <div ng-hide="editingData[x.id]" ng-bind="x.profession"></div>
                                             <div ng-show="editingData[x.id]"><input type="text" ng-model="x.profession" /></div>
                                         </td>
-<!--                                        <td>
-                                            <div ng-hide="editingData[x.id]" ng-bind="x.cert"></div>
-                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.cert" /></div>
-                                        </td>-->
+                                        <!--                                        <td>
+                                                                                    <div ng-hide="editingData[x.id]" ng-bind="x.cert"></div>
+                                                                                    <div ng-show="editingData[x.id]"><input type="text" ng-model="x.cert" /></div>
+                                                                                </td>-->
                                         <td> 
                                             <div ng-hide="editingData[x.id]" ng-bind="x.age"></div>
                                             <div ng-show="editingData[x.id]"><input type="text" ng-model="x.age" /></div>
@@ -132,12 +129,13 @@ and open the template in the editor.
                                         </td>                                        
                                         <!--                                        <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
                                                                                 <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>-->
+
                                         <td>
                                             <button ng-hide="editingData[x.id]" ng-click="modify(x)" class="btn btn-primary btn-sm"><span class="fa fa-pencil"></span></button>
                                             <button ng-show="editingData[x.id]" ng-click="update(x)" class="btn btn-warning btn-sm"><span class="fa fa-check-square"></span>Update</button></td>
                                         <td>   <button ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="fa fa-trash"></span></button>
                                         </td>
-                                    </tr>                            
+                                    </tr>                       
 
 
 
@@ -145,98 +143,119 @@ and open the template in the editor.
                             </table>                            
                         </div>
                     </div>
-                </div>
-                <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="create" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
-                                <h4 class="modal-title custom_align" id="Heading">Create New Volunteer</h4>
-                            </div>
+
+                </div></div>
+
+            <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="create" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
+                            <h4 class="modal-title custom_align" id="Heading">Create New Volunteer</h4>
+                        </div>
+                        <form action="/insertVolunteer" method="post">
                             <div class="modal-body">
                                 <div class="form-group">
-                                    First Name: <input class="form-control " type="text">
+                                    First Name: <input class="form-control " type="text" name='firstname'>
                                 </div>
                                 <div class="form-group">
 
-                                    Last Name:  <input class="form-control " type="text">
+                                    Last Name:  <input class="form-control " type="text" name='lastname'>
                                 </div>
                                 <div class="form-group">
-                                    Profession:  <input class="form-control " type="text">
+                                    Profession:  <input class="form-control " type="text" name='prof'>
                                 </div>
-<!--                                <div class="form-group">
-                                    Certification:  <input class="form-control " type="text">                                
-                                </div>-->
+                                <!--                                <div class="form-group">
+                                                                    Certification:  <input class="form-control " type="text">                                
+                                                                </div>-->
                                 <div class="form-group">
-                                    Age:  <input class="form-control " type="text">
-                                </div>
-                                <div class="form-group">
-                                    Address:  <input class="form-control " type="text">
+                                    Age:  <input class="form-control " type="text" name='age'>
                                 </div>
                                 <div class="form-group">
-                                    Email:  <input class="form-control " type="text">
+                                    Address:  <input class="form-control " type="text" name='address'>
                                 </div>
                                 <div class="form-group">
-                                    Contact:  <input class="form-control " type="text">
+                                    Email:  <input class="form-control " type="text" name='email'>
+                                </div>
+                                <div class="form-group">
+                                    Contact:  <input class="form-control " type="text" name='contact'>
                                 </div>
                             </div>
                             <div class="modal-footer ">
-                                <button type="button" class="btn btn-success btn-lg" style="width: 100%;"><span class="fa fa-check-square"></span> Add</button>
+                                <button type="submit" class="btn btn-success btn-lg" style="width: 100%;"><span class="fa fa-check-square"></span> Add</button>
                             </div>
-                        </div>
-                        <!-- /.modal-content --> 
+                        </form>
                     </div>
-
-                    <!-- /.modal-dialog --> 
+                    <!-- /.modal-content --> 
                 </div>
-                <div class="modal fade" id="createGroup" tabindex="-1" role="dialog" aria-labelledby="createGroup" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
-                                <h4 class="modal-title custom_align" id="Heading">Create Group</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    Group Name: <input class="form-control " type="text">
-                                </div>
-                                <div class="form-group">
-                                    Description : <textarea type="text" class="md-textarea"></textarea>
-                                </div>
-                                <div class="modal-footer ">
-                                    <button type="button" class="btn btn-success btn-lg" style="width: 100%;"><span class="fa fa-check-square"></span>Add Group</button>
-                                </div>
-                            </div>
+
+                <!-- /.modal-dialog --> 
+            </div>
+            <div class="modal fade" id="createGroup" tabindex="-1" role="dialog" aria-labelledby="createGroup" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
+                            <h4 class="modal-title custom_align" id="Heading">Create Group</h4>
                         </div>
-                    </div>
-                </div>
-                <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
-                                <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                Group Name: <input class="form-control " type="text">
                             </div>
-                            <div class="modal-body">
-
-                                <div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
-
+                            <div class="form-group">
+                                Description : <textarea type="text" class="md-textarea"></textarea>
                             </div>
                             <div class="modal-footer ">
-                                <button type="button" class="btn btn-success" ><span class="fa fa-check"></span> Yes</button>
-                                <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="fa fa-remove"></span> No</button>
+                                <button type="button" class="btn btn-success btn-lg" style="width: 100%;"><span class="fa fa-check-square"></span>Add Group</button>
                             </div>
                         </div>
-                        
-                        <!-- /.modal-content --> 
                     </div>
-                    <!-- /.modal-dialog --> 
                 </div>
             </div>
-            <script>
-                var app = angular.module('myApp', []);
-                app.controller('myCtrl', function ($scope) {
-                    $scope.volunteers = [{"id": 0, "fName": "Alfreds", "lName": "Futterkiste", "Address": "Berlin", "email": "ritish@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "21" },
+            <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
+                            <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
+
+                        </div>
+                        <div class="modal-footer ">
+                            <button type="button" class="btn btn-success" ><span class="fa fa-check"></span> Yes</button>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="fa fa-remove"></span> No</button>
+                        </div>
+                    </div>
+
+                    <!-- /.modal-content --> 
+                </div>
+                <!-- /.modal-dialog --> 
+            </div>
+        </div>
+        <!--        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.js"></script>
+                <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.js"></script>
+                <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.3.3.js"></script>-->
+        <script>
+            var app = angular.module('myApp', []);
+            app.controller('myCtrl', ['$scope', '$window', '$http', function ($scope, $http) {
+//                                                        $http({method: 'GET',
+//                                                            url: 'http://localhost:3000/Volunteer',
+////        params : data,
+//                                                            headers: {
+//                                                                'Content-Type': 'application/json'
+//                                                            }
+//                                                        }).then(function (result) {
+//                                                            $scope.test = result;
+//                                                            console.log(result);
+//                                                            console.log("hi" + JSON.stringify(result));
+//                                                        }, function (error) {
+//                                                            console.log(error);
+//                                                        }
+//                                                        );
+                    $scope.volunteers = [{"id": 0, "fName": "Alfreds", "lName": "Futterkiste", "Address": "Berlin", "email": "ritish@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "21"},
                         {"id": 1, "fName": "Ana Trujillo ", "lName": "Emparedados y helados", "Address": "México D.F.", "email": "harish@gmail.com", "profession": "Doctor", "contact": "+923335586757", "age": "31"},
                         {"id": 2, "fName": "Antonio Moreno", "lName": "Taquería", "Address": "México D.F.", "email": "anirudh@gmail.com", "profession": "Registered Nurse", "contact": "+923335586757", "age": "45"},
                         {"id": 3, "fName": "Around", "lName": "Horn", "Address": "London", "email": "jean@gmail.com", "profession": "EMR", "contact": "+923335456757", "age": "54"},
@@ -259,26 +278,26 @@ and open the template in the editor.
                     $scope.update = function (x) {
                         $scope.editingData[x.id] = false;
                     };
-                });
-            </script>
-            <script>
-                $(document).ready(function () {
-                    $("#mytable #checkall").click(function () {
-                        if ($("#mytable #checkall").is(':checked')) {
-                            $("#mytable input[type=checkbox]").each(function () {
-                                $(this).prop("checked", true);
-                            });
+                }]);
+        </script>
+        <script>
+            $(document).ready(function () {
+                $("#mytable #checkall").click(function () {
+                    if ($("#mytable #checkall").is(':checked')) {
+                        $("#mytable input[type=checkbox]").each(function () {
+                            $(this).prop("checked", true);
+                        });
 
-                        } else {
-                            $("#mytable input[type=checkbox]").each(function () {
-                                $(this).prop("checked", false);
-                            });
-                        }
-                    });
-
-                    $("[data-toggle=tooltip]").tooltip();
+                    } else {
+                        $("#mytable input[type=checkbox]").each(function () {
+                            $(this).prop("checked", false);
+                        });
+                    }
                 });
-            </script>
+
+                $("[data-toggle=tooltip]").tooltip();
+            });
+        </script>
 
     </body>
 </html>
