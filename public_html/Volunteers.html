@@ -172,16 +172,16 @@ and open the template in the editor.
                                                                     Certification:  <input class="form-control " type="text">                                
                                                                 </div>-->
                                 <div class="form-group">
-                                    Age:  <input class="form-control " type="text" name='age'>
+                                    Age:  <input class="form-control" type="number" size="6" name="age" min="18" max="99" required >
                                 </div>
                                 <div class="form-group">
                                     Address:  <input class="form-control " type="text" name='address'>
                                 </div>
                                 <div class="form-group">
-                                    Email:  <input class="form-control " type="text" name='email'>
+                                    Email:  <input class="form-control " type="email" name='email' pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}$" placeholder="Enter a valid email address" required>
                                 </div>
                                 <div class="form-group">
-                                    Contact:  <input class="form-control " type="text" name='contact'>
+                                    Contact:  <input class="form-control" type="tel" name='contact' pattern="^\d{4}-\d{3}-\d{4}$" required>
                                 </div>
                             </div>
                             <div class="modal-footer ">
