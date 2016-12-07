@@ -23,7 +23,7 @@ and open the template in the editor.
         <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>      
         <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
-   
+
         <!-- Bootstrap tooltips -->
         <script type="text/javascript" src="js/tether.min.js"></script>
 
@@ -89,74 +89,75 @@ and open the template in the editor.
         <!--/.Carousel Wrapper-->
 
         <!--Form without header-->
-        <div class="card" style="width: 500px;height: 400px;float: right;background-color: lightyellow">
-            <div class="card-block">
+        <form action="/Login" method="post">
+            <div class="card" style="width: 500px;height: 400px;float: right;background-color: lightyellow">
+                <div class="card-block">
 
-                <!--Header-->
-                <div class="text-xs-center">
-                    <h3><i class="fa fa-lock" ></i> Login:</h3>
-                    <hr class="mt-2 mb-2">
-                </div>
-
-                <!--Body-->
-                <div class="md-form">
-                    <i class="fa fa-envelope prefix"></i>
-                    <input type="email" id="form2" class="form-control" ng-model="email" placeholder="Enter Email ID" required="true">                    
-                </div>
-
-                <div class="md-form">
-                    <i class="fa fa-lock prefix"></i>
-                    <input type="password" id="form4" class="form-control" ng-model="password" placeholder="Enter Password" required="true">                    
-                </div>
-
-                <div class="text-xs-center">
-                    <a href="Home.html" >
-                        <button class="btn btn-deep-purple" >Login</button>
-                    </a>
-                </div>
-
-            </div>
-
-            <!--Footer-->
-            <div class="modal-footer">
-                <div class="options">
-                    <p><a data-toggle="modal" data-target="#forgotPass">Forgot Password?</a></p>
-                </div>
-            </div>
-
-        </div>
-        <!--/Form without header-->
-
-        <div class="modal fade" id="forgotPass" tabindex="-1" role="dialog" aria-labelledby="forgotPass" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
-                        <h4 class="modal-title custom_align" id="Heading">Forgot Password</h4>
+                    <!--Header-->
+                    <div class="text-xs-center">
+                        <h3><i class="fa fa-lock" ></i> Login:</h3>
+                        <hr class="mt-2 mb-2">
                     </div>
-                    <div style="width: 450px;height: 65px;padding-left: 30px">
-                        <div class="md-form">
-                            <i class="fa fa-envelope prefix"></i>
-                            <input type="email" id="form2" class="form-control" style="width: 100%;" placeholder="Enter Email ID" required="true">
 
-                        </div>
+                    <!--Body-->
+                    <div class="md-form">
+                        <i class="fa fa-envelope prefix"></i>
+                        <input type="email" id="form2" name='emailID' class="form-control" ng-model="email" placeholder="Enter Email ID" required="true">                    
                     </div>
-                    <div class="modal-footer ">
-                        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;">Submit</button>
+
+                    <div class="md-form">
+                        <i class="fa fa-lock prefix"></i>
+                        <input type="password" id="form4" name='password' class="form-control" ng-model="password" placeholder="Enter Password" required="true">                    
                     </div>
-                </div>
-                <!-- /.modal-content --> 
+
+                    <div class="text-xs-center">
+                        <a href="Home.html" >
+                            <button type='submit' class="btn btn-deep-purple" >Login</button>
+                        </a>
+                    </div>
+
+                </div></div></form>
+
+        <!--Footer-->
+        <div class="modal-footer">
+            <div class="options">
+                <p><a data-toggle="modal" data-target="#forgotPass">Forgot Password?</a></p>
             </div>
-
-            <!-- /.modal-dialog --> 
         </div>
 
     </div>
+    <!--/Form without header-->
+
+    <div class="modal fade" id="forgotPass" tabindex="-1" role="dialog" aria-labelledby="forgotPass" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
+                    <h4 class="modal-title custom_align" id="Heading">Forgot Password</h4>
+                </div>
+                <div style="width: 450px;height: 65px;padding-left: 30px">
+                    <div class="md-form">
+                        <i class="fa fa-envelope prefix"></i>
+                        <input type="email" id="form2" class="form-control" style="width: 100%;" placeholder="Enter Email ID" required="true">
+
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <button type="button" class="btn btn-warning btn-lg" style="width: 100%;">Submit</button>
+                </div>
+            </div>
+            <!-- /.modal-content --> 
+        </div>
+
+        <!-- /.modal-dialog --> 
+    </div>
+
+</div>
 <script>
-                var app = angular.module('myApp', []);
-                app.controller('myCtrl', function ($scope) {
-                  // Needs Validations to retrieve data from database to login  
-                });
-                </script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function ($scope) {
+        // Needs Validations to retrieve data from database to login  
+    });
+</script>
 </body>
 </html>

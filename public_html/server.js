@@ -25,6 +25,9 @@ app.get('/', function (req, res) {
     //res.render('/index')
 });
 app.get('/Volunteers', function (req, res) {
+    console.log(req);
+    console.log(res);
+    var volunteersList = [];
     mongoClient.connect(url, function (err, db) {
 
         if (err) {
@@ -32,7 +35,7 @@ app.get('/Volunteers', function (req, res) {
             res.send("Error in connection");
 
         } else {
-            var volunteersList = [];
+            
             console.log('Connection established ' + url);
             var cursor = db.collection('Volunteers').find();
             cursor.forEach(function (doc, err) {
@@ -40,7 +43,7 @@ app.get('/Volunteers', function (req, res) {
                     console.log(err);
                 } else {
                     volunteersList.push(doc);
-                    console.log(doc);
+                    console.log(volunteersList);
                     console.log('Volunteers Fetched');
                    
                 }
@@ -52,6 +55,56 @@ app.get('/Volunteers', function (req, res) {
             });
         }
     });
+    console.log("Respond"+res);
+});
+app.post('/Login', function (req, res) {
+//    console.log("In Insert");
+    
+    var login = {
+        emailID:req.body.emailID,
+        paswword:req.body.password
+    };
+    
+    mongoClient.connect(url, function (err, db) {
+        if (err) {
+            console.error('Error occured in database');
+            res.send("Error in connection");
+
+        } else {
+            console.log('Connection established ' + url);
+            db.collection('admin').count({email: login.email,paswword:login.paswword }, function (err, count) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(count);
+//                    var number = count;
+                    if (count === 0) {
+                         res.send("Invalid Username and password");
+//                        db.collection('Volunteers').insert(newVolunteer, function (err, result) {
+//                            if (err) {
+//                                console.log(err);
+//                            } else {
+//                                console.log('Item Inserted');
+//                                res.sendFile(__dirname + "/Volunteers.html");
+//                                db.close();
+//                            }
+//                        });
+
+                    } else {
+                        res.sendFile(__dirname + "/Home.html");
+                       
+                        db.close();
+
+                    }
+                }
+
+
+            });
+
+        }
+    });
+
+
 });
 app.post('/insertVolunteer', function (req, res) {
     console.log("In Insert");
