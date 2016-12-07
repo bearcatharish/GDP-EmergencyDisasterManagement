@@ -40,6 +40,7 @@ app.get('/Volunteers', function (req, res) {
                     console.log(err);
                 } else {
                     volunteersList.push(doc);
+                    console.log(doc);
                     console.log('Volunteers Fetched');
                    
                 }
@@ -54,8 +55,9 @@ app.get('/Volunteers', function (req, res) {
 });
 app.post('/insertVolunteer', function (req, res) {
     console.log("In Insert");
+    
     var newVolunteer = {
-        _id:3,
+        _id:5,
         fName: req.body.firstname,
         lName: req.body.lastname,
         Address: req.body.address,
