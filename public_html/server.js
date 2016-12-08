@@ -20,8 +20,8 @@ var mongoClient = mongo.MongoClient;
 var url = 'mongodb://localhost:27017/MDB';
 app.use(express.static(__dirname));
 
-app.get('/', function (req, res) {
-    res.sendFile(__dirname + "/Volunteers.html");
+app.get('/Login', function (req, res) {
+    res.sendFile(__dirname + "/LoginPage.html");
     //res.render('/index')
 });
 app.get('/Volunteers', function (req, res) {
@@ -35,7 +35,7 @@ app.get('/Volunteers', function (req, res) {
             res.send("Error in connection");
 
         } else {
-            
+
             console.log('Connection established ' + url);
             var cursor = db.collection('Volunteers').find();
             cursor.forEach(function (doc, err) {
@@ -45,26 +45,24 @@ app.get('/Volunteers', function (req, res) {
                     volunteersList.push(doc);
                     console.log(volunteersList);
                     console.log('Volunteers Fetched');
-                   
+
                 }
 //                 console.log(volunteersList);
             }
             , function () {
-                db.close();        
+                db.close();
                 res.sendFile(__dirname + "/Volunteers.html");
             });
         }
     });
-    console.log("Respond"+res);
+    console.log("Respond" + res);
 });
 app.post('/Login', function (req, res) {
-//    console.log("In Insert");
-    
     var login = {
-        emailID:req.body.emailID,
-        paswword:req.body.password
+        emailID: req.body.emailID,
+        password: req.body.password
+
     };
-    
     mongoClient.connect(url, function (err, db) {
         if (err) {
             console.error('Error occured in database');
@@ -72,35 +70,30 @@ app.post('/Login', function (req, res) {
 
         } else {
             console.log('Connection established ' + url);
-            db.collection('admin').count({email: login.email,paswword:login.paswword }, function (err, count) {
+            db.collection('admin').count({emailID: login.emailID}, function (err, count) {
                 if (err) {
                     console.log(err);
                 } else {
-                    console.log(count);
-//                    var number = count;
                     if (count === 0) {
-                         res.send("Invalid Username and password");
-//                        db.collection('Volunteers').insert(newVolunteer, function (err, result) {
-//                            if (err) {
-//                                console.log(err);
-//                            } else {
-//                                console.log('Item Inserted');
-//                                res.sendFile(__dirname + "/Volunteers.html");
-//                                db.close();
-//                            }
-//                        });
-
+                        res.send("Invalid Username");
                     } else {
-                        res.sendFile(__dirname + "/Home.html");
-                       
+                        db.collection('admin').count({password: login.password}, function (err, count) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                if (count === 0) {
+                                    res.send("Invalid password");
+                                } else {
+//                                    res.send(login.emailID);
+                                    res.sendFile(__dirname + "/Home.html");
+                                    db.close();
+                                }
+                            }
+                        });
                         db.close();
-
                     }
                 }
-
-
             });
-
         }
     });
 
@@ -108,9 +101,9 @@ app.post('/Login', function (req, res) {
 });
 app.post('/insertVolunteer', function (req, res) {
     console.log("In Insert");
-    
+
     var newVolunteer = {
-        _id:5,
+        _id: 5,
         fName: req.body.firstname,
         lName: req.body.lastname,
         Address: req.body.address,
@@ -120,7 +113,7 @@ app.post('/insertVolunteer', function (req, res) {
         age: req.body.age
 //        dateTo: req.body.dt1
     };
-    
+
     mongoClient.connect(url, function (err, db) {
         if (err) {
             console.error('Error occured in database');
