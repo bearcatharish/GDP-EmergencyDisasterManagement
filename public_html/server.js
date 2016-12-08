@@ -86,11 +86,10 @@ app.get('/Volunteers', function (req, res) {
             }
             , function () {
                 db.close();
-                res.render('Volunteers',{vol: volunteersList});
+                res.render('Volunteers', {vol: volunteersList});
             });
         }
     });
-    console.log("Respond" + res);
 });
 app.post('/Login', function (req, res) {
     var login = {
@@ -110,7 +109,7 @@ app.post('/Login', function (req, res) {
                     console.log(err);
                 } else {
                     if (count === 0) {
-                        res.send("Invalid Username"); 
+                        res.send("Invalid Username");
                     } else {
                         db.collection('admin').count({password: login.password}, function (err, count) {
                             if (err) {
@@ -119,7 +118,7 @@ app.post('/Login', function (req, res) {
                                 if (count === 0) {
                                     res.send("Invalid password");
                                 } else {
-                                    res.render('Login',{emailID: login.emailID});
+                                    res.render('Login', {emailID: login.emailID});
                                     db.close();
                                 }
                             }
@@ -137,7 +136,7 @@ app.post('/insertVolunteer', function (req, res) {
     console.log("In Insert");
 
     var newVolunteer = {
-        _id: 7,
+        _id: 10,
         fName: req.body.firstname,
         lName: req.body.lastname,
         Address: req.body.address,
@@ -166,9 +165,33 @@ app.post('/insertVolunteer', function (req, res) {
                             if (err) {
                                 console.log(err);
                             } else {
-                                console.log('Item Inserted');
-                                res.send('/Volunteers');
-                                db.close();
+                                var volunteersList = [];
+                                mongoClient.connect(url, function (err, db) {
+
+                                    if (err) {
+                                        console.error('Error occured in database');
+                                        res.send("Error in connection");
+
+                                    } else {
+
+                                        console.log('Connection established ' + url);
+                                        var cursor = db.collection('Volunteers').find();
+                                        cursor.forEach(function (doc, err) {
+                                            if (err) {
+                                                console.log(err);
+                                            } else {
+                                                volunteersList.push(doc);
+                                                console.log(volunteersList);
+                                                console.log('Volunteers Fetched');
+
+                                            }
+                                        }
+                                        , function () {
+                                            db.close();
+                                            res.render('Volunteers', {vol: volunteersList});
+                                        });
+                                    }
+                                });
                             }
                         });
 
