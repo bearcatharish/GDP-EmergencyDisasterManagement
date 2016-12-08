@@ -72,10 +72,12 @@ and open the template in the editor.
                 <div class="row"><br>
                     <form class="form-inline" role="search">
                         <div class="md-form form-group">
-                            <h2><strong>Reports </strong></h2> <br>
+                            <h2><strong>Fire Accident Reports</strong> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                             <input type="text" class="form-control" ng-model="test" placeholder="Search">
-
                             
+                            <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>                                                      
+                            </h2>
                    
                        
                         </div><br>
@@ -99,9 +101,7 @@ and open the template in the editor.
                                     </select>
                                 </th>
                                 <th>Reported by</th>
-                                <th>Certification
-                                    
-                                </th>
+                                
                                 <th>Contact Number</th>
                                 <th> Date </th>
                                 <th>Edit</th>
@@ -127,10 +127,7 @@ and open the template in the editor.
                                             <div ng-hide="editingData[x.id]" ng-bind="x.reportedBy"></div>
                                             <div ng-show="editingData[x.id]"><input type="text" ng-model="x.reportedBy" /></div>
                                         </td>
-                                        <td>
-                                            <div ng-hide="editingData[x.id]" ng-bind="x.cert"></div>
-                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.cert" /></div>
-                                        </td>
+                                       
                                         <td> 
                                             <div ng-hide="editingData[x.id]" ng-bind="x.contactNo"></div>
                                             <div ng-show="editingData[x.id]"><input type="text" ng-model="x.contactNo" /></div>
@@ -206,13 +203,13 @@ and open the template in the editor.
             
             <script>var app = angular.module('myApp', []);
                 app.controller('myCtrl', function ($scope) {
-                    $scope.volunteers = [{"id":1,"location": "1121 N college Dr.","incident":"Fire Accident", "LOI": "Medium", "reportedBy": "Jhon", "cert": "Level 1", "contactNo": "9233355867", "date": "11-03-2016"},
-                        {"id":2,"location": "N. Fillmore","incident":"Fire Accident", "LOI": "High", "reportedBy": "Antonio Moreno", "cert": "Level 4", "contactNo": "9233355866", "date": "01-18-2016"},
-                        {"id":3,"location": "120 S Main St.","incident":"Fire Accident", "LOI": "Low", "reportedBy": "Alfreds", "cert": "Level 4", "contactNo": "9233355864", "date": "10-05-2016"},
-                        {"id":4,"location": "N. Mulberry","incident":"Fire Accident", "LOI": "Low", "reportedBy": "Berglunds", "cert": "Level 2", "contactNo": "9233355869", "date": "11-03-2016"},
-                        {"id":5,"location": "1121 N college Dr.","incident":"Fire Accident", "LOI": "High", "reportedBy": "Jhon", "cert": "Level 3", "contactNo": "9233355870", "date": "08-15-2016"},
-                        {"id":6,"location": "Forest","incident":"Fire Accident", "LOI": "Low", "reportedBy": "Alfreds", "cert": "Level 1", "contactNo": "9233355861", "date": "11-06-2016"},
-                        {"id":7,"location": "N. Buchman", "incident":"Fire Accident","LOI": "Medium", "reportedBy": "Berglunds", "cert": "Level 4", "contactNo": "9233355868", "date": "10-06-2016"}
+                    $scope.volunteers = [{"id":1,"location": "1121 N college Dr.","incident":"Fire Accident", "LOI": "Medium", "reportedBy": "Jhon", "contactNo": "9233355867", "date": "11-03-2016"},
+                        {"id":2,"location": "N. Fillmore","incident":"Fire Accident", "LOI": "High", "reportedBy": "Antonio Moreno", "contactNo": "9233355866", "date": "01-18-2016"},
+                        {"id":3,"location": "120 S Main St.","incident":"Fire Accident", "LOI": "Low", "reportedBy": "Alfreds","contactNo": "9233355864", "date": "10-05-2016"},
+                        {"id":4,"location": "N. Mulberry","incident":"Fire Accident", "LOI": "Low", "reportedBy": "Berglunds","contactNo": "9233355869", "date": "11-03-2016"},
+                        {"id":5,"location": "1121 N college Dr.","incident":"Fire Accident", "LOI": "High", "reportedBy": "Jhon","contactNo": "9233355870", "date": "08-15-2016"},
+                        {"id":6,"location": "Forest","incident":"Fire Accident", "LOI": "Low", "reportedBy": "Alfreds","contactNo": "9233355861", "date": "11-06-2016"},
+                        {"id":7,"location": "N. Buchman", "incident":"Fire Accident","LOI": "Medium", "reportedBy": "Berglunds","contactNo": "9233355868", "date": "10-06-2016"}
                     ];
                    $scope.editingData = {};
 
