@@ -209,16 +209,11 @@
             <!--/.Navbar-->
 
 
-            <div class="header">
-                <br>
-                <br>
-            </div>
-            <br>
-
+            
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12"><h2><strong> Welcome admin </strong></h2> <br></div>
-                    <br>
+                    <div class="col-md-12"><h2><strong> Welcome admin </strong></h2> </div>
+                    
                 </div>
                 <!--/.Collapse content-->
 
@@ -226,25 +221,13 @@
 
         </nav>
         <!--/.Navbar-->
-
-
-        <div class="header">
-            <br>
-            <br>
-        </div>
-        <br>
-
+        <br>    
         <div class="container">
-            <div class="row">
-                <div class="col-md-12"><h3>Welcome Admin</h3></div>
-                <br>
-            </div>
+            
 
             <ul class="row list-unstyled">
                 <li class="col-md-4"> 
                     <div class="card card-block"> <a style="float:left" class="close"  data-toggle="modal" data-target="#Pops"><span class="glyphicon glyphicon-trash"></span></a>
-
-                        <!--<img src="http://powstudios.com/system/files/webupload/resources/Fire_pack/flames_1_.gif" class="img-responsive">-->
                         <br>
                         <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="Fire Accident" ></h4>
                         <p align="left"><a href="reports.html" class="text-accent-1">Open Reports</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
@@ -282,7 +265,7 @@
 
                             <div class="modal-body"> <br>
                                 <h5><p align="center">Incident deleted successfully !</p></h5>
-                                </p></h5>-->
+                               
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -329,18 +312,15 @@
                         <!-- Modal content-->
                         <div class="modal-content">
 
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <button type="button" class="close" data-dismiss="modal">hello&times;</button>
                             <!--          <h4 class="modal-title" align="center"><strong>Activities & Clubs</strong></h4>-->
 
                             <div class="modal-body"> <br>
                                 <h5><p align="center">Incident added successfully !</p></h5>
-                                <!--            <h5><p align="center"><strong>Annual Fashion show:  </strong> 16th March 2017<br>
-                                              <strong>Science national honor society: </strong>25th April 2017 <br>
-                                                      <strong>Navel cadet corps: </strong>30th April 2017 
-                                                      
-                                                  
-                                          </p></h5>-->
                             </div>
+                            <div class="alert alert-success" role="alert">
+  <strong>Well done!</strong> You successfully read this important alert message.
+</div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
@@ -373,9 +353,7 @@
         <script>
             $('.add').click(function () {
                 var $target = $(this).parents('ul');
-
                 $target.after('<li class="col-md-4"><div class="card card-block"> <a class="delete" data-toggle="modal" data-target="#Pops"><span class="glyphicon glyphicon-trash"></span></a><br><h4 class="card-title" align="center"><input type="text" class="form-control" id="type" placeholder="Name the Incident"></h4><br>\n<a href="reports.html" class="text-accent-1">Open Reports</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href="reports.html"><span class="glyphicon glyphicon-bell"></span></a></div></li>');
-
             })
 
             $('.close').click(function () {
