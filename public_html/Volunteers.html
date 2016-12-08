@@ -23,7 +23,7 @@ and open the template in the editor.
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>      
-        <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+        <!--<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>-->
 
         <!-- Bootstrap tooltips -->
         <script type="text/javascript" src="js/tether.min.js"></script>
@@ -35,6 +35,7 @@ and open the template in the editor.
         <script type="text/javascript" src="js/mdb.min.js"></script>
     </head>
     <body>
+
         <div ng-app="myApp" ng-controller="myCtrl">
             <table>
                 <td>
@@ -42,6 +43,7 @@ and open the template in the editor.
                 </td>
                 </tr>
             </table>
+
             <nav class="navbar navbar-dark mdb-color">
                 <div class="container-fluid">
                     <!--<div class="navbar-header">
@@ -61,10 +63,13 @@ and open the template in the editor.
                             <li class="nav-item"><a href=FAQ.html>FAQ's</a></li> 
                         </ul>
 
-                        <button class="btn btn-primary btn-sm" style="float: right" type="submit">Logout</button>  
+                        <form action ="LoginPage.html">
+                            <button class="btn btn-primary btn-sm" style="float: right" type="submit">Logout</button> 
+                        </form>
                     </div>     
                 </div>
-            </nav>            
+            </nav>    
+
             <div class="container">
 
                 <div class="row"><br>
@@ -77,74 +82,75 @@ and open the template in the editor.
                         <button style="float: right" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#create" ><span class="fa fa-plus">&nbsp;Create New Volunteer</span></button>
                         <button style="float: right" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#createGroup" ><span class="fa fa-plus">&nbsp;Create Group</span></button>
                     </form>
-                    <div class="col-md-12">
-                        <div class="table-responsive">                           
-                            <table id="mytable" class="table table-bordered table-striped">
-                                <thead class="thead-inverse">                                
-                                <th><input type="checkbox" id="checkall"  /></th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Profession</th>
-                                <th>Age</th>
-                                <th>Address</th>
-                                <th>Email</th>
-                                <th>Contact</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="x in volunteers| filter:test">
-                                        <td><input type="checkbox" class="checkthis" /></td>
-                                        <td>
-                                            <div ng-hide="editingData[x.id]" ng-bind="x.fName"></div>
-                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.fName" /></div>
-                                        </td>
-                                        <td>
-                                            <div ng-hide="editingData[x.id]" ng-bind="x.lName"></div>
-                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.lName" /></div>
-                                        </td>
-                                        <td>
-                                            <div ng-hide="editingData[x.id]" ng-bind="x.profession"></div>
-                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.profession" /></div>
-                                        </td>
-                                        <!--                                        <td>
-                                                                                    <div ng-hide="editingData[x.id]" ng-bind="x.cert"></div>
-                                                                                    <div ng-show="editingData[x.id]"><input type="text" ng-model="x.cert" /></div>
-                                                                                </td>-->
-                                        <td> 
-                                            <div ng-hide="editingData[x.id]" ng-bind="x.age"></div>
-                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.age" /></div>
-                                        </td>
-                                        <td>
-                                            <div ng-hide="editingData[x.id]" ng-bind="x.Address"></div>
-                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.Address" /></div>
-                                        </td>
-                                        <td>
-                                            <div ng-hide="editingData[x.id]" ng-bind="x.email"></div>
-                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.email" /></div>
-                                        </td>
-                                        <td>
-                                            <div ng-hide="editingData[x.id]" ng-bind="x.contact"></div>
-                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.contact" /></div>
-                                        </td>                                        
-                                        <!--                                        <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                                                                                <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>-->
+                    <form action="/Volunteers" method-="post">
+                        <div class="col-md-12">
+                            <div class="table-responsive">                           
+                                <table id="mytable" class="table table-bordered table-striped">
+                                    <thead class="thead-inverse">                                
+                                    <th><input type="checkbox" id="checkall"  /></th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Profession</th>
+                                    <th>Age</th>
+                                    <th>Address</th>
+                                    <th>Email</th>
+                                    <th>Contact</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="x in volunteers| filter:test">
+                                            <td><input type="checkbox" class="checkthis" /></td>
+                                            <td>
+                                                <div ng-hide="editingData[x._id]" ng-bind="x.fName"></div>
+                                                <div ng-show="editingData[x._id]"><input type="text" ng-model="x.fName" /></div>
+                                            </td>
+                                            <td>
+                                                <div ng-hide="editingData[x._id]" ng-bind="x.lName"></div>
+                                                <div ng-show="editingData[x._id]"><input type="text" ng-model="x.lName" /></div>
+                                            </td>
+                                            <td>
+                                                <div ng-hide="editingData[x._id]" ng-bind="x.profession"></div>
+                                                <div ng-show="editingData[x._id]"><input type="text" ng-model="x.profession" /></div>
+                                            </td>
+                                            <!--                                        <td>
+                                                                                        <div ng-hide="editingData[x.id]" ng-bind="x.cert"></div>
+                                                                                        <div ng-show="editingData[x.id]"><input type="text" ng-model="x.cert" /></div>
+                                                                                    </td>-->
+                                            <td> 
+                                                <div ng-hide="editingData[x._id]" ng-bind="x.age"></div>
+                                                <div ng-show="editingData[x._id]"><input type="text" ng-model="x.age" /></div>
+                                            </td>
+                                            <td>
+                                                <div ng-hide="editingData[x._id]" ng-bind="x.Address"></div>
+                                                <div ng-show="editingData[x._id]"><input type="text" ng-model="x.Address" /></div>
+                                            </td>
+                                            <td>
+                                                <div ng-hide="editingData[x._id]" ng-bind="x.email"></div>
+                                                <div ng-show="editingData[x._id]"><input type="text" ng-model="x.email" /></div>
+                                            </td>
+                                            <td>
+                                                <div ng-hide="editingData[x._id]" ng-bind="x.contact"></div>
+                                                <div ng-show="editingData[x._id]"><input type="text" ng-model="x.contact" /></div>
+                                            </td>                                        
+                                            <!--                                        <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                                                                                    <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>-->
 
-                                        <td>
-                                            <button ng-hide="editingData[x.id]" ng-click="modify(x)" class="btn btn-primary btn-sm"><span class="fa fa-pencil"></span></button>
-                                            <button ng-show="editingData[x.id]" ng-click="update(x)" class="btn btn-warning btn-sm"><span class="fa fa-check-square"></span>Update</button></td>
-                                        <td>   
-                                            <button ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="fa fa-trash"></span></button>
-                                        </td>
-                                    </tr>                       
+                                            <td>
+                                                <button ng-hide="editingData[x._id]" ng-click="modify(x)" class="btn btn-primary btn-sm"><span class="fa fa-pencil"></span></button>
+                                                <button ng-show="editingData[x._id]" ng-click="update(x)" class="btn btn-warning btn-sm"><span class="fa fa-check-square"></span>Update</button></td>
+                                            <td>   
+                                                <button ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="fa fa-trash"></span></button>
+                                            </td>
+                                        </tr>                       
 
 
 
-                                </tbody>
-                            </table>                            
+                                    </tbody>
+                                </table>                            
+                            </div>
                         </div>
-                    </div>
-
+                    </form>
                 </div></div>
 
             <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="create" aria-hidden="true">
@@ -157,62 +163,89 @@ and open the template in the editor.
                         <form action="/insertVolunteer" method="post">
                             <div class="modal-body">
                                 <div class="form-group">
-                                    First Name: <input class="form-control " type="text" name='firstname'>
+                                    First Name: <input class="form-control " type="text" name='firstname' required>
                                 </div>
                                 <div class="form-group">
 
-                                    Last Name:  <input class="form-control " type="text" name='lastname'>
+                                    Last Name:  <input class="form-control " type="text" name='lastname' required>
                                 </div>
                                 <div class="form-group">
-                                    Profession:  <input class="form-control " type="text" name='prof'>
+                                    Profession:  <input class="form-control " type="text" name='prof' required>
                                 </div>
                                 <!--                                <div class="form-group">
                                                                     Certification:  <input class="form-control " type="text">                                
                                                                 </div>-->
                                 <div class="form-group">
-                                    Age:  <input class="form-control " type="text" name='age'>
+                                    Age:  <input class="form-control" type="number" name="age" min="18" max="99" required >
                                 </div>
                                 <div class="form-group">
-                                    Address:  <input class="form-control " type="text" name='address'>
+                                    Address:  <input class="form-control " type="text" name='address' required>
                                 </div>
                                 <div class="form-group">
-                                    Email:  <input class="form-control " type="text" name='email'>
+                                    Email:  <input class="form-control " type="email" name='email' pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}$" placeholder="Enter a valid email address" required>
                                 </div>
                                 <div class="form-group">
-                                    Contact:  <input class="form-control " type="text" name='contact'>
+                                    Contact:  <input class="form-control" type="tel" name='contact' pattern="^\d{3}-\d{3}-\d{4}$" required>
                                 </div>
                             </div>
                             <div class="modal-footer ">
-                                <button type="submit" class="btn btn-success btn-lg" style="width: 100%;"><span class="fa fa-check-square"></span> Add</button>
+                                <button type="submit" onClick="myFunction()" class="btn btn-success btn-lg" style="width: 100%;"><span class="fa fa-check-square"></span> Add</button>
                             </div>
+
                         </form>
+
                     </div>
                     <!-- /.modal-content --> 
                 </div>
 
                 <!-- /.modal-dialog --> 
             </div>
+
+            <script>
+                function myFunction() {
+                    {
+                        alert("Volunteer added to the list");
+                    }
+
+                }
+
+            </script>
+
             <div class="modal fade" id="createGroup" tabindex="-1" role="dialog" aria-labelledby="createGroup" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
                             <h4 class="modal-title custom_align" id="Heading">Create Group</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                Group Name: <input class="form-control " type="text">
-                            </div>
-                            <div class="form-group">
-                                Description : <textarea type="text" class="md-textarea"></textarea>
-                            </div>
-                            <div class="modal-footer ">
-                                <button type="button" class="btn btn-success btn-lg" style="width: 100%;"><span class="fa fa-check-square"></span>Add Group</button>
-                            </div>
-                        </div>
+                        </div><form action="addGroup()">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    Group Name: <input class="form-control " type="text" required>
+                                </div>
+                                <div class="form-group">
+                                    Incident: <input class="form-control " type="text" required>
+                                </div>
+                                <div class="form-group">
+                                    Description : <textarea type="text" class="md-textarea"></textarea>
+                                </div>
+                                <div class="modal-footer ">
+                                    <button type="submit" class="btn btn-success btn-lg" style="width: 100%;"><span class="fa fa-check-square"></span>Add Group</button>
+                                </div>
+                            </div></form>
                     </div>
                 </div>
             </div>
+
+            <script>
+                function addGroup() {
+                    {
+                        alert("added group successfully");
+                    }
+
+                }
+
+            </script>
+
             <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -241,43 +274,44 @@ and open the template in the editor.
                 <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.3.3.js"></script>-->
         <script>
             var app = angular.module('myApp', []);
-            app.controller('myCtrl', ['$scope', '$window', '$http', function ($scope, $http) {
+            app.controller('myCtrl', ['$scope', '$window', '$http', function ($scope, $http, $location) {
+
 //                                                        $http({method: 'GET',
-//                                                            url: 'http://localhost:3000/Volunteer',
-////        params : data,
+//                                                            url: 'http://localhost:3000/Volunteers',
 //                                                            headers: {
 //                                                                'Content-Type': 'application/json'
 //                                                            }
 //                                                        }).then(function (result) {
-//                                                            $scope.test = result;
+//                                                            $scope.volunteers = result;
 //                                                            console.log(result);
 //                                                            console.log("hi" + JSON.stringify(result));
 //                                                        }, function (error) {
 //                                                            console.log(error);
 //                                                        }
 //                                                        );
-                    $scope.volunteers = [{"id": 0, "fName": "Alfreds", "lName": "Futterkiste", "Address": "Berlin", "email": "ritish@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "21"},
-                        {"id": 1, "fName": "Ana Trujillo ", "lName": "Emparedados y helados", "Address": "México D.F.", "email": "harish@gmail.com", "profession": "Doctor", "contact": "+923335586757", "age": "31"},
-                        {"id": 2, "fName": "Antonio Moreno", "lName": "Taquería", "Address": "México D.F.", "email": "anirudh@gmail.com", "profession": "Registered Nurse", "contact": "+923335586757", "age": "45"},
-                        {"id": 3, "fName": "Around", "lName": "Horn", "Address": "London", "email": "jean@gmail.com", "profession": "EMR", "contact": "+923335456757", "age": "54"},
-                        {"id": 4, "fName": "B's", "lName": "Beverages", "Address": "London", "email": "tommy@gmail.com", "profession": "Fire Fighter", "contact": "+923335586757", "age": "23"},
-                        {"id": 5, "fName": "Berglunds", "lName": "snabbköp", "Address": "Luleå", "email": "duff@gmail.com", "profession": "EMT", "contact": "+923335586757", "age": "27"},
-                        {"id": 6, "fName": "Blauer See", "lName": "Delikatessen", "Address": "Mannheim", "email": "tough@gmail.com", "profession": "LEO(Law Enforcement Officer)", "contact": "+923335586757", "age": "26"}
-                    ];
+                    //   $scope.volunteers = JSON.stringify(response);
+//                    $scope.volunteers = [{"_id": 0, "fName": "Alfreds", "lName": "Futterkiste", "Address": "Berlin", "email": "ritish@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "21"},
+//                        {"_id": 1, "fName": "Ana Trujillo ", "lName": "Emparedados y helados", "Address": "México D.F.", "email": "harish@gmail.com", "profession": "Doctor", "contact": "+923335586757", "age": "31"},
+//                        {"_id": 2, "fName": "Antonio Moreno", "lName": "Taquería", "Address": "México D.F.", "email": "anirudh@gmail.com", "profession": "Registered Nurse", "contact": "+923335586757", "age": "45"},
+//                        {"_id": 3, "fName": "Around", "lName": "Horn", "Address": "London", "email": "jean@gmail.com", "profession": "EMR", "contact": "+923335456757", "age": "54"},
+//                        {"_id": 4, "fName": "B's", "lName": "Beverages", "Address": "London", "email": "tommy@gmail.com", "profession": "Fire Fighter", "contact": "+923335586757", "age": "23"},
+//                        {"_id": 5, "fName": "Berglunds", "lName": "snabbköp", "Address": "Luleå", "email": "duff@gmail.com", "profession": "EMT", "contact": "+923335586757", "age": "27"},
+//                        {"_id": 6, "fName": "Blauer See", "lName": "Delikatessen", "Address": "Mannheim", "email": "tough@gmail.com", "profession": "LEO(Law Enforcement Officer)", "contact": "+923335586757", "age": "26"}
+//                    ];
                     $scope.editingData = {};
 
                     for (var i = 0, length = $scope.volunteers.length; i < length; i++) {
-                        $scope.editingData[$scope.volunteers[i].id] = false;
+                        $scope.editingData[$scope.volunteers[i]._id] = false;
                     }
 
 
                     $scope.modify = function (x) {
-                        $scope.editingData[x.id] = true;
+                        $scope.editingData[x._id] = true;
                     };
 
 
                     $scope.update = function (x) {
-                        $scope.editingData[x.id] = false;
+                        $scope.editingData[x._id] = false;
                     };
                 }]);
         </script>

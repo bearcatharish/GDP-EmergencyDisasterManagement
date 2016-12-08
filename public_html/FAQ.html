@@ -4,7 +4,6 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-
 <html>
     <head>
         <title>About Us</title>
@@ -17,6 +16,7 @@ and open the template in the editor.
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <!-- Material Design Bootstrap -->
         <link href="css/mdb.min.css" rel="stylesheet">
+        <link href="style.css" rel="stylesheet">
             
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src ="js/bootstrap.min.js"></script>
@@ -35,7 +35,8 @@ and open the template in the editor.
         <script type="text/javascript" src="js/mdb.min.js"></script>
     </head>
     <body>
-        <div ng-app="myApp" ng-controller="myCtrl">
+       
+            <div ng-app="myApp" ng-controller="myCtrl">
             <table>
                 <td>
                     <img src="CERT Logo.jpg" name="image" height="150" width="500"/>
@@ -57,22 +58,31 @@ and open the template in the editor.
                             <li class="nav-item"><a href=reports.html>Reports</a></li>
                             <li class="nav-item"><a href="/Volunteers">Volunteers</a></li>
                             <li class="nav-item"> <a href=groups.html>Groups</a></li> 
-                            <li class="nav-item active"><a href=aboutUs.html>About Us</a></li> 
-                            <li class="nav-item"><a href=FAQ.html>FAQ's</a></li> 
+                            <li class="nav-item"><a href=aboutUs.html>About Us</a></li> 
+                            <li class="nav-item active"><a href=FAQ.html>FAQ's</a></li> 
                         </ul>
 
-                        <button class="btn btn-primary btn-sm" style="float: right" type="submit">Logout</button>  
+                        <form action ="LoginPage.html">
+                   <button class="btn btn-primary btn-sm" style="float: right" type="submit">Logout</button> 
+                        </form>
                     </div>     
                 </div>
                 
             </nav> 
-             <center><img src="aboutUs.jpg" alt="mission" style="width:500px;height:300px;"></center>
-             <h2> <strong><center><br> Our Mission</center></strong></h2>
-             <h4><center>Focus on creating plans to decrease the effected disasters.In times of need deliver hope for a more positive future.</center></h4>
-             <h2><strong><center>About Us</center></strong></h2>
-             <h4><center>Community Emergency Response team is recognized nationwide as the non-governmental leader building community resiliency throughout the disaster cycle. 
-                     The volunteers represent a powerful force of goodwill in America. They are the leaders who do the work to make our communities stronger and more resilient.</center></h4>
-             
-        </div>
-        </body>
-        </html>
+                <br>
+                <br>
+      </div>
+            <h5><strong>How to add a new volunteer?</strong></h5>
+            <h6>Go to Volunteers page and click on “Create New Volunteer” button. Then fill all the details of the volunteer like name, age, address etc and finally click on “add” button. Then the volunteer will be added in the Volunteers page.</h6>
+            <h5><strong>How to create a group?</strong></h5>
+            <h6>Go to Volunteers page and click on “Create Group” button. A pop up will be displayed and enter the group id, name, description and group lead Mail Id and finally click on “Add Group” button.</h6>
+            <h5><strong> How should I prepare in the event of an emergency?</strong></h5>
+            <h6>Emergency preparedness is also an individual responsibility. Team strongly people to familiarize themselves with the plans and precautions currently in place at the university, but also to become aware of the measures they need to take to protect themselves and others in an emergency situation.</h6>
+            <h5><strong>Does the Response team have a disaster plan?</strong></h5>
+            <h6>The University is required by state and federal regulations to have a response and recovery plan. This plan covers everything from earthquakes and tsunamis to fires and flooding. This plan is maintained by the Emergency Management Team and is continuously updated. The current version is available on this Web site.</h6>
+            <h5><strong>How will I be advised of an emergency event affecting the area?</strong></h5>
+            <h6>As an emergency is identified, the first notification to be activated may be the Alert System. Alert sends emergency notifications to your cell phone, wireless device, or e-mail. Please ensure you are signed up for a account.</h6>
+  </body>
+    
+</html>
+
