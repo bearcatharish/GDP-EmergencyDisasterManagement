@@ -16,6 +16,8 @@ app.use(bodyParser.urlencoded({extended: true})); // support encoded bodies
 var router = express.Router();
 var mongo = require('mongodb');
 var mongoClient = mongo.MongoClient;
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
 
 var url = 'mongodb://localhost:27017/MDB';
 app.use(express.static(__dirname));
@@ -24,6 +26,40 @@ app.get('/Login', function (req, res) {
     res.sendFile(__dirname + "/LoginPage.html");
     //res.render('/index')
 });
+
+//app.get('/hello',function(req,res){
+//    
+//     var volunteersList = [];
+//    mongoClient.connect(url, function (err, db) {
+//
+//        if (err) {
+//            console.error('Error occured in database');
+//            res.send("Error in connection");
+//
+//        } else {
+//
+//            console.log('Connection established ' + url);
+//            var cursor = db.collection('Volunteers').find();
+//            cursor.forEach(function (doc, err) {
+//                if (err) {
+//                    console.log(err);
+//                } else {
+//                    volunteersList.push(doc);
+//                    console.log(volunteersList);
+//                    console.log('Volunteers Fetched');
+//
+//                }
+//            }
+//            , function () {
+//                db.close();
+//                res.render('hello',{vol: volunteersList});
+//                //res.render('Volunteers',{vol: volunteersList});
+//            });
+//        }
+//    });
+//    
+//    //res.render('hello',{names: JSON.stringify(["Daniel", "Sarah", "Peter"])    });
+//});
 app.get('/Volunteers', function (req, res) {
     console.log(req);
     console.log(res);
@@ -47,11 +83,10 @@ app.get('/Volunteers', function (req, res) {
                     console.log('Volunteers Fetched');
 
                 }
-//                 console.log(volunteersList);
             }
             , function () {
                 db.close();
-                res.sendFile(__dirname + "/Volunteers.html");
+                res.render('Volunteers',{vol: volunteersList});
             });
         }
     });
@@ -75,7 +110,7 @@ app.post('/Login', function (req, res) {
                     console.log(err);
                 } else {
                     if (count === 0) {
-                        res.send("Invalid Username");
+                        res.send("Invalid Username"); 
                     } else {
                         db.collection('admin').count({password: login.password}, function (err, count) {
                             if (err) {
@@ -84,8 +119,7 @@ app.post('/Login', function (req, res) {
                                 if (count === 0) {
                                     res.send("Invalid password");
                                 } else {
-//                                    res.send(login.emailID);
-                                    res.sendFile(__dirname + "/Home.html");
+                                    res.render('Login',{emailID: login.emailID});
                                     db.close();
                                 }
                             }
@@ -103,7 +137,7 @@ app.post('/insertVolunteer', function (req, res) {
     console.log("In Insert");
 
     var newVolunteer = {
-        _id: 5,
+        _id: 7,
         fName: req.body.firstname,
         lName: req.body.lastname,
         Address: req.body.address,
@@ -133,7 +167,7 @@ app.post('/insertVolunteer', function (req, res) {
                                 console.log(err);
                             } else {
                                 console.log('Item Inserted');
-                                res.sendFile(__dirname + "/Volunteers.html");
+                                res.send('/Volunteers');
                                 db.close();
                             }
                         });
