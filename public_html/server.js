@@ -27,39 +27,6 @@ app.get('/Login', function (req, res) {
     //res.render('/index')
 });
 
-//app.get('/hello',function(req,res){
-//    
-//     var volunteersList = [];
-//    mongoClient.connect(url, function (err, db) {
-//
-//        if (err) {
-//            console.error('Error occured in database');
-//            res.send("Error in connection");
-//
-//        } else {
-//
-//            console.log('Connection established ' + url);
-//            var cursor = db.collection('Volunteers').find();
-//            cursor.forEach(function (doc, err) {
-//                if (err) {
-//                    console.log(err);
-//                } else {
-//                    volunteersList.push(doc);
-//                    console.log(volunteersList);
-//                    console.log('Volunteers Fetched');
-//
-//                }
-//            }
-//            , function () {
-//                db.close();
-//                res.render('hello',{vol: volunteersList});
-//                //res.render('Volunteers',{vol: volunteersList});
-//            });
-//        }
-//    });
-//    
-//    //res.render('hello',{names: JSON.stringify(["Daniel", "Sarah", "Peter"])    });
-//});
 app.get('/Volunteers', function (req, res) {
     console.log(req);
     console.log(res);
@@ -109,16 +76,16 @@ app.post('/Login', function (req, res) {
                     console.log(err);
                 } else {
                     if (count === 0) {
-                        res.send("Invalid Username");
+                        res.render('Login', {invalid: 'email'});
                     } else {
                         db.collection('admin').count({password: login.password}, function (err, count) {
                             if (err) {
                                 console.log(err);
                             } else {
                                 if (count === 0) {
-                                    res.send("Invalid password");
+                                    res.render('Login', {invalid: 'pass'});
                                 } else {
-                                    res.render('Login', {emailID: login.emailID});
+                                    res.render('Home', {emailID: login.emailID});
                                     db.close();
                                 }
                             }
@@ -134,7 +101,7 @@ app.post('/Login', function (req, res) {
 });
 app.post('/insertVolunteer', function (req, res) {
     console.log("In Insert");
-
+    var volunteersList = [];
     var newVolunteer = {
         _id: 10,
         fName: req.body.firstname,
@@ -165,7 +132,7 @@ app.post('/insertVolunteer', function (req, res) {
                             if (err) {
                                 console.log(err);
                             } else {
-                                var volunteersList = [];
+
                                 mongoClient.connect(url, function (err, db) {
 
                                     if (err) {
