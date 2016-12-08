@@ -63,7 +63,10 @@ and open the template in the editor.
                             <li class="nav-item"><a href=FAQ.html>FAQ's</a></li> 
                         </ul>
 
-                            
+                        <form action ="LoginPage.html">
+                   <button class="btn btn-primary btn-sm" style="float: right" type="submit">Logout</button> 
+                        </form>
+                    </div>     
                 </div>
             </nav>    
             
@@ -165,14 +168,14 @@ and open the template in the editor.
                         <form action="/insertVolunteer" method="post">
                             <div class="modal-body">
                                 <div class="form-group">
-                                    First Name: <input class="form-control " type="text" name='firstname'>
+                                    First Name: <input class="form-control " type="text" name='firstname' required>
                                 </div>
                                 <div class="form-group">
 
-                                    Last Name:  <input class="form-control " type="text" name='lastname'>
+                                    Last Name:  <input class="form-control " type="text" name='lastname' required>
                                 </div>
                                 <div class="form-group">
-                                    Profession:  <input class="form-control " type="text" name='prof'>
+                                    Profession:  <input class="form-control " type="text" name='prof' required>
                                 </div>
                                 <!--                                <div class="form-group">
                                                                     Certification:  <input class="form-control " type="text">                                
@@ -181,7 +184,7 @@ and open the template in the editor.
                                     Age:  <input class="form-control" type="number" name="age" min="18" max="99" required >
                                 </div>
                                 <div class="form-group">
-                                    Address:  <input class="form-control " type="text" name='address'>
+                                    Address:  <input class="form-control " type="text" name='address' required>
                                 </div>
                                 <div class="form-group">
                                     Email:  <input class="form-control " type="email" name='email' pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}$" placeholder="Enter a valid email address" required>
@@ -276,29 +279,30 @@ function addGroup() {
                 <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.3.3.js"></script>-->
         <script>
             var app = angular.module('myApp', []);
-            app.controller('myCtrl', ['$scope', '$window', '$http', function ($scope, $http) {
+            app.controller('myCtrl', ['$scope', '$window', '$http', function ($scope, $http, response) {
+
 //                                                        $http({method: 'GET',
-//                                                            url: 'http://localhost:3000/Volunteer',
-////        params : data,
+//                                                            url: 'http://localhost:3000/Volunteers',
 //                                                            headers: {
 //                                                                'Content-Type': 'application/json'
 //                                                            }
 //                                                        }).then(function (result) {
-//                                                            $scope.test = result;
+//                                                            $scope.volunteers = result;
 //                                                            console.log(result);
 //                                                            console.log("hi" + JSON.stringify(result));
 //                                                        }, function (error) {
 //                                                            console.log(error);
 //                                                        }
 //                                                        );
-                    $scope.volunteers = [{"id": 0, "fName": "Alfreds", "lName": "Futterkiste", "Address": "Berlin", "email": "ritish@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "21"},
-                        {"id": 1, "fName": "Ana Trujillo ", "lName": "Emparedados y helados", "Address": "México D.F.", "email": "harish@gmail.com", "profession": "Doctor", "contact": "+923335586757", "age": "31"},
-                        {"id": 2, "fName": "Antonio Moreno", "lName": "Taquería", "Address": "México D.F.", "email": "anirudh@gmail.com", "profession": "Registered Nurse", "contact": "+923335586757", "age": "45"},
-                        {"id": 3, "fName": "Around", "lName": "Horn", "Address": "London", "email": "jean@gmail.com", "profession": "EMR", "contact": "+923335456757", "age": "54"},
-                        {"id": 4, "fName": "B's", "lName": "Beverages", "Address": "London", "email": "tommy@gmail.com", "profession": "Fire Fighter", "contact": "+923335586757", "age": "23"},
-                        {"id": 5, "fName": "Berglunds", "lName": "snabbköp", "Address": "Luleå", "email": "duff@gmail.com", "profession": "EMT", "contact": "+923335586757", "age": "27"},
-                        {"id": 6, "fName": "Blauer See", "lName": "Delikatessen", "Address": "Mannheim", "email": "tough@gmail.com", "profession": "LEO(Law Enforcement Officer)", "contact": "+923335586757", "age": "26"}
-                    ];
+                    $scope.volunteers = JSON.stringify(response);
+//                    $scope.volunteers = [{"id": 0, "fName": "Alfreds", "lName": "Futterkiste", "Address": "Berlin", "email": "ritish@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "21"},
+//                        {"id": 1, "fName": "Ana Trujillo ", "lName": "Emparedados y helados", "Address": "México D.F.", "email": "harish@gmail.com", "profession": "Doctor", "contact": "+923335586757", "age": "31"},
+//                        {"id": 2, "fName": "Antonio Moreno", "lName": "Taquería", "Address": "México D.F.", "email": "anirudh@gmail.com", "profession": "Registered Nurse", "contact": "+923335586757", "age": "45"},
+//                        {"id": 3, "fName": "Around", "lName": "Horn", "Address": "London", "email": "jean@gmail.com", "profession": "EMR", "contact": "+923335456757", "age": "54"},
+//                        {"id": 4, "fName": "B's", "lName": "Beverages", "Address": "London", "email": "tommy@gmail.com", "profession": "Fire Fighter", "contact": "+923335586757", "age": "23"},
+//                        {"id": 5, "fName": "Berglunds", "lName": "snabbköp", "Address": "Luleå", "email": "duff@gmail.com", "profession": "EMT", "contact": "+923335586757", "age": "27"},
+//                        {"id": 6, "fName": "Blauer See", "lName": "Delikatessen", "Address": "Mannheim", "email": "tough@gmail.com", "profession": "LEO(Law Enforcement Officer)", "contact": "+923335586757", "age": "26"}
+//                    ];
                     $scope.editingData = {};
 
                     for (var i = 0, length = $scope.volunteers.length; i < length; i++) {
