@@ -112,9 +112,9 @@ and open the template in the editor.
                 </div>
 
                 <div class="text-xs-center">
-                    <a href="Home.html" >
+                    <!-- <a href="Home.html" > -->
                         <button type='submit' class="btn btn-deep-purple" >Login</button>
-                    </a>
+                    <!-- </a> -->
                 </div>
 
             </div>
@@ -158,13 +158,13 @@ and open the template in the editor.
         app.controller('myCtrl', ['$scope', '$window', '$http', function ($scope, $http, $location) {
         $scope.valid = < % - JSON.stringify(invalidEmail) % > ;
         if ($scope.valid === "email"){
-        alert("The email you have entered is incorrect");
+                alert("The email you have entered is incorrect");
         }
         $scope.invalid = < % - JSON.stringify(invalidPass) % > ;
         if ($scope.invalid === "pass"){
-        alert("The password you have entered is incorrect");
+                alert("The password you have entered is incorrect");
         }
         }]);
-    </script>
+        </script>
 </body>
 </html>
