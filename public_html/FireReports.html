@@ -273,7 +273,6 @@ and open the template in the editor.
                         $('#myModal').modal('hide');
                     });
                  
-    
             $('.filterable .filters select').change(function(e){
                 /* Ignore tab key */
             /* Useful DOM data and selectors */
@@ -288,10 +287,12 @@ and open the template in the editor.
             var value = $(this).find('td').eq(column).text();
             return value.indexOf(inputContent) === -1;
         });
+        
         /* Clean previous no-result if exist */
         $table.find('tbody .no-result').remove();
         /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
         $rows.show();
+        
         $filteredRows.hide();
         /* Prepend no-result row if all rows are filtered */
         if ($filteredRows.length === $rows.length) {
