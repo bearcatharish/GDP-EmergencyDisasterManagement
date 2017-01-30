@@ -33,6 +33,9 @@ and open the template in the editor.
 
         <!-- MDB core JavaScript -->
         <script type="text/javascript" src="js/mdb.min.js"></script>
+        <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
+        <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+
     </head>
     <body>
         <div ng-app="myApp" ng-controller="myCtrl">
@@ -203,14 +206,15 @@ and open the template in the editor.
             
             <script>var app = angular.module('myApp', []);
                 app.controller('myCtrl', function ($scope) {
-                    $scope.volunteers = [{"id":1,"location": "1121 N college Dr.","incident":"Fire Accident", "LOI": "Medium", "reportedBy": "Jhon", "contactNo": "9233355867", "date": "11-03-2016"},
+                    $scope.volunteers = [{"id":1,"location": "1121 N college Dr.","incident":"Fire Accident", "LOI": "Medium", "reportedBy": "John", "contactNo": "9233355867", "date": "11-03-2016"},
                         {"id":2,"location": "N. Fillmore","incident":"Fire Accident", "LOI": "High", "reportedBy": "Antonio Moreno", "contactNo": "9233355866", "date": "01-18-2016"},
                         {"id":3,"location": "120 S Main St.","incident":"Fire Accident", "LOI": "Low", "reportedBy": "Alfreds","contactNo": "9233355864", "date": "10-05-2016"},
                         {"id":4,"location": "N. Mulberry","incident":"Fire Accident", "LOI": "Low", "reportedBy": "Berglunds","contactNo": "9233355869", "date": "11-03-2016"},
-                        {"id":5,"location": "1121 N college Dr.","incident":"Fire Accident", "LOI": "High", "reportedBy": "Jhon","contactNo": "9233355870", "date": "08-15-2016"},
+                        {"id":5,"location": "1121 N college Dr.","incident":"Fire Accident", "LOI": "High", "reportedBy": "John","contactNo": "9233355870", "date": "08-15-2016"},
                         {"id":6,"location": "Forest","incident":"Fire Accident", "LOI": "Low", "reportedBy": "Alfreds","contactNo": "9233355861", "date": "11-06-2016"},
                         {"id":7,"location": "N. Buchman", "incident":"Fire Accident","LOI": "Medium", "reportedBy": "Berglunds","contactNo": "9233355868", "date": "10-06-2016"}
-                    ];
+                        
+        ];
                    $scope.editingData = {};
 
                     for (var i = 0, length = $scope.volunteers.length; i < length; i++) {
@@ -228,6 +232,8 @@ and open the template in the editor.
                     };
                 });</script>
             <script>$(document).ready(function () {
+                 $('#mytable').dataTable( );
+
                     $("#mytable #checkall").click(function () {
                         if ($("#mytable #checkall").is(':checked')) {
                             $("#mytable input[type=checkbox]").each(function () {
@@ -247,7 +253,7 @@ and open the template in the editor.
                         // handle deletion here
                        // print("Hello");
                        // var id = $('.confrimDelete').data('title');
-//                        var id = 'Jhon';
+//                        var id = 'John';
 //                        $('[data-reportedBy='+id+']').parents('tr').remove();
 //                        $('#delete').modal('hide');
                         var id = $('.confrimDelete').data('id');
