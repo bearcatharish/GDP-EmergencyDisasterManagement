@@ -114,6 +114,9 @@
             input {
                 text-align: center;
             }
+
+
+
         </style>
 
     </head>
@@ -127,15 +130,15 @@
                 </tr>
             </table>
         </div>
-            <!--Navbar-->
-            <nav class="navbar navbar-dark mdb-color">
+        <!--Navbar-->
+        <nav class="navbar navbar-dark mdb-color">
 
                 <!-- Collapse button-->
                 <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapseEx">
                     <i class="fa fa-bars"></i>
                 </button>
 
-                <div class="container">
+                
 
                     <!--Collapse content-->
                     <div class="collapse navbar-toggleable-xs" id="collapseEx">
@@ -150,13 +153,13 @@
                                 <a class="nav-link" href=reports.html>Reports</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="Volunteers.html">Volunteer</a>
+                                <a class="nav-link" href="/Volunteers">Volunteer</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="groups.html">Groups</a>
                             </li> 
                             <li class="nav-item">
-                                <a class="nav-link" href="#">About Us</a>
+                                <a class="nav-link" href="AboutUs.html">About Us</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href=FAQ.html>FAQ's</a>
@@ -200,96 +203,133 @@
                     </div>
                     <!--/.Collapse content-->
 
-                </div>
+                
 
             </nav>
             <!--/.Navbar-->
 
 
-            <div class="header">
-                <br>
-                <br>
-            </div>
-            <br>
-
+            
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12"><h3>Welcome Admin, <%= emailID %></h3></div>
-                    <br>
+                    <div class="col-md-12"><h2><strong> Welcome <%= JSON.stringify(emailID) %> </strong></h2> </div>
+                    
                 </div>
-
-                <ul class="row list-unstyled">
-                    <li class="col-md-4"> 
-                        <div class="card card-block"> <a class="close" href="#" ><span class="glyphicon glyphicon-trash"></span></a>
-
-                            <!--<img src="http://powstudios.com/system/files/webupload/resources/Fire_pack/flames_1_.gif" class="img-responsive">-->
-                            <br>
-                            <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="FIRE" ></h4>
-
-                            <br>
-
-                        </div>
-                    </li>
-                    <li class="col-md-4">
-                        <div class="card card-block">
-                            <a class="close" href="#"><span class="glyphicon glyphicon-trash"></span></a>
-                            <!--<a class="add" href="#"><span class="glyphicon glyphicon-edit"></span></a>-->
-                            <br>
-                            <!--<img src="http://i.imgur.com/Se4UqVC.gif" class="img-responsive">-->
-                            <!--<img src="http://orig03.deviantart.net/3614/f/2013/001/f/b/smoke_fire_gif_3_by_prismsky-d5q07j3.gif" class="img-responsive">-->
-                            <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="COLLAPSED BUILDING" ></h4>
-
-                            <br>
-                        </div>
-                    </li>
-                    <li class="col-md-4">
-                        <div class="card card-block"> 
-                            <a class="close" href="#"><span class="glyphicon glyphicon-trash" style="color:blue"></span></a>
-
-                            <br>
-                            <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="FLOODS" ></h4>
-                            <br>
-
-                        </div>
-                    </li>
-                    <li class="col-md-4">
-                        <div class="card card-block"> 
-                            <a class="close" href="#"><span class="glyphicon glyphicon-trash" style="color:blue"></span></a>
-
-                            <br>
-                            <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="EARTHQUAKE" ></h4>
-                            <br>
-
-                        </div>
-                    </li>
-                    <li class="col-md-4">
-                        <div class="card card-block"> 
-                            <a class="close" href="#"><span class="glyphicon glyphicon-trash" style="color:blue"></span></a>
-
-                            <br>
-                            <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="TORNADO" ></h4>
-                            <br>
-
-                        </div>
-                    </li>
-                    <li class="col-md-4">
-
-                        <div class="card card-block"> <a class="add" href="#"><span class="glyphicon glyphicon-plus-sign" style="color:orange"></span></a>
-
-
-                            <h4 class="card-title" align="center"><strong>Add a disaster</strong></h4>
-                            <br>
-
-                        </div>
-
-                    </li>
-
-
-
-                </ul>
+                <!--/.Collapse content-->
 
             </div>
-       
+
+        </nav>
+        <!--/.Navbar-->
+        <br>    
+        <div class="container">
+            
+
+            <ul class="row list-unstyled">
+                <li class="col-md-4"> 
+                    <div class="card card-block"> <a style="float:left" class="close"  data-toggle="modal" data-target="#Pops"><span class="glyphicon glyphicon-trash"></span></a>
+                        <br>
+                        <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="Fire Accident" ></h4>
+                        <p align="left"><a href="FireReports.html" class="text-accent-1">Open Reports</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                            <a href="FireReports.html"><span class="glyphicon glyphicon-bell"></span></a></p>
+                    </div>
+                </li>
+                <li class="col-md-4">
+
+                    <div class="card card-block"> <a style="float:left" class="close"  data-toggle="modal" data-target="#Pops"><span class="glyphicon glyphicon-trash"></span></a>
+                        <br>
+
+                        <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="COLLAPSED BUILDING" ></h4>
+                        <p align="left"><a href="reports.html" class="text-accent-1">Open Reports</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                            <a href="reports.html"><span class="glyphicon glyphicon-bell"></span></a></p>
+                    </div>
+                </li>
+                <!--                    <li class="col-md-4">
+                                        <div class="card card-block"> 
+                                            <a class="close" data-toggle="modal" data-target="#Pops"><span class="glyphicon glyphicon-trash" style="color:blue"></span></a>
+                
+                                            <br>
+                                            <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="FLOODS" ></h4>
+                                            <p align="right"><a href="#"><span class="glyphicon glyphicon-bell"></span><span class="badge badge-notify">4</span></a></p>
+                
+                                        </div>
+                                    </li>-->
+                <div class="modal fade" id="Pops" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <!--          <h4 class="modal-title" align="center"><strong>Activities & Clubs</strong></h4>-->
+
+                            <div class="modal-body"> <br>
+                                <h5><p align="center">Incident deleted successfully !</p></h5>
+                               
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--                    <li class="col-md-4">
+                                        <div class="card card-block"> 
+                                            <a class="close" data-toggle="modal" data-target="#Pops"><span class="glyphicon glyphicon-trash" style="color:blue"></span></a>
+                
+                                            <br>
+                                            <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="EARTHQUAKE" ></h4>
+                                            <p align="right"><a href="#"><span class="glyphicon glyphicon-bell"></span><span class="badge badge-notify">1</span></a></p>
+                
+                                        </div>
+                                    </li>-->
+                <!--                    <li class="col-md-4">
+                                        <div class="card card-block"> 
+                                            <a class="close" data-toggle="modal" data-target="#Pops"><span class="glyphicon glyphicon-trash" style="color:blue"></span></a>
+                
+                                            <br>
+                                            <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="TORNADO" ></h4>
+                                           <p align="right"><a href="#"><span class="glyphicon glyphicon-bell"></span></a></p>
+                
+                                        </div>
+                                    </li>-->
+                <li class="col-md-4">
+
+                    <div class="card card-block"> <a class="add" data-toggle="modal" data-target="#Push"><span class="glyphicon glyphicon-plus-sign" style="color:orange"></span></a>
+
+
+                        <h4 class="card-title" align="center"><strong>Add an incident</strong></h4>
+                        <br>
+
+                    </div>
+
+                </li>
+
+                <div class="modal fade" id="Push" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+
+                            <button type="button" class="close" data-dismiss="modal"></button>
+                            <!--          <h4 class="modal-title" align="center"><strong>Activities & Clubs</strong></h4>-->
+
+                            <div class="modal-body"> <br>
+                                <h5><p align="center">Incident added successfully !</p></h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </ul>
+
+        </div>
+
         <!-- SCRIPTS -->
 
         <!-- JQuery -->
@@ -308,37 +348,33 @@
         <script src="path/to/bootstrap-confirmation.js"></script>
 
         <script>
-         $('.add').click(function () {
-             var $target = $(this).parents('ul');
-    //  $target.append(); 
-             $target.after('<li class="col-md-4"><div class="card card-block"> <a class="delete" href="#"><span class="glyphicon glyphicon-trash"></span></a><br><h4 class="card-title" align="center"><input type="text" class="form-control" id="type" placeholder="Type of disaster"></h4><br></div></li>');
+            $('.add').click(function () {
+                var $target = $(this).parents('ul');
+                $target.after('<li class="col-md-4"><div class="card card-block"> <a class="delete" data-toggle="modal" data-target="#Pops"><span class="glyphicon glyphicon-trash"></span></a><br><h4 class="card-title" align="center"><input type="text" class="form-control" id="type" placeholder="Name the Incident"></h4><br>\n<a href="reports.html" class="text-accent-1">Open Reports</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href="reports.html"><span class="glyphicon glyphicon-bell"></span></a></div></li>');
+            })
 
-         })
+            $('.close').click(function () {
+                var $target = $(this).parents('li');
+                $target.hide('slow', function () {
+                    $target.remove();
+                });
+            })
 
+            //$('.delete').click(function(){
+            //  var $target = $(this).parents('li');
+            //  $target.hide('slow', function(){ $target.remove(); });
+            //});
 
-
-         $('.close').click(function () {
-             var $target = $(this).parents('li');
-             $target.hide('slow', function () {
-                 $target.remove();
-             });
-         })
-
-    //$('.delete').click(function(){
-    //  var $target = $(this).parents('li');
-    //  $target.hide('slow', function(){ $target.remove(); });
-    //});
-
-         $("body").on("click", ".delete", function (e) {
-             var $target = $(this).parents('li');
-             $target.hide('slow', function () {
-                 $target.remove();
-             });
-         });
-    //$('.add').click(function(){
-    //  var $target = $(this).parents('li');
-    //  $target.append('slow', function(){ $target.append(); });
-    //})
+            $("body").on("click", ".delete", function (e) {
+                var $target = $(this).parents('li');
+                $target.hide('slow', function () {
+                    $target.remove();
+                });
+            });
+            //$('.add').click(function(){
+            //  var $target = $(this).parents('li');
+            //  $target.append('slow', function(){ $target.append(); });
+            //})
 
 
         </script>

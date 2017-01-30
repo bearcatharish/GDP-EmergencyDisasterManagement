@@ -16,6 +16,8 @@ app.use(bodyParser.urlencoded({extended: true})); // support encoded bodies
 var router = express.Router();
 var mongo = require('mongodb');
 var mongoClient = mongo.MongoClient;
+
+//View Engine
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
@@ -25,39 +27,6 @@ app.get('/Login', function (req, res) {
     //res.render('/index')
 });
 
-//app.get('/hello',function(req,res){
-//    
-//     var volunteersList = [];
-//    mongoClient.connect(url, function (err, db) {
-//
-//        if (err) {
-//            console.error('Error occured in database');
-//            res.send("Error in connection");
-//
-//        } else {
-//
-//            console.log('Connection established ' + url);
-//            var cursor = db.collection('Volunteers').find();
-//            cursor.forEach(function (doc, err) {
-//                if (err) {
-//                    console.log(err);
-//                } else {
-//                    volunteersList.push(doc);
-//                    console.log(volunteersList);
-//                    console.log('Volunteers Fetched');
-//
-//                }
-//            }
-//            , function () {
-//                db.close();
-//                res.render('hello',{vol: volunteersList});
-//                //res.render('Volunteers',{vol: volunteersList});
-//            });
-//        }
-//    });
-//    
-//    //res.render('hello',{names: JSON.stringify(["Daniel", "Sarah", "Peter"])    });
-//});
 app.get('/Volunteers', function (req, res) {
     console.log(req);
     console.log(res);
@@ -77,14 +46,14 @@ app.get('/Volunteers', function (req, res) {
                     console.log(err);
                 } else {
                     volunteersList.push(doc);
-                    console.log(volunteersList);
+                    // console.log(volunteersList);
                     console.log('Volunteers Fetched');
 
                 }
             }
             , function () {
                 db.close();
-                res.render('Volunteers', {vol: volunteersList});
+                res.render('VolunteersView', {vol: volunteersList});
             });
         }
     });
@@ -107,16 +76,16 @@ app.post('/Login', function (req, res) {
                     console.log(err);
                 } else {
                     if (count === 0) {
-                        res.send("Invalid Username");
+                        res.render('LoginView', {invalid: 'email'});
                     } else {
                         db.collection('admin').count({password: login.password}, function (err, count) {
                             if (err) {
                                 console.log(err);
                             } else {
                                 if (count === 0) {
-                                    res.send("Invalid password");
+                                    res.render('LoginView', {invalid: 'pass'});
                                 } else {
-                                    res.render('Login', {emailID: login.emailID});
+                                    res.render('HomeView', {emailID: login.emailID});
                                     db.close();
                                 }
                             }
@@ -132,9 +101,9 @@ app.post('/Login', function (req, res) {
 });
 app.post('/insertVolunteer', function (req, res) {
     console.log("In Insert");
-
+    var volunteersList = [];   
     var newVolunteer = {
-        _id: 10,
+        _id: 14,
         fName: req.body.firstname,
         lName: req.body.lastname,
         Address: req.body.address,
@@ -163,7 +132,7 @@ app.post('/insertVolunteer', function (req, res) {
                             if (err) {
                                 console.log(err);
                             } else {
-                                var volunteersList = [];
+
                                 mongoClient.connect(url, function (err, db) {
 
                                     if (err) {
@@ -179,8 +148,88 @@ app.post('/insertVolunteer', function (req, res) {
                                                 console.log(err);
                                             } else {
                                                 volunteersList.push(doc);
-                                                console.log(volunteersList);
+                                                // console.log(volunteersList);
                                                 console.log('Volunteers Fetched');
+
+                                            }
+                                        }
+                                        , function () {
+                                            db.close();
+                                            res.render('VolunteersView', {vol: volunteersList});
+                                        });
+                                    }
+                                });
+                            }
+                        });
+
+                    } else {
+                        res.send("already exists");
+                        db.close();
+
+                    }
+                }
+
+
+            });
+
+        }
+    });
+
+
+});
+
+
+app.post('/insertGroup', function (req, res) {
+    console.log("In Insert");
+    var groupList = [];   
+    var newGroup = {
+        _id: 1,
+        gName: req.body.groupname,
+        iName: req.body.incidentname,
+        comments: req.body.desc
+//        email: req.body.email,
+//        profession: req.body.prof,
+//        contact: req.body.contact,
+//        age: req.body.age
+//        dateTo: req.body.dt1
+    };
+
+    mongoClient.connect(url, function (err, db) {
+        if (err) {
+            console.error('Error occured in database');
+            res.send("Error in connection");
+
+        } else {
+            console.log('Connection established ' + url);
+            db.collection('groups').count({gName:newGroup.gName}, function (err, count) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(count);
+//                    var number = count;
+                    if (count === 0) {
+                        db.collection('groups').insert(newGroup, function (err, result) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+
+                                mongoClient.connect(url, function (err, db) {
+
+                                    if (err) {
+                                        console.error('Error occured in database');
+                                        res.send("Error in connection");
+
+                                    } else {
+
+                                        console.log('Connection established ' + url);
+                                        var cursor = db.collection('groups').find();
+                                        cursor.forEach(function (doc, err) {
+                                            if (err) {
+                                                console.log(err);
+                                            } else {
+                                                groupList.push(doc);
+                                                console.log(groupList);
+                                                console.log('groups Fetched');
 
                                             }
                                         }

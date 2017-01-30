@@ -74,12 +74,15 @@ and open the template in the editor.
                 <div class="row"><br>
                     <form class="form-inline" role="search">
                         <div class="md-form form-group">
+                           <h2><strong>Volunteers </strong> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                             <input type="text" class="form-control" ng-model="test" placeholder="Search">
-
+                            
                             <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>                                                      
-                        </div><br>
-                        <button style="float: right" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#create" ><span class="fa fa-plus">&nbsp;Create New Volunteer</span></button>
-                        <button style="float: right" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#createGroup" ><span class="fa fa-plus">&nbsp;Create Group</span></button>
+                            </h2>
+                        </div>
+                        <button style="float: right" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#create" ><span class="fa fa-plus"></span>&nbsp;Create New Volunteer</button>
+                        <button style="float: right" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#createGroup" ><span class="fa fa-plus"></span>&nbsp;Create Group</button>
                     </form>
                     <div class="col-md-12">
                         <div class="table-responsive">                           
@@ -202,16 +205,19 @@ and open the template in the editor.
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
                             <h4 class="modal-title custom_align" id="Heading">Create Group</h4>
-                        </div>
+                        </div>                    
                         <div class="modal-body">
                             <div class="form-group">
-                                Group Name: <input class="form-control " type="text">
-                            </div>
-<div class="form-group">
-                                Incident: <input class="form-control " type="text" required>
+                                Group Name: <input class="form-control " type="text" name='groupname' required>
                             </div>
                             <div class="form-group">
-                                Description : <textarea type="text" class="md-textarea"></textarea>
+                                Incident: <input class="form-control " type="text" name='incidentname' required>
+                            </div>
+<div class="form-group">
+                                Group Lead Mail Id: <input class="form-control " type="text" name='Group Lead Mail Id' required>
+                            </div>
+                            <div class="form-group">
+                                Description : <textarea type="text" class="md-textarea" name='desc'></textarea>
                             </div>
                             <div class="modal-footer ">
                                 <button type="button" class="btn btn-success btn-lg" style="width: 100%;"><span class="fa fa-check-square"></span>Add Group</button>
@@ -233,9 +239,9 @@ and open the template in the editor.
 
                         </div>
                         <div class="modal-footer ">
-                            <button type="button" class="btn btn-success" ><span class="fa fa-check"></span>Yes</button>
+                             <button type="submit" class="btn btn-success" data-dismiss="modal"><span class="fa fa-check"></span>Yes</button>
                             <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="fa fa-remove"></span>No</button>
-                        </div>
+</div>
                     </div>
 
                     <!-- /.modal-content --> 

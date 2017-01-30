@@ -75,15 +75,18 @@ and open the template in the editor.
                 <div class="row"><br>
                     <form class="form-inline" role="search">
                         <div class="md-form form-group">
+                          <h2><strong>Groups </strong> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                             <input type="text" class="form-control" ng-model="test" placeholder="Search">
-
+                            
                             <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>                                                      
+                            </h2>
                         </div><br>
                      
 <!--                        <button style="float: right" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#createGroup" ><span class="fa fa-plus">&nbsp;Create Group</span></button>-->
                     </form>
       
-    <h2><strong> Groups </strong></h2> <br>
+   
 
 
                     <div class="col-md-12">
@@ -152,7 +155,7 @@ and open the template in the editor.
 
                             </div>
                             <div class="modal-footer ">
-                                <button type="button" class="btn btn-success" ><span class="fa fa-check"></span> Yes</button>
+                                <button type="button" class="btn btn-success" data-dismiss="modal"><span class="fa fa-check"></span> Yes</button>
                                 <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="fa fa-remove"></span> No</button>
                             </div>
                         </div>
@@ -164,13 +167,13 @@ and open the template in the editor.
             <script>
                 var app = angular.module('myApp', []);
                 app.controller('myCtrl', function ($scope) {
-                    $scope.Groups = [{"GroupId": 01, "GroupName": "Rescuers", "Description": "Need to be updated", "GroupLeadMailId": "johhnadam@gmail.com", "IncidentName":"Collapsed building"},
-                        {"GroupId": 02, "GroupName": "FireFighters", "Description": "Need to be updated", "GroupLeadMailId": "johhnadam@gmail.com", "IncidentName":"Fire"},
-                        {"GroupId": 03, "GroupName": "Doctors", "Description": "Need to be updated", "GroupLeadMailId": "johhnadam@gmail.com", "IncidentName":"Fire"},
-                        {"GroupId": 04, "GroupName": "Nurse", "Description": "Need to be updated", "GroupLeadMailId": "johhnadam@gmail.com", "IncidentName":"Fire"},
-                        {"GroupId": 05, "GroupName": "Lifeguard", "Description": "Need to be updated", "GroupLeadMailId": "johhnadam@gmail.com", "IncidentName":"Fire"},
-                        {"GroupId": 06, "GroupName": "Law Enforcement Officer", "Description": "Need to be updated", "GroupLeadMailId": "johhnadam@gmail.com", "IncidentName":"Power"},
-                        {"GroupId": 07, "GroupName": "Heavily Equiped Operator", "Description": "Need to be updated", "GroupLeadMailId": "johhnadam@gmail.com", "IncidentName":"Flood"}
+                    $scope.Groups = [{"GroupId": 01, "GroupName": "Rescuers", "Description": "Response Team for Collapsed Buildings", "GroupLeadMailId": "harish@gmail.com", "IncidentName":"Collapsed building"},
+                        {"GroupId": 02, "GroupName": "FireFighters", "Description": "Response Team for Fire", "GroupLeadMailId": "anirudh@gmail.com", "IncidentName":"Fire"},
+                        {"GroupId": 03, "GroupName": "Doctors", "Description": "Response Team for Fire", "GroupLeadMailId": "vikram@gmail.com", "IncidentName":"Fire"},
+                        {"GroupId": 04, "GroupName": "Nurse", "Description": "Response Team for Fire", "GroupLeadMailId": "shiva@gmail.com", "IncidentName":"Fire"},
+                        {"GroupId": 05, "GroupName": "Lifeguard", "Description": "Response Team for Fire", "GroupLeadMailId": "jason@gmail.com", "IncidentName":"Fire"},
+                        {"GroupId": 06, "GroupName": "Law Enforcement Officer", "Description": "Response Team for Power", "GroupLeadMailId": "morris@gmail.com", "IncidentName":"Power"},
+                        {"GroupId": 07, "GroupName": "Heavily Equiped Operator", "Description": "Response Team for Flood", "GroupLeadMailId": "jeena@gmail.com", "IncidentName":"Flood"}
                     ];
                     $scope.editingData = {};
 
