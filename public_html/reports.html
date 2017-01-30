@@ -33,6 +33,8 @@ and open the template in the editor.
 
         <!-- MDB core JavaScript -->
         <script type="text/javascript" src="js/mdb.min.js"></script>
+        <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
+        <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
     </head>
     <body>
         <div ng-app="myApp" ng-controller="myCtrl">
@@ -227,6 +229,10 @@ and open the template in the editor.
                     };
                 });</script>
             <script>$(document).ready(function () {
+                 $('#mytable').dataTable(
+                         { "bFilter": false, 
+                     "ordering": false,
+                     "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ] });
                     $("#mytable #checkall").click(function () {
                         if ($("#mytable #checkall").is(':checked')) {
                             $("#mytable input[type=checkbox]").each(function () {
