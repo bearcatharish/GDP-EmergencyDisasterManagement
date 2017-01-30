@@ -232,7 +232,10 @@ and open the template in the editor.
                     };
                 });</script>
             <script>$(document).ready(function () {
-                 $('#mytable').dataTable( );
+                 $('#mytable').dataTable(
+                         { "bFilter": false, 
+                     "ordering": false,
+                     "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ] });
 
                     $("#mytable #checkall").click(function () {
                         if ($("#mytable #checkall").is(':checked')) {
