@@ -16,11 +16,11 @@ app.use(bodyParser.urlencoded({extended: true})); // support encoded bodies
 var router = express.Router();
 var mongo = require('mongodb');
 var mongoClient = mongo.MongoClient;
+
+//View Engine
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-var url = 'mongodb://localhost:27017/MDB';
-app.use(express.static(__dirname));
 
 app.get('/Login', function (req, res) {
     res.sendFile(__dirname + "/LoginPage.html");
@@ -46,14 +46,14 @@ app.get('/Volunteers', function (req, res) {
                     console.log(err);
                 } else {
                     volunteersList.push(doc);
-                    console.log(volunteersList);
+                    // console.log(volunteersList);
                     console.log('Volunteers Fetched');
 
                 }
             }
             , function () {
                 db.close();
-                res.render('Volunteers', {vol: volunteersList});
+                res.render('VolunteersView', {vol: volunteersList});
             });
         }
     });
@@ -76,16 +76,16 @@ app.post('/Login', function (req, res) {
                     console.log(err);
                 } else {
                     if (count === 0) {
-                        res.render('Login', {invalid: 'email'});
+                        res.render('LoginView', {invalid: 'email'});
                     } else {
                         db.collection('admin').count({password: login.password}, function (err, count) {
                             if (err) {
                                 console.log(err);
                             } else {
                                 if (count === 0) {
-                                    res.render('Login', {invalid: 'pass'});
+                                    res.render('LoginView', {invalid: 'pass'});
                                 } else {
-                                    res.render('Home', {emailID: login.emailID});
+                                    res.render('HomeView', {emailID: login.emailID});
                                     db.close();
                                 }
                             }
@@ -103,7 +103,7 @@ app.post('/insertVolunteer', function (req, res) {
     console.log("In Insert");
     var volunteersList = [];   
     var newVolunteer = {
-        _id: 8,
+        _id: 14,
         fName: req.body.firstname,
         lName: req.body.lastname,
         Address: req.body.address,
@@ -148,14 +148,14 @@ app.post('/insertVolunteer', function (req, res) {
                                                 console.log(err);
                                             } else {
                                                 volunteersList.push(doc);
-                                                console.log(volunteersList);
+                                                // console.log(volunteersList);
                                                 console.log('Volunteers Fetched');
 
                                             }
                                         }
                                         , function () {
                                             db.close();
-                                            res.render('Volunteers', {vol: volunteersList});
+                                            res.render('VolunteersView', {vol: volunteersList});
                                         });
                                     }
                                 });
@@ -186,7 +186,7 @@ app.post('/insertGroup', function (req, res) {
         _id: 1,
         gName: req.body.groupname,
         iName: req.body.incidentname,
-        comments: req.body.desc,
+        comments: req.body.desc
 //        email: req.body.email,
 //        profession: req.body.prof,
 //        contact: req.body.contact,
@@ -257,12 +257,3 @@ app.post('/insertGroup', function (req, res) {
 
 
 });
-
-app.listen(3000);
-console.log('Running on port 3000');
-
-http.createServer(function (request, response) {
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.end('Page One');
-}).listen(80);
-console.log("Server is listening");
