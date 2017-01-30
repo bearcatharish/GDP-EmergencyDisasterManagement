@@ -19,8 +19,6 @@ var mongoClient = mongo.MongoClient;
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-var url = 'mongodb://localhost:27017/MDB';
-app.use(express.static(__dirname));
 
 app.get('/Login', function (req, res) {
     res.sendFile(__dirname + "/LoginPage.html");
@@ -210,12 +208,3 @@ app.post('/insertVolunteer', function (req, res) {
 
 
 });
-
-app.listen(3000);
-console.log('Running on port 3000');
-
-http.createServer(function (request, response) {
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.end('Page One');
-}).listen(80);
-console.log("Server is listening");
