@@ -127,7 +127,7 @@ app.post('/insertVolunteer', function (req, res) {
                 } else{
                     console.log(count);
 //                    var number = count;
-                    if (count === 0) {
+                    if(count === 0) {
                         db.collection('Volunteers').insert(newVolunteer, function (err, result) {
                             if (err) {
                                 console.log(err);
