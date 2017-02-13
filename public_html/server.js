@@ -124,7 +124,7 @@ app.post('/insertVolunteer', function (req, res) {
             db.collection('Volunteers').count({email: newVolunteer.email}, function (err, count) {
                 if (err) {
                     console.log(err);
-                } else {
+                } else{
                     console.log(count);
 //                    var number = count;
                     if (count === 0) {
