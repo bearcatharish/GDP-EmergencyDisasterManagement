@@ -24,7 +24,8 @@ and open the template in the editor.
         <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>      
         <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
-
+        <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
         <!-- Bootstrap tooltips -->
         <script type="text/javascript" src="js/tether.min.js"></script>
 
@@ -70,7 +71,7 @@ and open the template in the editor.
                 <div class="row"><br>
                     <form class="form-inline" role="search">
                         <div class="md-form form-group">
-                            <h2><strong> Fire Reports </strong></h2> <br>
+                            <h2><strong>Reports </strong></h2> <br>
                             <input type="text" class="form-control" ng-model="test" placeholder="Search">
 
                             <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>                                                      
@@ -85,8 +86,9 @@ and open the template in the editor.
                                 <thead class="thead-inverse">
                                     <tr class="filters">
                                 <th>Location</th>
+                                <th>Type of Disaster</th>
                                 <th>Level Of Impact
-                                    <select class="form-control">
+                                    <select class="form-control bg-info">
                                     <option></option>
                                     <option>Low</option>
                                     <option>Medium</option>
@@ -98,7 +100,9 @@ and open the template in the editor.
                                     
                                 </th>
                                 <th>Contact Number</th>
-                                <th> Date </th>
+                                <th> Date 
+                                    <input type="date" name="disasterDate" value="10/24/1984" />
+                                </th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                                     </tr>
@@ -109,6 +113,10 @@ and open the template in the editor.
                                         <td>
                                             <div ng-hide="editingData[x.id]" ng-bind="x.location"></div>
                                             <div ng-show="editingData[x.id]"><input type="text" ng-model="x.location" /></div>
+                                        </td>
+                                        <td>
+                                            <div ng-hide="editingData[x.id]" ng-bind="x.tod"></div>
+                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.tod" /></div>
                                         </td>
                                         <td>
                                             <div ng-hide="editingData[x.id]" ng-bind="x.LOI"></div>
@@ -173,13 +181,13 @@ and open the template in the editor.
             </div>
             <script>var app = angular.module('myApp', []);
                 app.controller('myCtrl', function ($scope) {
-                    $scope.volunteers = [{"id":1,"location": "1121 N college Dr.", "LOI": "Medium", "reportedBy": "Jhon", "cert": "Level 1", "contactNo": "9233355867", "date": "11-03-2016"},
-                        {"id":2,"location": "N. Fillmore", "LOI": "High", "reportedBy": "Antonio Moreno", "cert": "Level 4", "contactNo": "9233355866", "date": "01-18-2016"},
-                        {"id":3,"location": "120 S Main St.", "LOI": "Low", "reportedBy": "Alfreds", "cert": "Level 4", "contactNo": "9233355864", "date": "10-05-2016"},
-                        {"id":4,"location": "N. Mulberry", "LOI": "Low", "reportedBy": "Berglunds", "cert": "Level 2", "contactNo": "9233355869", "date": "11-03-2016"},
-                        {"id":5,"location": "1121 N college Dr.", "LOI": "High", "reportedBy": "Jhon", "cert": "Level 3", "contactNo": "9233355870", "date": "08-15-2016"},
-                        {"id":6,"location": "Forest", "LOI": "Low", "reportedBy": "Alfreds", "cert": "Level 1", "contactNo": "9233355861", "date": "11-06-2016"},
-                        {"id":7,"location": "N. Buchman", "LOI": "Medium", "reportedBy": "Berglunds", "cert": "Level 4", "contactNo": "9233355868", "date": "10-06-2016"}
+                    $scope.volunteers = [{"id":1,"location": "1121 N college Dr.","tod":"Fire", "LOI": "Medium", "reportedBy": "Jhon", "cert": "Level 1", "contactNo": "9233355867", "date": "11-03-2016"},
+                        {"id":2,"location": "N. Fillmore", "tod":"Fire","LOI": "High", "reportedBy": "Antonio Moreno", "cert": "Level 4", "contactNo": "9233355866", "date": "01-18-2016"},
+                        {"id":3,"location": "120 S Main St.","tod":"Fire", "LOI": "Low", "reportedBy": "Alfreds", "cert": "Level 4", "contactNo": "9233355864", "date": "10-05-2016"},
+                        {"id":4,"location": "N. Mulberry", "tod":"Fire","LOI": "Low", "reportedBy": "Berglunds", "cert": "Level 2", "contactNo": "9233355869", "date": "11-03-2016"},
+                        {"id":5,"location": "1121 N college Dr.","tod":"Fire", "LOI": "High", "reportedBy": "Jhon", "cert": "Level 3", "contactNo": "9233355870", "date": "08-15-2016"},
+                        {"id":6,"location": "Forest", "tod":"Fire","LOI": "Low", "reportedBy": "Alfreds", "cert": "Level 1", "contactNo": "9233355861", "date": "11-06-2016"},
+                        {"id":7,"location": "N. Buchman","tod":"Fire", "LOI": "Medium", "reportedBy": "Berglunds", "cert": "Level 4", "contactNo": "9233355868", "date": "10-06-2016"}
                     ];
                    $scope.editingData = {};
 
@@ -196,8 +204,9 @@ and open the template in the editor.
                     $scope.update = function (x) {
                         $scope.editingData[x.id] = false;
                     };
-                });</script>
-          
+                    });
+                    
+                </script>
             <script>$(document).ready(function () {
                     $("#mytable #checkall").click(function () {
                         if ($("#mytable #checkall").is(':checked')) {
@@ -214,21 +223,20 @@ and open the template in the editor.
 
                     $("[data-toggle=tooltip]").tooltip();
                     });
-                    $('#yesBtn').click(function() {
+                    
+                 $('#yesBtn').click(function() {
                         // handle deletion here
                        // print("Hello");
                        // var id = $('.confrimDelete').data('title');
 //                        var id = 'Jhon';
 //                        $('[data-reportedBy='+id+']').parents('tr').remove();
 //                        $('#delete').modal('hide');
-                        var id = $('.confrimDelete').data('id');
+                        var id = $scope.editingData[x.id];
+                        window.alert(id);
                         $('[data-id='+id+']').parents('tr').remove();
-                        $('#myModal').modal('hide');
+                        $('#delete').modal('hide');
                     });
-                 
-     $('#myTable').DataTable( {
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
-    } );
+    
             $('.filterable .filters select').change(function(e){
                 /* Ignore tab key */
             /* Useful DOM data and selectors */
@@ -256,8 +264,13 @@ and open the template in the editor.
         });    
     
         });
-                
-         </script>
+        
+          $(function() {
+    $('input[name="birthdate"]').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true
+    });
+});   </script>
 
     </body>
 </html>

@@ -1,136 +1,289 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>Volunteers</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" href="hands.ico" />
-        <link rel="stylesheet" href="css/bootstrap.min.css">        
-        <script src ="js/bootstrap.min.js"></script>    
-        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <title>Community Emergency Report Team</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    
+    <!-- Template styles -->
+    <style rel="stylesheet">
+        /* TEMPLATE STYLES */
+               
+        html,
+        body {
+            height: 100%;
+        }
+        /* Navigation*/
+        
+        .navbar {
+            background-color: #373a3c;
+        }
+        .top-nav-collapse {
+            background-color: #373a3c;
+        }
+		
+		.nav-item1{
+		allign: "right"
+		}
+        
+        footer.page-footer {
+            background-color: #4285F4;
+            position:absolute;
+            width:100%;
+            bottom:0;
+            left:0;
+        }
+        
+        @media only screen and (max-width: 768px) {
+            .navbar {
+                background-color: #373a3c;
+            }
+        }
+                
+        @media (max-width: 776px) {
+            .carousel {
+                height: 100%;
+            }
+        }
        
-   <!-- </head>
-    <body>
-        <div ng-app="myApp" ng-controller="myCtrl">
-            <table>
-                <td>
-                    <img src="CERT Logo.jpg" name="image" height="150" width="500"/>
 
-                    </div>
-                   <!-- <ul class="nav navbar-nav">
-                        <li class="active"><a href=Home.html>Home</a></li>
-                        <li><a href=reports.html>Reports</a></li>
-                        <li><a href=Volunteers.html>Volunteers</a></li>
-                        <li><a href=groups.html>Groups</a></li> 
-                        <li><a href=aboutUs.html>About Us</a></li> 
-                        <li><a href=FAQ.html>FAQ's</a></li> 
-                    </ul>-->
-                <!--Caption-->
 
-            
-            <!--/.First slide-->
+        .profile-header-container{
+    margin: 0 auto;
+    text-align: right;
+}
 
-            <!--Second slide -->
-            <div class="carousel-item">
-                <!--Caption-->
-                <div class="flex-right animated fadeInDown">
-                    <ul>
-                        <!-- Insert log in page code-->
-                    </ul>
-                </div>
-                <!--Caption-->
+.profile-header-img {
+    padding: 0px;
+}
+
+.profile-header-img > img.img-circle {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #51D2B7;
+   
+}
+
+.profile-header {
+    margin-top: 30px;
+}
+
+       
+        /*Caption*/
+        
+        .flex-center {
+            color: #fff;
+        }
+        
+        /*CSS Styling for X button*/
+        
+        /*CSS styling for badge on the bell icon*/
+        .badge-notify{
+   background:red;
+   position:relative;
+   top: -14px;
+   left: -5px;
+}
+    /*CSS styling for Add icon on Add a disaster card*/
+   .glyphicon.glyphicon-plus-sign {
+    font-size: 40px;
+/*    top: 20px;*/
+   left: 5px;
+       
+}
+
+
+/* CSS styling for aligning the text to center in inputbox*/
+input {
+text-align: center;
+}
+    </style>
+    
+    </head>
+
+<body>
+
+
+    <!--Navbar-->
+    <nav class="navbar navbar-dark mdb-color navbar-fixed-top scrolling-navbar">
+
+        <!-- Collapse button-->
+        <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapseEx">
+            <i class="fa fa-bars"></i>
+        </button>
+
+        <div class="container">
+
+            <!--Collapse content-->
+            <div class="collapse navbar-toggleable-xs" id="collapseEx">
+                <!--Navbar Brand-->
+                <!--<a class="navbar-brand" href="http://mdbootstrap.com/material-design-for-bootstrap/" target="_blank">MDB</a>-->
+                <!--Links-->
+                <ul class="nav navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="Home.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href=reports.html>Reports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Volunteers.html">Volunteer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="groups.html">Groups</a>
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href=FAQ.html>FAQ's</a>
+                    </li>
+<!--                                        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Page 1-1</a></li>
+          <li><a href="#">Page 1-2</a></li>
+          <li><a href="#">Page 1-3</a></li> 
+        </ul>
+      </li>-->
+      
+       
+                </ul>
+                <!--Search form-->
+                <form class="form-inline">                    
+                    <input class="form-control" type="text" placeholder="Search">
+                    
+
+<!--                  <ul class="nav pull-right">
+                            
+                            <li><a href="#">Support </a></li>
+                            <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="images/user.png" class="nav-avatar" />
+                                <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Your Profile</a></li>
+                           
+<li><a href="#">Edit Profile</a></li>
+                                    <li><a href="#">Account Settings</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>  -->
+
+                    <button class="btn btn-primary btn-sm" type="submit">Logout</button>
+                </form>
             </div>
-            <!--/.Second slide -->
+            <!--/.Collapse content-->
 
-            <!--Third slide-->
-            <div class="carousel-item">
-                <!--Caption-->
-                <div class="flex-right animated fadeInDown">
-                    <ul>
-                        <!-- Insert login page code-->
-                    </ul>
-                </div>
-                <!--Caption-->
-            </div>
-            <!--/.Third slide-->
         </div>
-        <!--/.Slides-->
 
-        <!--Controls-->
-        <a class="left carousel-control" href="#carousel-example-1" role="button" data-slide="prev">
-            <span class="icon-prev" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-1" role="button" data-slide="next">
-            <span class="icon-next" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-        <!--/.Controls-->
-    </div>
-    <!--/.Carousel Wrapper-->
+    </nav>
+    <!--/.Navbar-->
 
+    
+<div class="header">
+<br>
+<br>
+</div>
     <br>
 
-    <!--Content-->
     <div class="container">
-        <div class="row">
-            <!--First columnn-->
-            <div class="col-md-4">
-                Welcome!
-            <!--First columnn-->
-
-            <!--Second columnn-->
-            <div class="col-md-4">
-                
-            </div>
-            <!--Second columnn-->
-
-            <!--Third columnn-->
-            <div class="col-md-4">
-                
-                </div>
-                <!--/.Card-->
-            </div>
-            <!--Third columnn-->
-        </div>
+    <div class="row">
+    	<div class="col-md-12"><h3>Welcome Admin</h3></div>
+        <br>
     </div>
-    <!--/.Content-->
+       
+    <ul class="row list-unstyled">
+        <li class="col-md-4"> 
+            <div class="card card-block"> <a class="close" href="#" ><span class="glyphicon glyphicon-trash"></span></a>
 
-
-
-    <!--Footer-->
-    <footer class="page-footer center-on-small-only">
-
-                       <!--Call to action-->
-        <div class="call-to-action">
-            <h4>CERT</h4>
-            <ul>
-               
-            </ul>
-        </div>
-        <!--/.Call to action-->
-
-        <!--Copyright-->
-        <div class="footer-copyright">
-            <div class="container-fluid">
-                © 2017 Copyright: <a href="#"> Excelsior Tech Services </a>
-
+                <!--<img src="http://powstudios.com/system/files/webupload/resources/Fire_pack/flames_1_.gif" class="img-responsive">-->
+                <br>
+                <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="FIRE" ></h4>
+                
+                <br>
+                
             </div>
-        </div>
-        <!--/.Copyright-->
+        </li>
+        <li class="col-md-4">
+            <div class="card card-block">
+                <a class="close" href="#"><span class="glyphicon glyphicon-trash"></span></a>
+                 <!--<a class="add" href="#"><span class="glyphicon glyphicon-edit"></span></a>-->
+                 <br>
+                <!--<img src="http://i.imgur.com/Se4UqVC.gif" class="img-responsive">-->
+                <!--<img src="http://orig03.deviantart.net/3614/f/2013/001/f/b/smoke_fire_gif_3_by_prismsky-d5q07j3.gif" class="img-responsive">-->
+                 <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="COLLAPSED BUILDING" ></h4>
+                 
+                 <br>
+            </div>
+        </li>
+        <li class="col-md-4">
+            <div class="card card-block"> 
+                <a class="close" href="#"><span class="glyphicon glyphicon-trash" style="color:blue"></span></a>
 
-    </footer>
-    <!--/.Footer-->
+                <br>
+                <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="FLOODS" ></h4>
+                <br>
+                   
+            </div>
+        </li>
+        <li class="col-md-4">
+            <div class="card card-block"> 
+                <a class="close" href="#"><span class="glyphicon glyphicon-trash" style="color:blue"></span></a>
 
+                <br>
+                <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="EARTHQUAKE" ></h4>
+                <br>
+                   
+            </div>
+        </li>
+        <li class="col-md-4">
+            <div class="card card-block"> 
+                <a class="close" href="#"><span class="glyphicon glyphicon-trash" style="color:blue"></span></a>
 
+                <br>
+                <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="TORNADO" ></h4>
+                <br>
+                   
+            </div>
+        </li>
+        <li class="col-md-4">
+            
+            <div class="card card-block"> <a class="add" href="#"><span class="glyphicon glyphicon-plus-sign" style="color:orange"></span></a>
+              
+                
+                <h4 class="card-title" align="center"><strong>Add a disaster</strong></h4>
+                    <br>
+                
+            </div>
+            
+        </li>
+ 
+        
+       
+    </ul>
+        
+</div>
+    
     <!-- SCRIPTS -->
 
     <!-- JQuery -->
@@ -144,7 +297,41 @@ and open the template in the editor.
 
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="js/mdb.min.js"></script>
+    
+    <!-- Bootstrap Confirmation -->
+    <script src="path/to/bootstrap-confirmation.js"></script>
+   
+    <script>
+        $('.add').click(function(){
+  var $target = $(this).parents('ul');
+//  $target.append(); 
+$target.after('<li class="col-md-4"><div class="card card-block"> <a class="delete" href="#"><span class="glyphicon glyphicon-trash"></span></a><br><h4 class="card-title" align="center"><input type="text" class="form-control" id="type" placeholder="Type of disaster"></h4><br></div></li>');
 
+})
+
+
+
+$('.close').click(function(){
+  var $target = $(this).parents('li');
+  $target.hide('slow', function(){ $target.remove(); });
+})
+
+//$('.delete').click(function(){
+//  var $target = $(this).parents('li');
+//  $target.hide('slow', function(){ $target.remove(); });
+//});
+
+$("body").on("click", ".delete", function (e) {
+	var $target = $(this).parents('li');
+  $target.hide('slow', function(){ $target.remove(); });
+});
+//$('.add').click(function(){
+//  var $target = $(this).parents('li');
+//  $target.append('slow', function(){ $target.append(); });
+//})
+
+
+</script>
 
 </body>
 
