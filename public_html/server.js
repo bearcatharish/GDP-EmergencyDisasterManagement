@@ -103,7 +103,7 @@ app.post('/insertVolunteer', function (req, res) {
     console.log("In Insert");
     var volunteersList = [];
     var newVolunteer = {
-        _id: getNextSequence("userid"),
+        _id: 5,
         fName: req.body.firstname,
         lName: req.body.lastname,
         Address: req.body.address,
@@ -139,7 +139,8 @@ app.post('/insertVolunteer', function (req, res) {
                                         console.error('Error occured in database');
                                         res.send("Error in connection");
 
-                                    } else {
+                                    } else
+                                    {
 
                                         console.log('Connection established ' + url);
                                         var cursor = db.collection('Volunteers').find();
