@@ -89,6 +89,7 @@ and open the template in the editor.
                     <table id="mytable" class="table table-bordered table-striped">
                         <thead class="thead-inverse">                                
                             <th><input type="checkbox" id="checkall"  /></th>
+                            <th>Volunteer ID</th>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Profession</th>
@@ -100,8 +101,13 @@ and open the template in the editor.
                             <th>Delete</th>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="x in volunteers| filter:test">
+                            <tr ng-repeat="x in volunteers| filter:test | orderBy:'_id'">
                                 <td><input type="checkbox" class="checkthis" /></td>
+                                <form action="/updateVolunteer" method="post">
+                                <td>
+                                    <div ng-hide="editingData[x._id]" ng-bind="x._id"></div>
+                                    <div ng-show="editingData[x._id]"><input type="text" ng-model="x._id" /></div>
+                                </td>
                                 <td>
                                     <div ng-hide="editingData[x._id]" ng-bind="x.fName"></div>
                                     <div ng-show="editingData[x._id]"><input type="text" ng-model="x.fName" /></div>
@@ -134,9 +140,10 @@ and open the template in the editor.
                                     <button ng-hide="editingData[x._id]" ng-click="modify(x)" class="btn btn-primary btn-sm">
                                     <span class="fa fa-pencil"></span>
                                     </button>
-                                    <button ng-show="editingData[x._id]" ng-click="update(x)" class="btn btn-warning btn-sm">
+                                    <button type='submit' ng-show="editingData[x._id]" ng-click="update(x)" class="btn btn-warning btn-sm">
                                     <span class="fa fa-check-square"></span>Update</button>
                                 </td>
+                                </form>
                                 <td>   
                                         <button ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal" data-target="#delete">
                                         <span class="fa fa-trash"></span>
