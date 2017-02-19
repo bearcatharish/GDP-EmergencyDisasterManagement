@@ -99,8 +99,82 @@ app.post('/Login', function (req, res) {
 
 
 });
+app.post('/updateVolunteer', function (req, res) {
+// console.log("In updateVolunteer");
+// console.log(req.body);
+//res.render('VolunteersView');
+    var volunteersList = [];
+    var updatedVolunteer = req.body;
+    mongoClient.connect(url, function (err, db) {
+        if (err) {
+            console.error('Error occured in database');
+            res.send("Error in connection");
+
+        } else
+        {
+            console.log('Connection established ' + url);
+            // db.collection('Volunteers').count({email: updatedVolunteer.email, _id: updatedVolunteer._id}, function (err, count) {
+            //     if (err) {
+            //         console.log(err);
+            //     } else {
+            //         console.log(count);
+            //         if (count === 0) {
+            db.collection('Volunteers').update({"_id": updatedVolunteer._id}, {$set: updatedVolunteer}, function (err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+
+                    mongoClient.connect(url, function (err, db) {
+
+                        if (err) {
+                            console.error('Error occured in database');
+                            res.send("Error in connection");
+
+                        } else
+                        {
+
+                            console.log('Connection established ' + url);
+                            var cursor = db.collection('Volunteers').find();
+                            console.log('Volunteers Fetched');
+                            cursor.forEach(function (doc, err) {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    volunteersList.push(doc);
+                                }
+                            }
+                            , function () {
+                                db.close();
+                                res.render('VolunteersView', {vol: volunteersList});
+                            });
+                        }
+                    });
+                }
+            });
+
+            //     } else {
+            //         res.send("already exists");
+            //         db.close();
+
+            //     }
+            // }
+
+
+            // });
+
+        }
+    });
+
+});
+app.post('/deleteVolunteer', function (req, res) {
+    console.log("In deleteVolunteer");
+    var volunteerID = {
+        _id: req.body._id,
+        email: req.body.email
+    };
+    console.log(volunteerID);
+});
 app.post('/insertVolunteer', function (req, res) {
-    console.log("In Insert");
     var volunteersList = [];
     var newVolunteer = {
         _id: 5,
@@ -126,7 +200,6 @@ app.post('/insertVolunteer', function (req, res) {
                     console.log(err);
                 } else {
                     console.log(count);
-//                    var number = count;
                     if (count === 0) {
                         db.collection('Volunteers').insert(newVolunteer, function (err, result) {
                             if (err) {
