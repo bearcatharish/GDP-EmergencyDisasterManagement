@@ -111,6 +111,14 @@ app.post('/Login', function (req, res) {
 
 
 });
+app.post('/deleteVolunteer', function (req, res) {
+    console.log("In deleteVolunteer");
+    console.log(req.body);
+    var deleteVolunteer = req.body;
+    mongoClient.connect(url, function (err, db) {
+     
+    });
+});
 app.post('/updateVolunteer', function (req, res) {
 // console.log("In updateVolunteer");
 // console.log(req.body);
