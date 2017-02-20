@@ -18,6 +18,9 @@ var mongo = require('mongodb');
 var mongoClient = mongo.MongoClient;
 var autoIncrement = require("mongodb-autoincrement");
 
+/*
+ * all details are available here link--> http://docs.back4app.com/docs/integrations/webhosting-back4app/ 
+ */
 //below code is for connecting back4app which is a cloud service which connects mobile app and web application
 /*
  app.post('/someFunction', function (req, res) {
