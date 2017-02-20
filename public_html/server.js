@@ -119,6 +119,17 @@ app.post('/deleteVolunteer', function (req, res) {
      if (err) {
         console.error('Error occured in database');
         res.send("Error in connection");
+    }
+        else
+    {
+                db.collection('Volunteers').remove(deleteVolunteer, function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.sendFile(__dirname+"/views/VolunteersView.ejs");
+                    }
+                });
+        
 
     } 
     });
