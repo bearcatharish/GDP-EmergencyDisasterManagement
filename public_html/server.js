@@ -17,6 +17,8 @@ var router = express.Router();
 var mongo = require('mongodb');
 var mongoClient = mongo.MongoClient;
 var autoIncrement = require("mongodb-autoincrement");
+
+//below code is for connecting back4app which is a cloud service which connects mobile app and web application
 /*
  app.post('/someFunction', function (req, res) {
  Parse.Cloud.run('someFunction', req.body).then(
