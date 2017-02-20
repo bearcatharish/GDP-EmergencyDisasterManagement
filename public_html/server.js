@@ -116,7 +116,11 @@ app.post('/deleteVolunteer', function (req, res) {
     console.log(req.body);
     var deleteVolunteer = req.body;
     mongoClient.connect(url, function (err, db) {
-     
+     if (err) {
+        console.error('Error occured in database');
+        res.send("Error in connection");
+
+    } 
     });
 });
 app.post('/updateVolunteer', function (req, res) {
