@@ -140,7 +140,8 @@ and open the template in the editor.
                                 <span class="fa fa-check-square"></span>Update</button>
                             </td>
                             <td>   
-                                <button ng-model="x._id" ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal" data-target="#delete">
+                            <!-- <button ng-model="x._id" ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal" data-target="#delete"> -->
+                                <button type='submit' ng-model="x._id" ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal" ng-click="delete(x)">
                                     <span class="fa fa-trash"></span>
                                 </button>
                             </td>
@@ -228,7 +229,7 @@ and open the template in the editor.
             </div>
         </div>
     </div>
-    <form action="/deleteVolunteer" method="post">
+    <!-- <form action="/deleteVolunteer" method="post"> -->
         <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -245,7 +246,7 @@ and open the template in the editor.
                         </div>
                     </div>
                     <div class="modal-footer ">
-                        <button type="submit" ng-model='x.email' class="btn btn-success">
+                        <button type="submit" ng-click="delete(x)" class="btn btn-success">
                             <span class="fa fa-check"></span>Yes</button>
                             <button class="btn btn-warning" data-dismiss="modal">
                                 <span class="fa fa-remove"></span>No</button>
@@ -256,7 +257,7 @@ and open the template in the editor.
                     </div>
                     <!-- /.modal-dialog --> 
                 </div>
-            </form>
+            <!-- </form> -->
         </div>
         <script>
             var app = angular.module('myApp', []);
@@ -288,7 +289,18 @@ $scope.modify = function (x) {
     $scope.editingData[x._id] = true;
 };
 
-
+$scope.delete = function(x){
+var _id = x._id;
+$http({method: 'POST',
+     url: '/deleteVolunteer',
+     data: JSON.stringify({
+        _id: x._id
+     }),
+     headers: {
+         'Content-Type': 'application/json'
+     }
+ });
+};
 $scope.update = function (x) {
 var _id = x._id;
     $http({method: 'POST',
