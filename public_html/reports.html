@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Reports</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="hands.ico" />
+        <link rel="stylesheet" href="css/bootstrap.min.css">         
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Material Design Bootstrap -->
+        <link href="css/mdb.min.css" rel="stylesheet">
+        <script src ="js/bootstrap.min.js"></script>    
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>      
+        <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="js/tether.min.js"></script>
+
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="js/mdb.min.js"></script>
+    </head>
+    <body>
+        <div ng-app="myApp" ng-controller="myCtrl">
+            <table>
+                <td>
+                    <img src="CERT Logo.jpg" name="image" height="150" width="500"/>
+                </td>
+                </tr>
+            </table>
+            <nav class="navbar navbar-dark mdb-color">
+                <div class="container-fluid">
+                    <!--<div class="navbar-header">
+                      <ul class="nav navbar-nav">
+                    <!--<div class="container">
+        
+                    <!--Collapse content-->
+                    <div class="collapse navbar-toggleable-xs" id="collapseEx">
+                        <!--Navbar Brand-->
+                        <!--Links-->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item"><a href=home.html>Home</a></li>
+                            <li class="nav-item active"><a href=reports.html>Reports</a></li>
+                            <li class="nav-item"><a href="/Volunteers">Volunteers</a></li>
+                            <li class="nav-item"> <a href=groups.html>Groups</a></li> 
+                            <li class="nav-item"><a href=aboutUs.html>About Us</a></li> 
+                            <li class="nav-item"><a href=FAQ.html>FAQ's</a></li> 
+                        </ul>
+
+                        <form action ="LoginPage.html">
+                   <button class="btn btn-primary btn-sm" style="float: right" type="submit">Logout</button> 
+                        </form>
+                    </div>     
+                </div>
+            </nav>            
+            <div class="container">
+
+                <div class="row"><br>
+                    <form class="form-inline" role="search">
+                        <div class="md-form form-group">
+                            <h2><strong>Collapsed Building Reports </strong> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                &emsp;&emsp;&emsp;&emsp;
+                            <input type="text" class="form-control" ng-model="test" placeholder="Search">
+                            
+                            <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>                                                      
+                            </h2>
+                       
+                        </div>
+                        
+                    </form>
+
+
+                    <div class="col-md-12 filterable" >
+                        <div class="table-responsive">                           
+                            <table id="mytable" class="table table-bordered table-striped table">
+                                <thead class="thead-inverse">
+                                    <tr class="filters">
+                                <th>Location</th>
+                                <th>Incident name </th>
+                                <th>Level Of Impact <br>
+                                    <select>
+                                    <option></option>
+                                    <option>Low</option>
+                                    <option>Medium</option>
+                                    <option>High</option>
+                                       </select>
+                                </th>
+                                <th>Reported by</th>
+                               
+                                <th>Contact Number</th>
+                                <th> Date </th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="x in volunteers| filter:test">
+                                        
+                                        <td>
+                                            <div ng-hide="editingData[x.id]" ng-bind="x.location"></div>
+                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.location" /></div>
+                                        </td>
+                                        <td>
+                                            <div ng-hide="editingData[x.id]" ng-bind="x.incident"></div>
+                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.incident" /></div>
+                                        </td>
+                                        <td>
+                                            <div ng-hide="editingData[x.id]" ng-bind="x.LOI"></div>
+                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.LOI" /></div>
+                                        </td>
+                                        <td>
+                                            <div ng-hide="editingData[x.id]" ng-bind="x.reportedBy"></div>
+                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.reportedBy" /></div>
+                                        </td>
+                                       
+                                        <td> 
+                                            <div ng-hide="editingData[x.id]" ng-bind="x.contactNo"></div>
+                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.contactNo" /></div>
+                                        </td>
+                                        <td>
+                                            <div ng-hide="editingData[x.id]" ng-bind="x.date"></div>
+                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.date" /></div>
+                                        </td>
+                                                                              
+                                        <td>
+                                            <button ng-hide="editingData[x.id]" ng-click="modify(x)" class="btn btn-primary btn-sm"><span class="fa fa-pencil"></span></button>
+                                            <button ng-show="editingData[x.id]" ng-click="update(x)" class="btn btn-warning btn-sm"><span class="fa fa-check-square"></span>Update</button>
+                                        </td>
+                                        <td>   <button ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="fa fa-trash"></span></button>
+                                        </td>
+                                    </tr>                            
+
+
+
+                                </tbody>
+                            </table>                            
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
+                                <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
+
+                            </div>
+                            <div class="modal-footer ">
+                                <button type="button" class="btn btn-success glyphicon glyphicon-remove row-remove" id="yesBtn" ><span class="fa fa-check"></span> Yes</button>
+                                <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="fa fa-remove"></span> No</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content --> 
+                    </div>
+                    <!-- /.modal-dialog --> 
+                </div>
+            </div>
+            
+            
+            <!--<div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="create" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
+                            <h4 class="modal-title custom_align" id="Heading">Report Details</h4>
+                        </div>
+                        <form action="/viewReport" method="post">
+                            <div class="modal-body">
+                                
+                            </div>
+                            <div class="modal-footer ">
+                                <a href="./report.html"><button>Cancel</button></a>
+                                <button type="submit" class="btn btn-success btn-lg" style="width: 100%;"><span class="fa fa-check-square"></span> Download</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.modal-content --> 
+                <!--</div>
+
+                <!-- /.modal-dialog --> 
+            <!--</div>-->
+            
+            
+            <script>var app = angular.module('myApp', []);
+                app.controller('myCtrl', function ($scope) {
+                    $scope.volunteers = [{"id":1,"location": "1121 N college Dr.","incident":"Collapsed Building", "LOI": "Medium", "reportedBy": "Jhon","contactNo": "9233355867", "date": "11-03-2016"},
+                        {"id":2,"location": "N. Fillmore","incident":"Collapsed Building", "LOI": "High", "reportedBy": "Antonio Moreno","contactNo": "9233355866", "date": "01-18-2016"},
+                        {"id":3,"location": "120 S Main St.","incident":"Collapsed Building", "LOI": "Low", "reportedBy": "Alfreds","contactNo": "9233355864", "date": "10-05-2016"},
+                        {"id":4,"location": "N. Mulberry","incident":"Collapsed Building", "LOI": "Low", "reportedBy": "Berglunds","contactNo": "9233355869", "date": "11-03-2016"},
+                        {"id":5,"location": "1121 N college Dr.","incident":"Collapsed Building", "LOI": "High", "reportedBy": "Jhon","contactNo": "9233355870", "date": "08-15-2016"},
+                        {"id":6,"location": "Forest","incident":"Collapsed Building", "LOI": "Low", "reportedBy": "Alfreds","contactNo": "9233355861", "date": "11-06-2016"},
+                        {"id":7,"location": "N. Buchman", "incident":"Collapsed Building","LOI": "Medium", "reportedBy": "Berglunds","contactNo": "9233355868", "date": "10-06-2016"}
+                    ];
+                   $scope.editingData = {};
+
+                    for (var i = 0, length = $scope.volunteers.length; i < length; i++) {
+                        $scope.editingData[$scope.volunteers[i].id] = false;
+                    }
+
+
+                    $scope.modify = function (x) {
+                        $scope.editingData[x.id] = true;
+                    };
+
+
+                    $scope.update = function (x) {
+                        $scope.editingData[x.id] = false;
+                    };
+                });</script>
+            <script>$(document).ready(function () {
+                    $("#mytable #checkall").click(function () {
+                        if ($("#mytable #checkall").is(':checked')) {
+                            $("#mytable input[type=checkbox]").each(function () {
+                                $(this).prop("checked", true);
+                            });
+
+                        } else {
+                            $("#mytable input[type=checkbox]").each(function () {
+                                $(this).prop("checked", false);
+                            });
+                        }
+                    
+
+                    $("[data-toggle=tooltip]").tooltip();
+                    });
+                    $('#yesBtn').click(function() {
+                        // handle deletion here
+                       // print("Hello");
+                       // var id = $('.confrimDelete').data('title');
+//                        var id = 'Jhon';
+//                        $('[data-reportedBy='+id+']').parents('tr').remove();
+//                        $('#delete').modal('hide');
+                        var id = $('.confrimDelete').data('id');
+                        $('[data-id='+id+']').parents('tr').remove();
+                        $('#myModal').modal('hide');
+                    });
+                 
+    
+            $('.filterable .filters select').change(function(e){
+                /* Ignore tab key */
+            /* Useful DOM data and selectors */
+            var $input = $(this),
+            inputContent = $input.val(),
+            $panel = $input.parents('.filterable'),
+            column = $panel.find('.filters th').index($input.parents('th')),
+            $table = $panel.find('.table'),
+            $rows = $table.find('tbody tr');
+            /* Dirtiest filter function ever ;) */
+            var $filteredRows = $rows.filter(function(){
+            var value = $(this).find('td').eq(column).text();
+            return value.indexOf(inputContent) === -1;
+        });
+        /* Clean previous no-result if exist */
+        $table.find('tbody .no-result').remove();
+        /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+        $rows.show();
+        $filteredRows.hide();
+        /* Prepend no-result row if all rows are filtered */
+        if ($filteredRows.length === $rows.length) {
+            $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">No result found</td></tr>'));
+        }
+        });    
+    
+        });
+                
+         </script>
+
+    </body>
+</html>
