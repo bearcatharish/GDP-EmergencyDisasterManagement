@@ -207,7 +207,7 @@ and open the template in the editor.
             <script>
                 function myFunction() {
                     {
-                        alert("Volunteer added to the list");
+                        alert("New Volunteer added successfully");
                     }
 
                 }
@@ -242,7 +242,7 @@ and open the template in the editor.
             <script>
                 function addGroup() {
                     {
-                        alert("added group successfully");
+                        alert("New Group added successfully.");
                     }
 
                 }
@@ -279,28 +279,28 @@ and open the template in the editor.
             var app = angular.module('myApp', []);
             app.controller('myCtrl', ['$scope', '$window', '$http', function ($scope, $http, $location) {
 
-//                                                        $http({method: 'GET',
-//                                                            url: 'http://localhost:3000/Volunteers',
-//                                                            headers: {
-//                                                                'Content-Type': 'application/json'
-//                                                            }
-//                                                        }).then(function (result) {
-//                                                            $scope.volunteers = result;
-//                                                            console.log(result);
-//                                                            console.log("hi" + JSON.stringify(result));
-//                                                        }, function (error) {
-//                                                            console.log(error);
-//                                                        }
-//                                                        );
-                    //   $scope.volunteers = JSON.stringify(response);
-//                    $scope.volunteers = [{"_id": 0, "fName": "Alfreds", "lName": "Futterkiste", "Address": "Berlin", "email": "ritish@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "21"},
-//                        {"_id": 1, "fName": "Ana Trujillo ", "lName": "Emparedados y helados", "Address": "México D.F.", "email": "harish@gmail.com", "profession": "Doctor", "contact": "+923335586757", "age": "31"},
-//                        {"_id": 2, "fName": "Antonio Moreno", "lName": "Taquería", "Address": "México D.F.", "email": "anirudh@gmail.com", "profession": "Registered Nurse", "contact": "+923335586757", "age": "45"},
-//                        {"_id": 3, "fName": "Around", "lName": "Horn", "Address": "London", "email": "jean@gmail.com", "profession": "EMR", "contact": "+923335456757", "age": "54"},
-//                        {"_id": 4, "fName": "B's", "lName": "Beverages", "Address": "London", "email": "tommy@gmail.com", "profession": "Fire Fighter", "contact": "+923335586757", "age": "23"},
-//                        {"_id": 5, "fName": "Berglunds", "lName": "snabbköp", "Address": "Luleå", "email": "duff@gmail.com", "profession": "EMT", "contact": "+923335586757", "age": "27"},
-//                        {"_id": 6, "fName": "Blauer See", "lName": "Delikatessen", "Address": "Mannheim", "email": "tough@gmail.com", "profession": "LEO(Law Enforcement Officer)", "contact": "+923335586757", "age": "26"}
-//                    ];
+                                                        $http({method: 'GET',
+                                                            url: 'http://localhost:3000/Volunteers',
+                                                            headers: {
+                                                                'Content-Type': 'application/json'
+                                                            }
+                                                        }).then(function (result) {
+                                                            $scope.volunteers = result;
+                                                            console.log(result);
+                                                            console.log("hi" + JSON.stringify(result));
+                                                        }, function (error) {
+                                                            console.log(error);
+                                                        }
+                                                        );
+                       $scope.volunteers = JSON.stringify(response);
+                    $scope.volunteers = [{"_id": 0, "fName": "Alfreds", "lName": "Futterkiste", "Address": "Berlin", "email": "ritish@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "21"},
+                        {"_id": 1, "fName": "Ana Trujillo ", "lName": "Emparedados y helados", "Address": "México D.F.", "email": "harish@gmail.com", "profession": "Doctor", "contact": "+923335586757", "age": "31"},
+                        {"_id": 2, "fName": "Antonio Moreno", "lName": "Taquería", "Address": "México D.F.", "email": "anirudh@gmail.com", "profession": "Registered Nurse", "contact": "+923335586757", "age": "45"},
+                        {"_id": 3, "fName": "Around", "lName": "Horn", "Address": "London", "email": "jean@gmail.com", "profession": "EMR", "contact": "+923335456757", "age": "54"},
+                        {"_id": 4, "fName": "B's", "lName": "Beverages", "Address": "London", "email": "tommy@gmail.com", "profession": "Fire Fighter", "contact": "+923335586757", "age": "23"},
+                        {"_id": 5, "fName": "Berglunds", "lName": "snabbköp", "Address": "Luleå", "email": "duff@gmail.com", "profession": "EMT", "contact": "+923335586757", "age": "27"},
+                        {"_id": 6, "fName": "Blauer See", "lName": "Delikatessen", "Address": "Mannheim", "email": "tough@gmail.com", "profession": "LEO(Law Enforcement Officer)", "contact": "+923335586757", "age": "26"}
+                    ];
                     $scope.editingData = {};
 
                     for (var i = 0, length = $scope.volunteers.length; i < length; i++) {

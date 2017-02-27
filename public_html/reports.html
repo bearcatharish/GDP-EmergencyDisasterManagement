@@ -33,6 +33,8 @@ and open the template in the editor.
 
         <!-- MDB core JavaScript -->
         <script type="text/javascript" src="js/mdb.min.js"></script>
+        <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
+        <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
     </head>
     <body>
         <div ng-app="myApp" ng-controller="myCtrl">
@@ -208,7 +210,11 @@ and open the template in the editor.
                         {"id":4,"location": "N. Mulberry","incident":"Collapsed Building", "LOI": "Low", "reportedBy": "Berglunds","contactNo": "9233355869", "date": "11-03-2016"},
                         {"id":5,"location": "1121 N college Dr.","incident":"Collapsed Building", "LOI": "High", "reportedBy": "Jhon","contactNo": "9233355870", "date": "08-15-2016"},
                         {"id":6,"location": "Forest","incident":"Collapsed Building", "LOI": "Low", "reportedBy": "Alfreds","contactNo": "9233355861", "date": "11-06-2016"},
-                        {"id":7,"location": "N. Buchman", "incident":"Collapsed Building","LOI": "Medium", "reportedBy": "Berglunds","contactNo": "9233355868", "date": "10-06-2016"}
+                        {"id":7,"location": "N. Buchman", "incident":"Collapsed Building","LOI": "Medium", "reportedBy": "Berglunds","contactNo": "9233355868", "date": "10-06-2016"},
+                        {"id":8,"location": "N. Mulberry","incident":"Collapsed Building", "LOI": "Low", "reportedBy": "Berglunds","contactNo": "9233355869", "date": "11-03-2016"},
+                        {"id":9,"location": "1121 N college Dr.","incident":"Collapsed Building", "LOI": "High", "reportedBy": "Jhon","contactNo": "9233355870", "date": "08-15-2016"},
+                        {"id":10,"location": "Forest","incident":"Collapsed Building", "LOI": "Low", "reportedBy": "Alfreds","contactNo": "9233355861", "date": "11-06-2016"},
+                        {"id":11,"location": "N. Buchman", "incident":"Collapsed Building","LOI": "Medium", "reportedBy": "Berglunds","contactNo": "9233355868", "date": "10-06-2016"}
                     ];
                    $scope.editingData = {};
 
@@ -227,6 +233,10 @@ and open the template in the editor.
                     };
                 });</script>
             <script>$(document).ready(function () {
+                 $('#mytable').dataTable(
+                         { "bFilter": false, 
+                     "ordering": false,
+                     "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ] });
                     $("#mytable #checkall").click(function () {
                         if ($("#mytable #checkall").is(':checked')) {
                             $("#mytable input[type=checkbox]").each(function () {
@@ -246,7 +256,7 @@ and open the template in the editor.
                         // handle deletion here
                        // print("Hello");
                        // var id = $('.confrimDelete').data('title');
-//                        var id = 'Jhon';
+//                        var id = 'John';
 //                        $('[data-reportedBy='+id+']').parents('tr').remove();
 //                        $('#delete').modal('hide');
                         var id = $('.confrimDelete').data('id');
