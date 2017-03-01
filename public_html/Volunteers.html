@@ -91,10 +91,10 @@ and open the template in the editor.
                                 <table id="mytable" class="table table-bordered table-striped">
                                     <thead class="thead-inverse">                                
                                     <th><input type="checkbox" id="checkall"  /></th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Profession</th>
-                                    <th>Age</th>
+                                    <th>Username</th>
+                                    
+                                    <th>Certification</th>
+                                    
                                     <th>Address</th>
                                     <th>Email</th>
                                     <th>Contact</th>
@@ -105,15 +105,12 @@ and open the template in the editor.
                                         <tr ng-repeat="x in volunteers| filter:test">
                                             <td><input type="checkbox" class="checkthis" /></td>
                                             <td>
-                                                <div ng-hide="editingData[x._id]" ng-bind="x.fName"></div>
+                                                <div ng-hide="editingData[x._id]" ng-bind="x.userName"></div>
                                                 <div ng-show="editingData[x._id]"><input type="text" ng-model="x.fName" /></div>
                                             </td>
+                                            
                                             <td>
-                                                <div ng-hide="editingData[x._id]" ng-bind="x.lName"></div>
-                                                <div ng-show="editingData[x._id]"><input type="text" ng-model="x.lName" /></div>
-                                            </td>
-                                            <td>
-                                                <div ng-hide="editingData[x._id]" ng-bind="x.profession"></div>
+                                                <div ng-hide="editingData[x._id]" ng-bind="x.certification"></div>
                                                 <div ng-show="editingData[x._id]"><input type="text" ng-model="x.profession" /></div>
                                             </td>
                                             <!--                                        <td>
@@ -125,11 +122,11 @@ and open the template in the editor.
                                                 <div ng-show="editingData[x._id]"><input type="text" ng-model="x.age" /></div>
                                             </td>
                                             <td>
-                                                <div ng-hide="editingData[x._id]" ng-bind="x.Address"></div>
+                                                <div ng-hide="editingData[x._id]" ng-bind="x.address"></div>
                                                 <div ng-show="editingData[x._id]"><input type="text" ng-model="x.Address" /></div>
                                             </td>
                                             <td>
-                                                <div ng-hide="editingData[x._id]" ng-bind="x.email"></div>
+                                                <div ng-hide="editingData[x._id]" ng-bind="x.emailID"></div>
                                                 <div ng-show="editingData[x._id]"><input type="text" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}$" ng-model="x.email" /></div>
                                             </td>
                                             <td>
@@ -166,21 +163,16 @@ and open the template in the editor.
                         <form action="/insertVolunteer" method="post">
                             <div class="modal-body">
                                 <div class="form-group">
-                                    First Name: <input class="form-control " type="text" name='firstname' required>
+                                    Username: <input class="form-control " type="text" name='userName' required>
                                 </div>
+                                
                                 <div class="form-group">
-
-                                    Last Name:  <input class="form-control " type="text" name='lastname' required>
-                                </div>
-                                <div class="form-group">
-                                    Profession:  <input class="form-control " type="text" name='prof' required>
+                                    Certification:  <input class="form-control " type="text" name='certification' required>
                                 </div>
                                 <!--                                <div class="form-group">
                                                                     Certification:  <input class="form-control " type="text">                                
                                                                 </div>-->
-                                <div class="form-group">
-                                    Age:  <input class="form-control" type="number" name="age" min="18" max="99" required >
-                                </div>
+                                
                                 <div class="form-group">
                                     Add:  <input class="form-control " type="text" name='address' required>
                                 </div>
