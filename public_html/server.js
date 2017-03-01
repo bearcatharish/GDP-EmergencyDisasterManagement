@@ -19,27 +19,12 @@ var mongoClient = mongo.MongoClient;
 var ObjectID = require('mongodb').ObjectID;
 var autoIncrement = require("mongodb-autoincrement");
 
-/*
- * all details are available here link--> http://docs.back4app.com/docs/integrations/webhosting-back4app/ 
- */
-//below code is for connecting back4app which is a cloud service which connects mobile app and web application
-/*
- app.post('/someFunction', function (req, res) {
- Parse.Cloud.run('someFunction', req.body).then(
- function () {
- console.log('Cloud Code Function called');
- return res.send(200);
- },
- function (error) {
- console.log("CLoud Code Function Called Fail");
- return res.status(400).send(error.message);
- });
-});
- */
 //View Engine
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
+var url = 'mongodb://localhost:27017/MDB';
+app.use(express.static(__dirname));
 
 app.get('/Login', function (req, res) {
     res.sendFile(__dirname + "/LoginPage.html");
@@ -115,29 +100,6 @@ app.post('/Login', function (req, res) {
 
 
 });
-app.post('/deleteVolunteer', function (req, res) {
-    console.log("In deleteVolunteer");
-    console.log(req.body);
-    var deleteVolunteer = req.body;
-    mongoClient.connect(url, function (err, db) {
-     if (err) {
-        console.error('Error occured in database');
-        res.send("Error in connection");
-    }
-        else
-    {
-                db.collection('Volunteers').remove(deleteVolunteer, function (err, result) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        res.sendFile(__dirname+"/views/VolunteersView.ejs");
-                    }
-                });
-        
-
-    } 
-    });
-});
 app.post('/updateVolunteer', function (req, res) {
     var updatedVolunteer = req.body;
     mongoClient.connect(url, function (err, db) {
@@ -180,7 +142,7 @@ app.post('/deleteVolunteer', function (req, res) {
 });
 app.post('/insertVolunteer', function (req, res) {
     var newVolunteer = {
-        _id: 1,
+        _id: 2,
         fName: req.body.firstname,
         lName: req.body.lastname,
         Address: req.body.address,
@@ -200,7 +162,7 @@ app.post('/insertVolunteer', function (req, res) {
             db.collection('Volunteers').count({email: newVolunteer.email}, function (err, count) {
                 if (err) {
                     console.log(err);
-                } else{
+                } else {
                     console.log(count);
                     if (count === 0) {
                         db.collection('Volunteers').insert(newVolunteer, function (err, result) {
@@ -223,6 +185,7 @@ app.post('/insertVolunteer', function (req, res) {
 
         }
     });
+
 
 });
 
@@ -299,3 +262,12 @@ app.post('/insertGroup', function (req, res) {
 
 
 });
+
+app.listen(3000);
+console.log('Running on port 3000');
+
+http.createServer(function (request, response) {
+    response.writeHead(200, {'Content-Type': 'text/plain'});
+    response.end('Page One');
+}).listen(80);
+console.log("Server is listening");
