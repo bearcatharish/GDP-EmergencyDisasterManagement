@@ -85,10 +85,10 @@ and open the template in the editor.
                 <thead class="thead-inverse">                                
                     <th><input type="checkbox" id="checkall"  /></th>
                     <th>Volunteer ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Profession</th>
-                    <th>Age</th>
+                    <th>Username</th>
+                    
+                    <th>Certification</th>
+                    
                     <th>Address</th>
                     <th>Email</th>
                     <th>Contact</th>
@@ -105,31 +105,25 @@ and open the template in the editor.
                             <p ng-bind='x._id'></p>
                         </td>
                         <td>
-                            <div ng-hide="editingData[x._id]" ng-bind="x.fName"></div>
+                            <div ng-hide="editingData[x._id]" ng-bind="x.userName"></div>
                             <div ng-show="editingData[x._id]"><input type="text" ng-model="x.fName" /></div>
                         </td>
+                        
                         <td>
-                            <div ng-hide="editingData[x._id]" ng-bind="x.lName"></div>
-                            <div ng-show="editingData[x._id]"><input type="text" ng-model="x.lName" /></div>
-                        </td>
-                        <td>
-                            <div ng-hide="editingData[x._id]" ng-bind="x.profession"></div>
+                            <div ng-hide="editingData[x._id]" ng-bind="x.certification"></div>
                             <div ng-show="editingData[x._id]"><input type="text" ng-model="x.profession" /></div>
                         </td>
-                        <td> 
-                            <div ng-hide="editingData[x._id]" ng-bind="x.age"></div>
-                            <div ng-show="editingData[x._id]"><input type="text" ng-model="x.age" /></div>
-                        </td>
+                       
                         <td>
-                            <div ng-hide="editingData[x._id]" ng-bind="x.Address"></div>
+                            <div ng-hide="editingData[x._id]" ng-bind="x.address"></div>
                             <div ng-show="editingData[x._id]"><input type="text" ng-model="x.Address" /></div>
                         </td>
                         <td>
-                            <div ng-hide="editingData[x._id]" ng-bind="x.email"></div>
+                            <div ng-hide="editingData[x._id]" ng-bind="x.emailID"></div>
                             <div ng-show="editingData[x._id]"><input type="text" ng-model="x.email" /></div>
                         </td>
                         <td>
-                            <div ng-hide="editingData[x._id]" ng-bind="x.contact"></div>
+                            <div ng-hide="editingData[x._id]" ng-bind="x.mobileNumber"></div>
                             <div ng-show="editingData[x._id]"><input type="text" ng-model="x.contact" /></div>
                         </td>
                         <td>
@@ -166,26 +160,21 @@ and open the template in the editor.
                 <form action="/insertVolunteer" method="post">
                     <div class="modal-body">
                         <div class="form-group">
-                            First Name: <input class="form-control " type="text" name='firstname' required>
+                            Username: <input class="form-control " type="text" name='userName' required>
                         </div>
+                        
                         <div class="form-group">
-
-                            Last Name:  <input class="form-control " type="text" name='lastname' required>
+                            Certification:  <input class="form-control " type="text" name='certification' required>
                         </div>
-                        <div class="form-group">
-                            Profession:  <input class="form-control " type="text" name='prof' required>
-                        </div>
-                        <div class="form-group">
-                            Age:  <input class="form-control" type="number" size="6" name="age" min="18" max="99" required >
-                        </div>
+                        
                         <div class="form-group">
                             Address:  <input class="form-control " type="text" name='address' required>
                         </div>
                         <div class="form-group">
-                            Email:  <input class="form-control " type="email" name='email' pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}$" placeholder="Enter a valid email address" required>
+                            Email:  <input class="form-control " type="email" name='emailID' pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}$" placeholder="Enter a valid email address" required>
                         </div>
                         <div class="form-group">
-                            Contact:  <input class="form-control" type="tel" name='contact' pattern="^\d{3}-\d{3}-\d{4}$" required>
+                            Contact:  <input class="form-control" type="tel" name='mobileNumber' pattern="^\d{3}-\d{3}-\d{4}$" required>
                         </div>
                     </div>
                     <div class="modal-footer ">
@@ -307,13 +296,13 @@ var _id = x._id;
      url: '/updateVolunteer',
      data: JSON.stringify({
         _id: x._id,
-        fName: x.fName,
-        lName: x.lName,
-        Address: x.Address,
-        email: x.email,
-        profession: x.profession,
-        contact: x.contact,
-        age: x.age
+        userName: x.userName,
+        
+        address: x.address,
+        emailID: x.emailID,
+        certification: x.certification,
+        mobileNumber: x.mobileNumber
+        
      }),
      headers: {
          'Content-Type': 'application/json'
