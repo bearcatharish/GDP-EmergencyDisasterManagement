@@ -293,6 +293,7 @@ and open the template in the editor.
                                                         }
                                                         );
                        $scope.volunteers = JSON.stringify(response);
+                       
                     $scope.volunteers = [{"_id": 0, "fName": "Alfreds", "lName": "Futterkiste", "Address": "Berlin", "email": "ritish@gmail.com", "profession": "Student", "contact": "+923335586757", "age": "21"},
                         {"_id": 1, "fName": "Ana Trujillo ", "lName": "Emparedados y helados", "Address": "México D.F.", "email": "harish@gmail.com", "profession": "Doctor", "contact": "+923335586757", "age": "31"},
                         {"_id": 2, "fName": "Antonio Moreno", "lName": "Taquería", "Address": "México D.F.", "email": "anirudh@gmail.com", "profession": "Registered Nurse", "contact": "+923335586757", "age": "45"},
@@ -317,6 +318,7 @@ and open the template in the editor.
                         $scope.editingData[x._id] = false;
                     };
                 }]);
+            
         </script>
         <script>
             $(document).ready(function () {
