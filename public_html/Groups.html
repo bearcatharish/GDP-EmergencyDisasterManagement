@@ -104,10 +104,7 @@ and open the template in the editor.
                                 <tbody>
                                     <tr ng-repeat="x in Groups| filter:test">
                                         <td><input type="checkbox" class="checkthis" /></td>
-                                        <td>
-                                            <div ng-hide="editingData[x.id]" ng-bind="x.GroupId"></div>
-                                            <div ng-show="editingData[x.id]"><input type="text" ng-model="x.GroupId" /></div>
-                                        </td>
+                                        
                                         <td>
                                             <div ng-hide="editingData[x.id]" ng-bind="x.GroupName"></div>
                                             <div ng-show="editingData[x.id]"><input type="text" ng-model="x.GroupName" /></div>
