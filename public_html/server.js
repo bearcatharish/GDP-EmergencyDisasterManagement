@@ -47,7 +47,7 @@ var url = 'mongodb://admin:1jlt2CMYsL5dUfHVRmlib06G@mongodb7.back4app.com:27017/
 app.use(express.static(__dirname));
 
 app.get('/Login', function (req, res) {
-    res.sendFile(__dirname + "/views/LoginView.ejs");
+    res.sendFile(__dirname + "/LoginPage.html");
     //res.render('/index')
 });
 app.get('/Home', function (req, res) {
