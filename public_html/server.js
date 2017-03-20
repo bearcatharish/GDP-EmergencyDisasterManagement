@@ -46,15 +46,19 @@ app.set('view engine', 'ejs');
 var url = 'mongodb://admin:1jlt2CMYsL5dUfHVRmlib06G@mongodb7.back4app.com:27017/6e687c63d6f047edb7dc466d09b3463e?ssl=true';
 app.use(express.static(__dirname));
 
+//Login view
 app.get('/Login', function (req, res) {
     res.sendFile(__dirname + "/LoginPage.html");
     //res.render('/index')
 });
+
+//calls home page
 app.get('/Home', function (req, res) {
     res.sendFile(__dirname + "/views/HomeView.ejs");
     //res.render('/index')
 });
 
+//calls volunteer page
 app.get('/Volunteers', function (req, res) {
     var volunteersList = [];
     mongoClient.connect(url, function (err, db) {
@@ -84,6 +88,7 @@ app.get('/Volunteers', function (req, res) {
     });
 });
 
+//validation logins
 app.post('/Login', function (req, res) {
     var login = {
         emailID: req.body.emailID,
@@ -130,6 +135,8 @@ app.post('/Login', function (req, res) {
 
 
 });
+
+//volunteer data changes
 app.post('/updateVolunteer', function (req, res) {
     // console.log("In updateVolunteer");
     // console.log(req.body);
@@ -165,6 +172,8 @@ app.post('/updateVolunteer', function (req, res) {
     });
 
 });
+
+//volunteer deletion
 app.post('/deleteVolunteer', function (req, res) {
     console.log("In deleteVolunteer");
     console.log(req.body);
@@ -185,6 +194,8 @@ app.post('/deleteVolunteer', function (req, res) {
         }
     });
 });
+
+//volunteer insertion
 app.post('/insertVolunteer', function (req, res) {
     var volunteersList = [];
     var newVolunteer = {
@@ -236,6 +247,7 @@ app.post('/insertVolunteer', function (req, res) {
 
 });
 
+//groups retrieval
 app.get('/Groups', function (req, res) {
     var groupList = [];
     mongoClient.connect(url, function (err, db) {
@@ -263,6 +275,8 @@ app.get('/Groups', function (req, res) {
         }
     });
 });
+
+//groups update
 app.post('/updateGroup', function (req, res) {
     // console.log("In updateVolunteer");
     console.log(req.body);
@@ -298,6 +312,8 @@ app.post('/updateGroup', function (req, res) {
     });
 
 });
+
+//group insertion
 app.post('/insertGroup', function (req, res) {
     console.log("In Insert");
     var groupList = [];
