@@ -10,6 +10,9 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
 
         <title>Community Emergency Report Team</title>
 
@@ -129,91 +132,90 @@
                 </td>
                 </tr>
             </table>
-        </div>
-        <!--Navbar-->
-        <nav class="navbar navbar-dark mdb-color">
+            <!--Navbar-->
+            <nav class="navbar navbar-dark mdb-color">
 
                 <!-- Collapse button-->
                 <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapseEx">
                     <i class="fa fa-bars"></i>
                 </button>
 
-                
-
-                    <!--Collapse content-->
-                    <div class="collapse navbar-toggleable-xs" id="collapseEx">
-                        <!--Navbar Brand-->
-                        <!--<a class="navbar-brand" href="http://mdbootstrap.com/material-design-for-bootstrap/" target="_blank">MDB</a>-->
-                        <!--Links-->
-                        <ul class="nav navbar-nav">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="Home.html">Home <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href=reports.html>Reports</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/Volunteers">Volunteer</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/Groups">Groups</a>
-                            </li> 
-                            <li class="nav-item">
-                                <a class="nav-link" href="AboutUs.html">About Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href=FAQ.html>FAQ's</a>
-                            </li>
-                            <!--                                        <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1
-                                    <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                      <li><a href="#">Page 1-1</a></li>
-                                      <li><a href="#">Page 1-2</a></li>
-                                      <li><a href="#">Page 1-3</a></li> 
-                                    </ul>
-                                  </li>-->
 
 
-                        </ul>
-                        <!--Search form-->
-                        <form class="form-inline" action="LoginPage.html">                    
-                            <input class="form-control" type="text" placeholder="Search">
+                <!--Collapse content-->
+                <div class="collapse navbar-toggleable-xs" id="collapseEx">
+                    <!--Navbar Brand-->
+                    <!--<a class="navbar-brand" href="http://mdbootstrap.com/material-design-for-bootstrap/" target="_blank">MDB</a>-->
+                    <!--Links-->
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/Home">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Reports">Reports</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Volunteers">Volunteer</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Groups">Groups</a>
+                        </li> 
+                        <li class="nav-item">
+                            <a class="nav-link" href="AboutUs.html">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href=FAQ.html>FAQ's</a>
+                        </li>
+                        <!--                                        <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                  <li><a href="#">Page 1-1</a></li>
+                                  <li><a href="#">Page 1-2</a></li>
+                                  <li><a href="#">Page 1-3</a></li> 
+                                </ul>
+                              </li>-->
 
 
-                            <!--                  <ul class="nav pull-right">
-                                                        
-                                                        <li><a href="#">Support </a></li>
-                                                        <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                                            <img src="images/user.png" class="nav-avatar" />
-                                                            <b class="caret"></b></a>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a href="#">Your Profile</a></li>
-                                                       
-                            <li><a href="#">Edit Profile</a></li>
-                                                                <li><a href="#">Account Settings</a></li>
-                                                                <li class="divider"></li>
-                                                                <li><a href="#">Logout</a></li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>  -->
+                    </ul>
+                    <!--Search form-->
+                    <form class="form-inline" action="LoginPage.html">                    
+                        <input class="form-control" type="text" placeholder="Search">
 
-                            <button class="btn btn-primary btn-sm" type="submit">Logout</button>
-                        </form>
-                    </div>
-                    <!--/.Collapse content-->
 
-                
+                        <!--                  <ul class="nav pull-right">
+                                                    
+                                                    <li><a href="#">Support </a></li>
+                                                    <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        <img src="images/user.png" class="nav-avatar" />
+                                                        <b class="caret"></b></a>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a href="#">Your Profile</a></li>
+                                                   
+                        <li><a href="#">Edit Profile</a></li>
+                                                            <li><a href="#">Account Settings</a></li>
+                                                            <li class="divider"></li>
+                                                            <li><a href="#">Logout</a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>  -->
+
+                        <button class="btn btn-primary btn-sm" type="submit">Logout</button>
+                    </form>
+                </div>
+                <!--/.Collapse content-->
+
+
 
             </nav>
             <!--/.Navbar-->
 
 
-            
+
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12"><h2><strong> Welcome <%= JSON.stringify(emailID) %> </strong></h2> </div>
-                    
+                    <div class="col-md-12"><h2><strong> Welcome <%= JSON.stringify(Username) %> </strong></h2> </div>
+
                 </div>
                 <!--/.Collapse content-->
 
@@ -223,159 +225,210 @@
         <!--/.Navbar-->
         <br>    
         <div class="container">
-            
+
 
             <ul class="row list-unstyled" style="list-style-type:none">
-                <li class="col-md-4"> 
-                    <div class="card card-block"> <a style="float:left" class="close"  data-toggle="modal" data-target="#Pops"><span class="glyphicon glyphicon-trash"></span></a>
+                <li class="col-md-4" ng-repeat="x in incidents| orderBy:'_id'"> 
+                    <div class="card card-block">
+                       
+                        <button style="float:left" type='submit' ng-model="x._id" ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal" ng-click="delete(x)">
+                            <span class="fa fa-trash"></span>
+                        </button>
+                      
+                        <button style="float:right" ng-hide="editingData[x._id]" ng-click="modify(x)" class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                        </button>
+                        
+                        
+                        <button style="float:right" type='submit' ng-show="editingData[x._id]" ng-click="update(x)" class="btn btn-warning btn-sm">
+                            <span class="fa fa-floppy-o"></span>
+                        </button>
                         <br>
-                        <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="Fire Accident" ></h4>
-                        <p align="left"><a href="FireReports.html" class="text-accent-1">Open Reports</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                            <a href="FireReports.html"><span class="glyphicon glyphicon-bell"></span></a></p>
+                         <!--<form ng-submit="openReports(x)" method="post">-->
+                        <h4 class="card-title" align="center"> 
+                           <div ng-hide="editingData[x._id]" ng-bind="x.incidentName"></div>
+                            <div ng-show="editingData[x._id]"><input type="text" ng-model="x.incidentName" required/></div>
+                        </h4>
+                        
+                        
+                            <button style="float:left" type='submit' ng-click="openReports(x)" ng-model="x._id"  class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-bell"></span> Open reports</button>
+                        
+                       <!--</form>-->
                     </div>
                 </li>
+
                 <li class="col-md-4">
 
-                    <div class="card card-block"> <a style="float:left" class="close"  data-toggle="modal" data-target="#Pops"><span class="glyphicon glyphicon-trash"></span></a>
-                        <br>
-
-                        <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="COLLAPSED BUILDING" ></h4>
-                        <p align="left"><a href="reports.html" class="text-accent-1">Open Reports</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                            <a href="reports.html"><span class="glyphicon glyphicon-bell"></span></a></p>
-                    </div>
-                </li>
-                <!--                    <li class="col-md-4">
-                                        <div class="card card-block"> 
-                                            <a class="close" data-toggle="modal" data-target="#Pops"><span class="glyphicon glyphicon-trash" style="color:blue"></span></a>
-                
-                                            <br>
-                                            <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="FLOODS" ></h4>
-                                            <p align="right"><a href="#"><span class="glyphicon glyphicon-bell"></span><span class="badge badge-notify">4</span></a></p>
-                
-                                        </div>
-                                    </li>-->
-                <div class="modal fade" id="Pops" role="dialog">
-                    <div class="modal-dialog">
-
-                        <!-- Modal content-->
-                        <div class="modal-content">
-
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <!--          <h4 class="modal-title" align="center"><strong>Activities & Clubs</strong></h4>-->
-
-                            <div class="modal-body"> <br>
-                                <h5><p align="center">Incident deleted successfully !</p></h5>
-                               
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <!--                    <li class="col-md-4">
-                                        <div class="card card-block"> 
-                                            <a class="close" data-toggle="modal" data-target="#Pops"><span class="glyphicon glyphicon-trash" style="color:blue"></span></a>
-                
-                                            <br>
-                                            <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="EARTHQUAKE" ></h4>
-                                            <p align="right"><a href="#"><span class="glyphicon glyphicon-bell"></span><span class="badge badge-notify">1</span></a></p>
-                
-                                        </div>
-                                    </li>-->
-                <!--                    <li class="col-md-4">
-                                        <div class="card card-block"> 
-                                            <a class="close" data-toggle="modal" data-target="#Pops"><span class="glyphicon glyphicon-trash" style="color:blue"></span></a>
-                
-                                            <br>
-                                            <h4 class="card-title" align="center"><input type="text" class="form-control" id="type" value="TORNADO" ></h4>
-                                           <p align="right"><a href="#"><span class="glyphicon glyphicon-bell"></span></a></p>
-                
-                                        </div>
-                                    </li>-->
-                <li class="col-md-4">
-
-                    <div class="card card-block"> <a class="add" data-toggle="modal" data-target="#Push"><span class="glyphicon glyphicon-plus-sign" style="color:orange"></span></a>
+                    <div class="card card-block"> <a class="add" data-toggle="modal" data-target="#createIncident"><span class="glyphicon glyphicon-plus-sign" style="color:orange"></span>
 
 
-                        <h4 class="card-title" align="center"><strong>Add an incident</strong></h4>
+                            <h4 class="card-title" align="center"><strong>Add an incident</strong></h4></a>
                         <br>
 
                     </div>
 
                 </li>
-
-                <div class="modal fade" id="Push" role="dialog">
-                    <div class="modal-dialog">
-
-                        <!-- Modal content-->
-                        <div class="modal-content">
-
-                            <button type="button" class="close" data-dismiss="modal"></button>
-                            <!--          <h4 class="modal-title" align="center"><strong>Activities & Clubs</strong></h4>-->
-
-                            <div class="modal-body"> <br>
-                                <h5><p align="center">Incident added successfully !</p></h5>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
             </ul>
+            <div class="modal fade" id="createIncident" tabindex="-1" role="dialog" aria-labelledby="create" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
+                            <h4 class="modal-title custom_align" id="Heading">Create New Disaster</h4>
+                        </div>
+                        <form action="/insertIncident" method="post">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    Incident Name: <input class="form-control " type="text" name='incidentName' placeholder="Enter Incident Name" required>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer ">
+                                <button type="submit" class="btn btn-success btn-lg" style="width: 100%;" data-target="#pops"><span class="fa fa-check-square"></span>Add</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.modal-content --> 
+                </div>
+
+                <!-- /.modal-dialog --> 
+            </div>
+            <div class="modal fade" id="pops" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+
+                        <div class="modal-body"> <br>
+                            <h5><p align="center">Incident deleted successfully !</p></h5>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <div class="modal fade" id="Push" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+
+                        <button type="button" class="close" data-dismiss="modal"></button>
+
+
+                        <div class="modal-body"> <br>
+                            <h5><p align="center">Incident added successfully !</p></h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
 
         </div>
+    </div>
+    <!-- SCRIPTS -->
 
-        <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
 
-        <!-- JQuery -->
-        <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/tether.min.js"></script>
 
-        <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="js/tether.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
 
-        <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- Bootstrap Confirmation -->
+    <script src="path/to/bootstrap-confirmation.js"></script>
+    <script>
+                                var app = angular.module('myApp', []);
+                                app.controller('myCtrl', ['$scope', '$http', '$window', function ($scope, $http, $location) {
 
-        <!-- Bootstrap Confirmation -->
-        <script src="path/to/bootstrap-confirmation.js"></script>
 
+                                $scope.incidents =  <%- JSON.stringify(incident) %>;
+
+
+                                    $scope.editingData = {};
+
+                                    for (var i = 0, length = $scope.incidents.length; i < length; i++) {
+                                        $scope.editingData[$scope.incidents[i]._id] = false;
+                                    }
+
+
+                                    $scope.modify = function (x) {
+                                        $scope.editingData[x._id] = true;
+                                    };
+
+                                    $scope.delete = function (x) {
+                                        var _id = x._id;
+                                        $http({method: 'POST',
+                                            url: '/deleteIncident',
+                                            data: JSON.stringify({
+                                                _id: x._id
+                                            }),
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            }
+                                        });
+                                    };
+                                    $scope.update = function (x) {
+                                        var _id = x._id;
+                                        $http({method: 'POST',
+                                            url: '/updateIncident',
+                                            data: JSON.stringify({
+                                                _id: x._id,
+                                                incidentName: x.incidentName
+                                            }),
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            }
+                                        });
+                                        $scope.editingData[x._id] = false;
+                                    };
+                                    $scope.openReports = function (x) {
+                                        
+                                        var _id = x._id;
+                                        return $http({method: 'POST',
+                                            url: '/Reports',
+                                            data: JSON.stringify({
+                                                _id: x._id,
+                                                incidentName: x.incidentName
+                                            }),
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            }
+                                            
+                                        }).success(function (response) {
+                                            window.open('/Reports');  
+                                            
+                                        });
+                                    };
+                                 
+        
+                                }]);
+        </script>
         <script>
-            $('.add').click(function () {
-                var $target = $(this).parents('ul');
-                $target.after('<li class="col-md-4"><div class="card card-block"> <a class="delete" data-toggle="modal" data-target="#Pops"><span class="glyphicon glyphicon-trash"></span></a><br><h4 class="card-title" align="center"><input type="text" class="form-control" id="type" placeholder="Name the Incident"></h4><br>\n<a href="reports.html" class="text-accent-1">Open Reports</a>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href="reports.html"><span class="glyphicon glyphicon-bell"></span></a></div></li>');
-            })
-
-            $('.close').click(function () {
-                var $target = $(this).parents('li');
-                $target.hide('slow', function () {
-                    $target.remove();
-                });
-            })
-
-            //$('.delete').click(function(){
-            //  var $target = $(this).parents('li');
-            //  $target.hide('slow', function(){ $target.remove(); });
-            //});
-
-            $("body").on("click", ".delete", function (e) {
-                var $target = $(this).parents('li');
-                $target.hide('slow', function () {
-                    $target.remove();
-                });
-            });
-            //$('.add').click(function(){
-            //  var $target = $(this).parents('li');
-            //  $target.append('slow', function(){ $target.append(); });
-            //})
-
+        $(document).ready(function () {
+            
+$("[data-toggle=tooltip]").tooltip();
+        });
+            
 
         </script>
 
