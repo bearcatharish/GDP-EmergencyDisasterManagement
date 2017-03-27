@@ -35,8 +35,8 @@ app.get('/clear', (req, res) => {
     });
 });
 
-app.listen(3000, () => {
-    console.log('parse-server running on port 3000.');
+app.listen(3001, () => {
+    console.log('parse-server running on port 3001.');
 });
 
 //View Engine
@@ -47,10 +47,10 @@ var url = 'mongodb://admin:1jlt2CMYsL5dUfHVRmlib06G@mongodb7.back4app.com:27017/
 app.use(express.static(__dirname));
 
 
-var jsdom = require("jsdom").jsdom;
-    var doc = jsdom();
-    var window = doc.defaultView;
-    var $ = require('jQuery')(window);
+//var jsdom = require("jsdom").jsdom;
+ //   var doc = jsdom();
+  //  var window = doc.defaultView;
+   // var $ = require('jQuery')(window);
 
 //Login view
 app.get('/Login', function (req, res) {
