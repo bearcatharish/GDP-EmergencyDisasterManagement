@@ -391,7 +391,7 @@ app.post('/deleteVolunteer', function (req, res) {
 app.post('/insertVolunteer', function (req, res) {
     var volunteersList = [];
     var newVolunteer = {
-        _id: 3,
+        _id: randomIntInc(0,9999),
         userName: req.body.userName,
         profession: req.body.profession,
         address: req.body.address,
@@ -551,7 +551,7 @@ app.post('/insertGroup', function (req, res) {
     console.log("In Insert");
     var groupList = [];
     var newGroup = {
-        _id: 7,
+        _id: randomIntInc(0,9999),
         gName: req.body.groupname,
         iName: req.body.incidentname,
         gLead: req.body.GroupLeadMailId,
