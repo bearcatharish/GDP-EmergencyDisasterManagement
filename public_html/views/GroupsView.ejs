@@ -38,7 +38,7 @@ and open the template in the editor.
     <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script> 
 </head>
 <body>
-  
+
     <div ng-app="myApp" ng-controller="myCtrl">
         <table>
             <td>
@@ -66,13 +66,13 @@ and open the template in the editor.
                         </ul>
 
                         <form action ="/Login">
-                         <button class="btn btn-primary btn-sm" style="float: right" type="submit">Logout</button> 
-                     </form>
-                 </div>     
-             </div>
-         </nav>    
-         
-         <div class="container">
+                           <button class="btn btn-primary btn-sm" style="float: right" type="submit">Logout</button> 
+                       </form>
+                   </div>     
+               </div>
+           </nav>    
+
+           <div class="container">
 
             <div class="row"><br>
                 <form class="form-inline" role="search">
@@ -131,7 +131,7 @@ and open the template in the editor.
                                         <td>
                                             <button ng-hide="editingData[x._id]" ng-click="modify(x)" class="btn btn-primary btn-sm"><span class="fa fa-pencil"></span></button>
                                             <button ng-show="editingData[x._id]" ng-click="update(x)" class="btn btn-warning btn-sm"><span class="fa fa-save"></span></button></td>
-                                            <td>   <button ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="fa fa-trash"></span></button>
+                                            <td>   <button ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal" ng-click="delete(x)"><span class="fa fa-trash"></span></button>
                                             </td>
                                         </tr>                            
 
@@ -167,62 +167,73 @@ and open the template in the editor.
                 <script>
                     var app = angular.module('myApp', []);
                     app.controller('myCtrl', ['$scope', '$http', '$window', function ($scope, $http, $location) {
-                    $scope.Groups = <%- JSON.stringify(gList) %>;
-                    $scope.editingData = {};
+                        $scope.Groups = <%- JSON.stringify(gList) %>;
+                        $scope.editingData = {};
 
-                    for (var i = 0, length = $scope.Groups.length; i < length; i++) {
-                        $scope.editingData[$scope.Groups[i]._id] = false;
-                    }
-
-
-                    $scope.modify = function (x) {
-                        $scope.editingData[x._id] = true;
-                    };
-
-
-                    $scope.update = function (x) {
-                        var _id = x._id;
-                        $http({method: 'POST',
-                           url: '/updateGroup',
-                           data: JSON.stringify({
-                            _id: x._id,
-                            gName: x.gName,
-                            iName: x.iName,
-                            gLead: x.gLead,
-                            comments: x.comments        
-                        }),
-                           headers: {
-                               'Content-Type': 'application/json'
-                           }
-                       });
-                        $scope.editingData[x._id] = false;
-                    };
-                }]);
-            </script>
-            <script>
-                $(document).ready(function () {
-                    $('#mytable').dataTable(
-                       { "bFilter": false, 
-                       "ordering": false,
-                       "lengthMenu": [ [10,  25, 50, -1], [10, 25, 50, "All"] ] });
-                    $("#mytable #checkall").click(function () {
-                        if ($("#mytable #checkall").is(':checked')) {
-                            $("#mytable input[type=checkbox]").each(function () {
-                                $(this).prop("checked", true);
-                            });
-
-                        } else {
-                            $("#mytable input[type=checkbox]").each(function () {
-                                $(this).prop("checked", false);
-                            });
+                        for (var i = 0, length = $scope.Groups.length; i < length; i++) {
+                            $scope.editingData[$scope.Groups[i]._id] = false;
                         }
+
+
+                        $scope.modify = function (x) {
+                            $scope.editingData[x._id] = true;
+                        };
+
+                        $scope.delete = function(x){
+                            var _id = x._id;
+                            $http({method: 'POST',
+                                url: '/deleteGroup',
+                               data: JSON.stringify({
+                                _id: x._id
+                            }),
+                               headers: {
+                                   'Content-Type': 'application/json'
+                               }
+                           });
+                        };
+                        $scope.update = function (x) {
+                            var _id = x._id;
+                            $http({method: 'POST',
+                             url: '/updateGroup',
+                             data: JSON.stringify({
+                                _id: x._id,
+                                gName: x.gName,
+                                iName: x.iName,
+                                gLead: x.gLead,
+                                comments: x.comments        
+                            }),
+                             headers: {
+                                 'Content-Type': 'application/json'
+                             }
+                         });
+                            $scope.editingData[x._id] = false;
+                        };
+                    }]);
+                </script>
+                <script>
+                    $(document).ready(function () {
+                        $('#mytable').dataTable(
+                         { "bFilter": false, 
+                         "ordering": false,
+                         "lengthMenu": [ [10,  25, 50, -1], [10, 25, 50, "All"] ] });
+                        $("#mytable #checkall").click(function () {
+                            if ($("#mytable #checkall").is(':checked')) {
+                                $("#mytable input[type=checkbox]").each(function () {
+                                    $(this).prop("checked", true);
+                                });
+
+                            } else {
+                                $("#mytable input[type=checkbox]").each(function () {
+                                    $(this).prop("checked", false);
+                                });
+                            }
+                        });
+
+                        $("[data-toggle=tooltip]").tooltip();
                     });
+                </script>
 
-                    $("[data-toggle=tooltip]").tooltip();
-                });
-            </script>
-
-        </div>
-    </body>
-    </html>
-y
+            </div>
+        </body>
+        </html>
+        y

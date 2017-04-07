@@ -34,10 +34,10 @@ and open the template in the editor.
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="js/mdb.min.js"></script>
     <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
-        <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script> 
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script> 
 </head>
 <body>
-    
+
 
     <div ng-app="myApp" ng-controller="myCtrl">
         <table>
@@ -61,17 +61,17 @@ and open the template in the editor.
                 </ul>
 
                 <form action ="/Login">
-                   <button class="btn btn-primary btn-sm" style="float: right" type="submit">Logout</button> 
-               </form>
-           </div>     
-       </div>
-   </nav>            
-   <div class="container">
+                 <button class="btn btn-primary btn-sm" style="float: right" type="submit">Logout</button> 
+             </form>
+         </div>     
+     </div>
+ </nav>            
+ <div class="container">
 
     <div class="row"><br>
         <form class="form-inline" role="search">
             <div class="md-form form-group">
-               <h2><strong>Volunteers </strong> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+             <h2><strong>Volunteers </strong> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                 <input type="text" class="form-control" ng-model="test" placeholder="Search">
 
@@ -85,108 +85,116 @@ and open the template in the editor.
         <div class="table-responsive">                           
             <table id="mytable" class="table table-bordered table-striped">
                 <thead class="thead-inverse">    
-                <tr class="filters">                            
-                    <th><input type="checkbox" id="checkall"  /></th>
-                    <!-- <th>Volunteer ID</th> -->
-                    <th>Username</th>                    
-                    <th>Certification<br>
-                    <select ng-model='test'>
-                    <option></option>
-                    <option ng-repeat = "certi in volunteers| filter: test | unique: 'cert' | orderBy: 'cert'">{{certi.cert}}</option>
-                    </select>
-                    </th>  
-                    <th>Profession<br>
-                    <select ng-model='test'>
-                    <option></option>
-                    <option ng-repeat = "prof in volunteers| filter: test | unique: 'profession' | orderBy: 'profession'">{{prof.profession}}</option>
-                    </select></th>                  
-                    <th>Address</th>
-                    <th>Email</th>
-                    <th>Contact</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="x in volunteers| filter:test | orderBy:'userName'">
-                        <td><input type="checkbox" class="checkthis" /></td>
+                    <tr class="filters">                            
+                        <th>
+                            <input type="checkbox" id="checkall"  />
+                        </th>
+                        <th>Username</th>                    
+                        <th>Certification<br>
+                            <select ng-model='test'>
+                                <option></option>
+                                <option ng-repeat = "certi in volunteers| filter: test | unique: 'cert' | orderBy: 'cert'">{{certi.cert}}</option>
+                            </select>
+                        </th>  
+                        <th>Profession<br>
+                            <select ng-model='test'>
+                                <option></option>
+                                <option ng-repeat = "prof in volunteers| filter: test | unique: 'profession' | orderBy: 'profession'">{{prof.profession}}</option>
+                            </select></th>                  
+                            <th>Address</th>
+                            <th>Email</th>
+                            <th>Contact</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in volunteers| filter:test | orderBy:'userName'">
+                            <td><input type="checkbox" class="checkthis" /></td> 
                        <!--  <td>
-                            <!-- <div ng-hide="editingData[x._id]" ng-bind="x._id"></div> -->
-                            <!-- <div ng-show="editingData[x._id]"> -->
-                            <!-- <input type="text" ng-model="x._id" /></div> -->
-                            <!-- <p ng-bind='x._id'></p> -->
-                        <!-- </td> --> 
-                        <td>
-                            <div ng-hide="editingData[x._id]" ng-bind="x.userName"></div>
-                            <div ng-show="editingData[x._id]"><input type="text" ng-model="x.userName" /></div>
+                       <!-- <div ng-hide="editingData[x._id]" ng-bind="x._id"></div> -->
+                       <!-- <div ng-show="editingData[x._id]"> -->
+                       <!-- <input type="text" ng-model="x._id" /></div> -->
+                       <!-- <p ng-bind='x._id'></p> -->
+                       <!-- </td> --> 
+                       <td>
+                        <div ng-hide="editingData[x._id]" ng-bind="x.userName"></div>
+                        <div ng-show="editingData[x._id]"><input type="text" ng-model="x.userName" /></div>
+                    </td>
+
+                    <td>
+                        <div ng-hide="editingData[x._id]" ng-bind="x.cert"></div>
+                        <div ng-show="editingData[x._id]"><input type="text" ng-model="x.cert" /></div>
+                    </td>
+                    <td>
+                        <div ng-hide="editingData[x._id]" ng-bind="x.profession"></div>
+                        <div ng-show="editingData[x._id]"><input type="text" ng-model="x.profession" /></div>
+                    </td>
+                    <td>
+                        <div ng-hide="editingData[x._id]" ng-bind="x.address"></div>
+                        <div ng-show="editingData[x._id]"><input type="text" ng-model="x.address" /></div>
+                    </td>
+                    <td>
+                        <div ng-hide="editingData[x._id]" ng-bind="x.emailID"></div>
+                        <div ng-show="editingData[x._id]"><input type="text" ng-model="x.emailID" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}$" title=" Enter in this format: abc@domain.com "/></div>
+                    </td>
+                    <td>
+                        <div ng-hide="editingData[x._id]" ng-bind="x.mobileNumber"></div>
+                        <div ng-show="editingData[x._id]"><input type="text" ng-model="x.mobileNumber" pattern="^\d{3}-\d{3}-\d{4}$" title="Please enter 10 digit contact no." /></div>
+                    </td>
+                    <td>
+                        <button ng-hide="editingData[x._id]" ng-click="modify(x)" class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                        </button>
+                        <button type='submit' ng-show="editingData[x._id]" ng-click="update(x)" class="btn btn-warning btn-sm">
+                            <span class="fa fa-save"></span></button>
                         </td>
-                        
-                        <td>
-                            <div ng-hide="editingData[x._id]" ng-bind="x.cert"></div>
-                            <div ng-show="editingData[x._id]"><input type="text" ng-model="x.cert" /></div>
-                        </td>
-                                               <td>
-                            <div ng-hide="editingData[x._id]" ng-bind="x.profession"></div>
-                            <div ng-show="editingData[x._id]"><input type="text" ng-model="x.profession" /></div>
-                        </td>
-                        <td>
-                            <div ng-hide="editingData[x._id]" ng-bind="x.address"></div>
-                            <div ng-show="editingData[x._id]"><input type="text" ng-model="x.address" /></div>
-                        </td>
-                        <td>
-                            <div ng-hide="editingData[x._id]" ng-bind="x.emailID"></div>
-                            <div ng-show="editingData[x._id]"><input type="text" ng-model="x.emailID" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}$" title=" Enter in this format: abc@domain.com "/></div>
-                        </td>
-                        <td>
-                            <div ng-hide="editingData[x._id]" ng-bind="x.mobileNumber"></div>
-                            <div ng-show="editingData[x._id]"><input type="text" ng-model="x.mobileNumber" pattern="^\d{3}-\d{3}-\d{4}$" title="Please enter 10 digit contact no." /></div>
-                        </td>
-                        <td>
-                            <button ng-hide="editingData[x._id]" ng-click="modify(x)" class="btn btn-primary btn-sm">
-                                <span class="fa fa-pencil"></span>
-                            </button>
-                            <button type='submit' ng-show="editingData[x._id]" ng-click="update(x)" class="btn btn-warning btn-sm">
-                                <span class="fa fa-save"></span></button>
-                            </td>
-                            <td>   
+                        <td>   
                             <!-- <button ng-model="x._id" ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal" data-target="#delete"> -->
-                                <button type='submit' ng-model="x._id" ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal" ng-click="delete(x)">
-                                    <span class="fa fa-trash"></span>
-                                </button>
-                            </td>
-                        </tr>                       
+                            <button type='submit' ng-model="x._id" ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal" ng-click="delete(x)">
+                                <span class="fa fa-trash"></span>
+                            </button>
+                        </td>
+                    </tr>                       
 
 
 
-                    </tbody>
-                </table>                            
-            </div>
+                </tbody>
+            </table>                            
         </div>
+    </div>
 
-    </div></div>
+</div></div>
 
-    <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="create" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
-                    <h4 class="modal-title custom_align" id="Heading">Create New Volunteer</h4>
+<div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="create" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">Create New Volunteer</h4>
+            </div>
+            <form action="/insertVolunteer" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        Username: <input class="form-control " type="text" name='userName' required>
+                    </div>
+
+                    <div class="form-group">
+                        Certification: <select name='cert' class="mdb-select">
+                        <option value="" disabled selected>Choose your Level</option>
+                        <option value="Level 1">Level 1</option>
+                        <option value="Level 2">Level 2</option>
+                        <option value="Level 3">Level 3</option>
+                        <option value="Level 4">Level 4</option>
+                    </select> 
+                    <!-- <input class="form-control " type="text" name='cert' required> -->
                 </div>
-                <form action="/insertVolunteer" method="post">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            Username: <input class="form-control " type="text" name='userName' required>
-                        </div>
-                        
-                        <div class="form-group">
-                            Certification:  <input class="form-control " type="text" name='cert' required>
-                        </div>
-                        <div class="form-group">
-                            Profession:  <input class="form-control " type="text" name='profession' required>
-                        </div>
-                        <div class="form-group">
-                            
-                            Address: <input class="form-control " type="text" name='address' placeholder="Street         City     State    Zip" required>
+                <div class="form-group">
+                    Profession:  <input class="form-control " type="text" name='profession' required>
+                </div>
+                <div class="form-group">
+
+                    Address: <input class="form-control " type="text" name='address' placeholder="Street         City     State    Zip" required>
                             <!-- City: <input class="form-control " type="text" name='city' required> 
                             State: <input class="form-control " type="text" name='state' required>
                             Zip: <input class="form-control " type="text" name='zip'pattern="^\d{5}$" placeholder="zip must be 5 digits" title="Must be 5 digits only"required>   -->                   
@@ -225,53 +233,86 @@ and open the template in the editor.
                         <div class="form-group">
                             Incident: <input class="form-control " type="text" name='incidentname' required>
                         </div>
-                        <div class="form-group">
-                            Group Lead Mail Id: <input class="form-control " type="text" name='GroupLeadMailId' required>
-                        </div>
-                        <div class="form-group">
-                            Description : <textarea type="text" class="md-textarea" name='desc' required></textarea>
-                        </div>
-                        <div class="modal-footer ">
-                            <button type="submit" class="btn btn-success btn-lg" style="width: 100%;"><span class="fa fa-check-square"></span>Add Group</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- <form action="/deleteVolunteer" method="post"> -->
-        <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            <span class="fa fa-times" aria-hidden="true">
-                            </span>
-                        </button>
-                        <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="alert alert-warning">
-                            <span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?
-                        </div>
-                    </div>
-                    <div class="modal-footer ">
-                        <button type="submit" ng-click="delete(x)" class="btn btn-success">
-                            <span class="fa fa-check"></span>Yes</button>
-                            <button class="btn btn-warning" data-dismiss="modal">
-                                <span class="fa fa-remove"></span>No</button>
+                        <div class="row">
+
+                            <div class="form-group">
+                             &nbsp;&nbsp;&nbsp; Group Lead Mail Id: 
+                         </div>
+                         <div class="col-md-6">
+                            <div class="md-form">
+                                <input class="form-control " type="text" name='GroupLeadMailId' ng-model="groupLead" required>
                             </div>
                         </div>
-
-                        <!-- /.modal-content --> 
+                        <div class="col-md-6">
+                            <div class="md-form">
+                                <select ng-model='groupLead' name='GroupLeadMailId'>
+                                    <option ng-repeat = "user in volunteers| filter: groupLead | unique: 'userName' | orderBy: 'userName'">{{user.emailID}}</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                    <!-- /.modal-dialog --> 
+                    <div class="row">
+
+                        <div class="form-group">
+                        &nbsp;&nbsp;&nbsp; Group Members: 
+                     </div>
+                     <div class="col-md-6">
+                        <div class="md-form">
+                            <input class="form-control " type="text" name='GroupMem' ng-model="groupLead" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="md-form">
+                            <select ng-model='groupMem' name='GroupMem' multiple="true">
+                                <option ng-repeat = "user in volunteers| filter: groupMem | unique: 'userName' | orderBy: 'userName'">{{user.emailID}}</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-            <!-- </form> -->
+                <div class="form-group">
+                    Description : <textarea type="text" class="md-textarea" name='desc' required></textarea>
+                </div>
+                <div class="modal-footer ">
+                    <button type="submit" class="btn btn-success btn-lg" style="width: 100%;"><span class="fa fa-check-square"></span>Add Group</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<!-- <form action="/deleteVolunteer" method="post"> -->
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <span class="fa fa-times" aria-hidden="true">
+                    </span>
+                </button>
+                <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning">
+                    <span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button type="submit" ng-click="delete(x)" class="btn btn-success">
+                    <span class="fa fa-check"></span>Yes</button>
+                    <button class="btn btn-warning" data-dismiss="modal">
+                        <span class="fa fa-remove"></span>No</button>
+                    </div>
+                </div>
+
+                <!-- /.modal-content --> 
+            </div>
+            <!-- /.modal-dialog --> 
         </div>
-        <script>
-            var app = angular.module('myApp', ['angular.filter']);
-            app.controller('myCtrl', ['$scope', '$http', '$window', function ($scope, $http, $location) {
+        <!-- </form> -->
+    </div>
+    <script>
+        var app = angular.module('myApp', ['angular.filter']);
+        app.controller('myCtrl', ['$scope', '$http', '$window', function ($scope, $http, $location) {
 
 //                                                        $http({method: 'GET',
 //                                                            url: 'http://localhost:3000/Volunteers',
@@ -287,7 +328,6 @@ and open the template in the editor.
 //                                                        }
 //                                                        );
 $scope.volunteers = <%- JSON.stringify(vol) %>;
-
 $scope.editingData = {};
 
 for (var i = 0, length = $scope.volunteers.length; i < length; i++) {
@@ -300,22 +340,22 @@ $scope.modify = function (x) {
 };
 
 $scope.delete = function(x){
-var _id = x._id;
-$http({method: 'POST',
-     url: '/deleteVolunteer',
-     data: JSON.stringify({
+    var _id = x._id;
+    $http({method: 'POST',
+       url: '/deleteVolunteer',
+       data: JSON.stringify({
         _id: x._id
-     }),
-     headers: {
-         'Content-Type': 'application/json'
-     }
- });
+    }),
+       headers: {
+           'Content-Type': 'application/json'
+       }
+   });
 };
 $scope.update = function (x) {
-var _id = x._id;
+    var _id = x._id;
     $http({method: 'POST',
-     url: '/updateVolunteer',
-     data: JSON.stringify({
+       url: '/updateVolunteer',
+       data: JSON.stringify({
         _id: x._id,
         userName: x.userName,
         profession: x.profession,
@@ -324,11 +364,11 @@ var _id = x._id;
         cert: x.cert,
         mobileNumber: x.mobileNumber
         
-     }),
-     headers: {
-         'Content-Type': 'application/json'
-     }
- });
+    }),
+       headers: {
+           'Content-Type': 'application/json'
+       }
+   });
     $scope.editingData[x._id] = false;
 };
 }]);
@@ -349,10 +389,10 @@ var _id = x._id;
         });
 
         $("[data-toggle=tooltip]").tooltip();
-         $('#mytable').dataTable(
-                         { "bFilter": false, 
-                     "ordering": false,
-                     "lengthMenu": [ [10,  25, 50, -1], [10, 25, 50, "All"] ] });
+        $('#mytable').dataTable(
+           { "bFilter": false, 
+           "ordering": false,
+           "lengthMenu": [ [10,  25, 50, -1], [10, 25, 50, "All"] ] });
     });
 </script>
 

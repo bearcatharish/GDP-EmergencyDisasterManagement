@@ -387,6 +387,28 @@ app.post('/deleteVolunteer', function (req, res) {
     });
 });
 
+//Group Deletion
+app.post('/deleteGroup', function (req, res) {
+    console.log("In deleteGroup");
+    console.log(req.body);
+    var deleteGroup = req.body;
+    mongoClient.connect(url, function (err, db) {
+        if (err) {
+            console.error('Error occured in database');
+            res.send("Error in connection");
+
+        } else {
+            db.collection('groups').remove(deleteGroup, function (err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.redirect("/Groups");
+                }
+            });
+        }
+    });
+});
+
 //volunteer insertion
 app.post('/insertVolunteer', function (req, res) {
     var volunteersList = [];
@@ -401,7 +423,7 @@ app.post('/insertVolunteer', function (req, res) {
 
                 //        dateTo: req.body.dt1
     };
-
+    
     mongoClient.connect(url, function (err, db) {
         if (err) {
             console.error('Error occured in database');
