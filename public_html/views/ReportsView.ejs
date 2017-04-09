@@ -69,13 +69,13 @@ and open the template in the editor.
                         </ul>
 
                         <form action ="LoginPage.html">
-                           <button class="btn btn-primary btn-sm" style="float: right" type="submit">Logout</button> 
-                       </form>
-                   </div>     
-               </div>
-           </nav>       
-           
-           <div class="container">
+                         <button class="btn btn-primary btn-sm" style="float: right" type="submit">Logout</button> 
+                     </form>
+                 </div>     
+             </div>
+         </nav>       
+
+         <div class="container">
 
             <div class="row"><br>
                 <form class="form-inline" role="search">
@@ -111,7 +111,7 @@ and open the template in the editor.
                             <th>Reported by</th>
 
                             <th>Cell Number</th>
-                            <th> Date </th>
+                            <!-- <th> Date </th> -->
                             <th>Edit</th>
                             <th>Delete</th>
                             <th>Full Details</th>
@@ -124,7 +124,7 @@ and open the template in the editor.
                                 <div ng-hide="editingData[x.id]" ng-bind="x.location"></div>
                                 <div ng-show="editingData[x.id]"><input type="text" ng-model="x.location" /></div>
                             </td> -->
-                           <td> <button data-toggle="modal" data-target="#mapView"><i class="fa fa-map-marker" aria-hidden="true"></i></button></td>
+                            <td> <button data-toggle="modal" data-target="#mapView"><i class="fa fa-map-marker" aria-hidden="true"></i></button></td>
                             <td>
                                 <div ng-hide="editingData[x._id]" ng-bind="x.incidentName"></div>
                                 <div ng-show="editingData[x._id]"><input type="text" ng-model="x.incidentName" /></div>
@@ -142,16 +142,16 @@ and open the template in the editor.
                                 <div ng-hide="editingData[x._id]" ng-bind="x.mobileNumber"></div>
                                 <div ng-show="editingData[x._id]"><input type="text" ng-model="x.mobileNumber" /></div>
                             </td>
-                            <td>
+                           <!--  <td>
                                 <div ng-hide="editingData[x._id]" ng-bind="x.createdAt"></div>
                                 <div ng-show="editingData[x._id]"><input type="Date" ng-model="x.createdAt" /></div>
-                            </td>
+                            </td> -->
 
                             <td>
                                 <button ng-hide="editingData[x._id]" ng-click="modify(x)" class="btn btn-primary btn-sm"><span class="fa fa-pencil"></span></button>
                                 <button ng-show="editingData[x._id]" ng-click="update(x)" class="btn btn-warning btn-sm"><span class="fa fa-check-square"></span>Update</button>
                             </td>
-                            <td>   <button ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="fa fa-trash"></span></button>
+                            <td>   <button ng-hide="viewField" class="btn btn-danger btn-sm" ng-click="delete(x)"><span class="fa fa-trash"></span></button>
                             </td>
                             <td class="detail_td">
                                 <p data-placement="top" data-toggle="tooltip" title="Details">
@@ -228,22 +228,22 @@ and open the template in the editor.
 </div>
 </div>
 <div class="modal fade" id="mapView" tabindex="-1" role="dialog" aria-labelledby="mapView" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
-                    <h4 class="modal-title custom_align" id="Heading">Location</h4>                    
-                </div>
-                <div class="modal-body">
-               <div id="map-container" class="z-depth-1" style="height: 350px;width: 570px"></div>   
-               </div> 
-               <div class="modal-footer ">
-               </div>  
-            <!-- /.modal-content --> 
-        </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">Location</h4>                    
+            </div>
+            <div class="modal-body">
+             <div id="map-container" class="z-depth-1" style="height: 350px;width: 570px"></div>   
+         </div> 
+         <div class="modal-footer ">
+         </div>  
+         <!-- /.modal-content --> 
+     </div>
 
-        <!-- /.modal-dialog --> 
-    </div>
+     <!-- /.modal-dialog --> 
+ </div>
             <!--<div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="create" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -312,58 +312,69 @@ and open the template in the editor.
                     $scope.editingData[x._id] = true;
                 };
 
-
+                $scope.delete = function(x){
+                    var _id = x._id;
+                    $http({method: 'POST',
+                        url: '/deleteReport',
+                        data: JSON.stringify({
+                            _id: x._id
+                        }),
+                        headers: {
+                         'Content-Type': 'application/json'
+                     }
+                 });
+                };
                 $scope.update = function (x) {
                     var _id = x._id;
                     $http({method: 'POST',
-                     url: '/updateReport',
-                     data: JSON.stringify({
+                       url: '/updateReport',
+                       data: JSON.stringify({
                         _id: x._id,
                         location: x.location,
                         incidentName: x.incidentName,
                         levelOfImpact: x.levelOfImpact,
                         userName: x.userName,
-                        mobileNumber: x.mobileNumber,
-                        createdAt: x.createdAt
+                        mobileNumber: x.mobileNumber
+                        // createdAt: x.createdAt
                     }),
-                     headers: {
-                         'Content-Type': 'application/json'
-                     }
-                 });
+                       headers: {
+                           'Content-Type': 'application/json'
+                       }
+                   });
                     $scope.editingData[x._id] = false;
                 };
             }]);</script>
-            <script>function init_map() {
+                    <script>function init_map() {
 
-                    var var_location = new google.maps.LatLng(40.3507, -94.8824);
+                        var var_location = new google.maps.LatLng(40.3507, -94.8824);
 
-                    var var_mapoptions = {
-                        center: var_location,
+                        var var_mapoptions = {
+                            center: var_location,
 
-                        zoom: 14
-                    };
+                            zoom: 14
+                        };
 
-                    var var_marker = new google.maps.Marker({
-                        position: var_location,
-                        map: var_map,
-                        title: "New York"
-                    });
+                        var var_marker = new google.maps.Marker({
+                            position: var_location,
+                            map: var_map,
+                            title: "New York"
+                        });
 
-                    var var_map = new google.maps.Map(document.getElementById("map-container"),
-                        var_mapoptions);
+                        var var_map = new google.maps.Map(document.getElementById("map-container"),
+                            var_mapoptions);
 
-                    var_marker.setMap(var_map);
+                        var_marker.setMap(var_map);
 
-                }
-                google.maps.event.addDomListener(window, 'click', init_map);
-                // document.getElementById("map-container").innerHTML = init_map();</script>
+                    }
+                    google.maps.event.addDomListener(window, 'click', init_map);
+                    // document.getElementById("map-container").innerHTML = init_map();</script>
                     <script>$(document).ready(function () {
-                     $('#mytable').dataTable(
-                         { "bFilter": false, 
-                         "ordering": false,
-                         "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ] });
+                       $('#mytable').dataTable(
+                           { "bFilter": false, 
+                           "ordering": false,
+                           "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ] });
 
-                     $("#mytable #checkall").click(function () {
+                       $("#mytable #checkall").click(function () {
                         if ($("#mytable #checkall").is(':checked')) {
                             $("#mytable input[type=checkbox]").each(function () {
                                 $(this).prop("checked", true);
@@ -378,7 +389,7 @@ and open the template in the editor.
 
                         $("[data-toggle=tooltip]").tooltip();
                     });
-                     $('#yesBtn').click(function() {
+                       $('#yesBtn').click(function() {
                         // handle deletion here
                        // print("Hello");
                        // var id = $('.confrimDelete').data('title');
@@ -389,7 +400,7 @@ var id = $('.confrimDelete').data('id');
 $('[data-id='+id+']').parents('tr').remove();
 $('#myModal').modal('hide');
 });
-                     $(".dtlBtn").on("click", function (evt) {
+                       $(".dtlBtn").on("click", function (evt) {
                         console.log(evt);
                         var row_id = evt.target.id;
 
@@ -402,45 +413,121 @@ $('#myModal').modal('hide');
                             }
                         });
 
+                        var formHtml = "<form >";
 
-                  //  console.log(slctdRow);
+                        for( key in slctdRow){
+                            if( (key != "_id" && key != "_created_at" && key != "$$hashKey" && key != "_updated_at" ))
+                                formHtml += '<div class="form-group"><label for="exampleInputEmail1" class="dtl_key">'+key+': </label> <span id="'+key+'" class="dtl_value" > '+slctdRow[key]+'</span></div>';
+                        }
 
-                  var formHtml = "<form >";
+                        formHtml += "" 
+                        formHtml += "</form>"
 
-                  for( key in slctdRow){
-                    if( (key != "_id" && key != "_created_at" && key != "$$hashKey" && key != "_updated_at" ))
-                        formHtml += '<div class="form-group"><label for="exampleInputEmail1" class="dtl_key">'+key+': </label> <span id="'+key+'" class="dtl_value" > '+slctdRow[key]+'</span></div>';
-                }
+                        $('#rowDetails').html(formHtml);
+                    });
 
-                formHtml += "" 
-                formHtml += "</form>"
+                       var name, volunteerComments, uName,greenVic, blackVic,lvlOfImpact, yellowVic, redVic, mobilenum;
+                       $('.detail_button').click(function(){
 
-                $('#rowDetails').html(formHtml);
-            });
+                        id = $('#incidentName').html();
+                        comments = $('#comments').html();
+                        userName = $('#userName').html();
+                        greenVictims = $('#greenVictims').html();
+                        blackVictims = $('#blackVictims').html();
+                        levelOfImpact = $('#levelOfImpact').html();
+                        yellowVictims = $('#yellowVictims').html();
+                        redVictims = $('#redVictims').html();
+                        mobileNumber = $('#mobileNumber').html();
+
+
+
+
+                        localStorage.setItem('name',id);
+                        localStorage.setItem('volunteerComments',comments);
+                        localStorage.setItem('uName', userName);
+                        localStorage.setItem('greenVic',greenVictims);
+                        localStorage.setItem('blackVic',blackVictims);
+                        localStorage.setItem('lvlOfImpact',levelOfImpact);
+                        localStorage.setItem('yellowVic',yellowVictims);
+                        localStorage.setItem('redVic',redVictims);
+                        localStorage.setItem('mobilenum',mobileNumber);
+
+
+
+                        name = localStorage.getItem('name');
+                        volunteerComments = localStorage.getItem('volunteerComments');
+                        uName = localStorage.getItem('uName');
+                        greenVic = localStorage.getItem('greenVic');
+                        blackVic = localStorage.getItem('blackVic');
+                        lvlOfImpact = localStorage.getItem('lvlOfImpact');
+                        yellowVic = localStorage.getItem('yellowVic');
+                        redVic = localStorage.getItem('redVic');
+                        mobilenum = localStorage.getItem('mobilenum');
+
+                        $('#savePdf').data('whichid', id);
+                        $('#savePdf').data('volComments',comments);
+                        $( '#savePdf').data('usrName', userName);
+                        $( '#savePdf').data('grnVic', greenVictims);
+                        $( '#savePdf').data('blckVic', blackVictims);
+                        $( '#savePdf').data('lvlImpct', levelOfImpact);
+                        $( '#savePdf').data('ylwVic',yellowVictims);
+                        $( '#savePdf').data('rdVic', redVictims);
+                        $( '#savePdf').data('mNum', mobileNumber);
+
+                    });
+
+
+                       name = localStorage.getItem('name');
+                       volunteerComments = localStorage.getItem('volunteerComments');
+                       uName = localStorage.getItem('uName');
+                       greenVic = localStorage.getItem('greenVic');
+                       blackVic = localStorage.getItem('blackVic');
+                       lvlOfImpact = localStorage.getItem('lvlOfImpact');
+                       yellowVic = localStorage.getItem('yellowVic');
+                       redVic = localStorage.getItem('redVic');
+                       mobilenum = localStorage.getItem('mobilenum');
+
+
 //generating a PDF
 $('#savePdf').click(function () {
+   // var a = id;
+   var a  = $('#savePdf').data('whichid');
+   var b = $('#savePdf').data('volComments');
+   var c = $('#savePdf').data('usrName');
+   var d = $('#savePdf').data('grnVic');
+   var e = $('#savePdf').data('blckVic');
+   var f = $('#savePdf').data('lvlImpct');
+   var g = $('#savePdf').data('ylwVic');
+   var h = $('#savePdf').data('rdVic');
+   var i = $('#savePdf').data('mNum');
 
-   // var id = $('#rowDetails').find("#id").text();
-    //var location = $('#rowDetails').find("#location").val();
-    var incident = $('#rowDetails').find("#incidentName").html();
-    console.log(incident + "value");
-    //var loi = $('#rowDetails').find("#LOI").val();
-    //var reportedBy = $('#rowDetails').find("#reportedBy").val();
-    //var contactNo = $('#rowDetails').find("#contactNo").val();
-    //var date = $('#rowDetails').find("#date").val();
-    
+
+
+  //   var lMargin=15; //left margin in mm
+   // var rMargin=15; //right margin in mm
+    //var pdfInMM=210;  // width of A4 in mm
     var doc = new jsPDF();
-    doc.text(10, 10, 'Report Details ' );
-    //doc.text(10, 20, 'Id : ' + id );
-    doc.text(10, 30, 'Incident : ' + incident);
-    //doc.text(10, 40, 'Location : ' +location );
-    //doc.text(10, 50, 'LOI : ' + loi);
-    //doc.text(10, 60, 'Reported By : ' + reportedBy);
-    //doc.text(10, 70, 'Contact Number : ' + contactNo);
-    //doc.text(10, 80, 'Date : ' + date);
+
+
+    doc.text(80, 10, 'Report Details ' );
+    doc.text(10, 20, 'Id : ' + a );
     
+    doc.text(10, 30, 'User Name:' + c);
+    doc.text(10, 40, 'Green Victims:' + d);
+    doc.text(10, 50, 'Black Victims:' + e);
+    doc.text(10,60, 'Level Of Impact:' + f);
+    doc.text(10,70, 'Yellow Victims:' + g);
+    doc.text(10,80, 'Red Victims:' + h);
+    doc.text(10,90, 'Mobile Number:' + i);
+
+    doc.text(10, 100, 'Comments: ' +b);
+
+
     doc.save('Reports.pdf');
+
 });
+
+
 
 $('.filterable .filters select').change(function(e){
     /* Ignore tab key */

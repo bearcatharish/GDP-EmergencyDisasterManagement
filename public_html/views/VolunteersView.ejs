@@ -341,7 +341,7 @@ $scope.modify = function (x) {
 
 $scope.delete = function(x){
     var _id = x._id;
-    $http({method: 'POST',
+    return $http({method: 'POST',
        url: '/deleteVolunteer',
        data: JSON.stringify({
         _id: x._id
@@ -349,7 +349,10 @@ $scope.delete = function(x){
        headers: {
            'Content-Type': 'application/json'
        }
-   });
+   }).success(function (response) {
+                                             window.location='/Volunteers';  
+                                             
+                                         });
 };
 $scope.update = function (x) {
     var _id = x._id;

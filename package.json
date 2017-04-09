@@ -1,8 +1,18 @@
 {
-    "name": "Webpage",
-    "version": "1.0.0",
-    "keywords": ["util", "functional", "server", "client", "browser"],
-    "author": "S525701",
-    "contributors": [],
-    "dependencies": {}
+  "name": "Webpage",
+  "version": "1.0.0",
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "author": "S525701",
+  "contributors": [],
+  "dependencies": {
+    "nodemailer": "^4.0.0",
+    "nodemailer-smtp-transport": "^2.7.4",
+    "sendmail": "^1.1.1"
+  }
 }
