@@ -1,6 +1,9 @@
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
+var session = require('express-session');
 var app = express();
+
+app.use(session({secret: 'ssshhhhh'}));
 
 var http = require('http');
 var assert = require('assert');
@@ -9,6 +12,24 @@ var fs = require('fs');
 var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({extended: true})); // support encoded bodies
+
+var sess;
+
+//app.get('/',function(req,res){
+//sess = req.session;
+////Session set when user Request our app via URL
+//if(sess.email) {
+///*
+//* This line check Session existence.
+//* If it existed will do some action.
+//*/
+//    res.redirect('/Home');
+//}
+//else {
+//    res.render('LoginPage.html');
+//}
+//});
+
 var router = express.Router();
 var mongo = require('mongodb');
 var mongoClient = mongo.MongoClient;
@@ -100,6 +121,8 @@ var incidentReportList=[];
 var called= false;
 
 app.get('/Home', function (req, res) {
+    sess = req.session;
+if(sess.email) {
     var incidentList = [];
     mongoClient.connect(url, function (err, db) {
 
@@ -125,10 +148,19 @@ app.get('/Home', function (req, res) {
                                     });
         }
     });
+//res.end('<a href="+">Logout</a>');
+} else {
+    res.redirect("/Login");
+//res.render('LoginPage.html');
+//    res.write('<h1>Please login first.</h1>');
+//    res.end('<a href="./LoginPage.html">Login</a>');
+}
 });
 
 //calls volunteer page
 app.get('/Volunteers', function (req, res) {
+    sess = req.session;
+if(sess.email) {
     var volunteersList = [];
     mongoClient.connect(url, function (err, db) {
 
@@ -155,10 +187,15 @@ app.get('/Volunteers', function (req, res) {
             });
         }
     });
+//res.end('<a href="+">Logout</a>');
+} else {
+    res.redirect("/Login");
+    }
 });
 
 //validation logins
 app.post('/Login', function (req, res) {
+    sess = req.session;
     var incidentName = [];
     var login = {
         emailID: req.body.emailID,
@@ -226,8 +263,12 @@ app.post('/Login', function (req, res) {
             });
         }
     });
+    sess.email=req.body.emailID;
+  //res.end('done');
 });
 app.post('/updateIncident', function (req, res) {
+    sess = req.session;
+if(sess.email) {
     var incidentList = [];
     var updatedIncident = req.body;
     mongoClient.connect(url, function (err, db) {
@@ -257,10 +298,15 @@ app.post('/updateIncident', function (req, res) {
             });
         }
     });
-
+//res.end('<a href="+">Logout</a>');
+} else {
+    res.redirect("/Login");
+}
 });
 
 app.post('/deleteIncident', function (req, res) {
+    sess = req.session;
+if(sess.email) {
     var deleteIncident = req.body;
     mongoClient.connect(url, function (err, db) {
         if (err) {
@@ -277,12 +323,18 @@ app.post('/deleteIncident', function (req, res) {
             });
         }
     });
+//res.end('<a href="+">Logout</a>');
+} else {
+    res.redirect("/Login");
+}
 });
 function randomIntInc (low, high) {
     return Math.floor(Math.random() * (high - low + 1) + low);
 }
 
 app.post('/insertIncident', function (req, res) {
+    sess = req.session;
+if(sess.email) {
     var incidentList = [];
     var newIncident = {
         _id: randomIntInc(0,9999),
@@ -325,10 +377,15 @@ app.post('/insertIncident', function (req, res) {
         }
     });
 
-
+//res.end('<a href="+">Logout</a>');
+} else {
+    res.redirect("/Login");
+}
 });
 
 app.post('/Reports', function (req, res) {
+    sess = req.session;
+if(sess.email) {
     console.log("In open reports");
     var openIncident = req.body.incidentName;
     console.log(name);
@@ -362,9 +419,15 @@ app.post('/Reports', function (req, res) {
             });
         }
     });
+    //res.end('<a href="+">Logout</a>');
+} else {
+    res.redirect("/Login");
+}
     });
 //Reports Deletion
 app.post('/deleteReport', function (req, res) {
+    sess = req.session;
+if(sess.email) {
     console.log("In deleteReport");
     console.log(req.body);
     var deleteReport = req.body;
@@ -383,10 +446,16 @@ app.post('/deleteReport', function (req, res) {
             });
         }
     });
+//res.end('<a href="+">Logout</a>');
+} else {
+    res.redirect("/Login");
+}
 });
 //reports update
 app.post('/updateReport', function (req, res) {
     // console.log("In updateVolunteer");
+    sess = req.session;
+if(sess.email) {
     console.log(req.body);
     //res.render('VolunteersView');
     var reportList = [];
@@ -418,13 +487,18 @@ app.post('/updateReport', function (req, res) {
             });
         }
     });
-
+//res.end('<a href="+">Logout</a>');
+} else {
+    res.redirect("/Login");
+}
 });
 //volunteer data changes
 app.post('/updateVolunteer', function (req, res) {
     // console.log("In updateVolunteer");
     // console.log(req.body);
     //res.render('VolunteersView');
+    sess = req.session;
+if(sess.email) {
     var volunteersList = [];
     var updatedVolunteer = req.body;
     mongoClient.connect(url, function (err, db) {
@@ -454,11 +528,16 @@ app.post('/updateVolunteer', function (req, res) {
             });
         }
     });
-
+//res.end('<a href="+">Logout</a>');
+} else {
+    res.redirect("/Login");
+}
 });
 
 //volunteer deletion
 app.post('/deleteVolunteer', function (req, res) {
+    sess = req.session;
+if(sess.email) {
     console.log("In deleteVolunteer");
     console.log(req.body);
     var deleteVolunteer = req.body;
@@ -477,10 +556,16 @@ app.post('/deleteVolunteer', function (req, res) {
             });
         }
     });
+//res.end('<a href="+">Logout</a>');
+} else {
+    res.redirect("/Login");
+}
 });
 
 //Group Deletion
 app.post('/deleteGroup', function (req, res) {
+    sess = req.session;
+if(sess.email) {
     console.log("In deleteGroup");
     console.log(req.body);
     var deleteGroup = req.body;
@@ -499,10 +584,16 @@ app.post('/deleteGroup', function (req, res) {
             });
         }
     });
+//res.end('<a href="+">Logout</a>');
+} else {
+    res.redirect("/Login");
+}
 });
 
 //volunteer insertion
 app.post('/insertVolunteer', function (req, res) {
+    sess = req.session;
+if(sess.email) {
     var volunteersList = [];
 	var passwords= req.body.userName+randomIntInc(1000,9999);
     var newVolunteer = {
@@ -574,11 +665,16 @@ app.post('/insertVolunteer', function (req, res) {
         }
     });
 
-
+//res.end('<a href="+">Logout</a>');
+} else {
+    res.redirect("/Login");
+}
 });
 
 //groups retrieval
 app.get('/Groups', function (req, res) {
+    sess = req.session;
+if(sess.email) {
     var groupList = [];
     mongoClient.connect(url, function (err, db) {
 
@@ -604,10 +700,16 @@ app.get('/Groups', function (req, res) {
             });
         }
     });
+//res.end('<a href="+">Logout</a>');
+} else {
+    res.redirect("/Login");
+}
 });
 
 //Reports page
 app.get('/Reports', function (req, res) {
+    sess = req.session;
+if(sess.email) {
     var reportsList = [];
     console.log('-------------');
 //    console.log(req.body.reportsList);
@@ -646,10 +748,16 @@ else{
     incidentReportList = [];
     incidentsName="";
 }
+//res.end('<a href="+">Logout</a>');
+} else {
+    res.redirect("/Login");
+}
 });
 //groups update
 app.post('/updateGroup', function (req, res) {
     // console.log("In updateVolunteer");
+    sess = req.session;
+if(sess.email) {
     console.log(req.body);
     //res.render('VolunteersView');
     var groupList = [];
@@ -681,11 +789,16 @@ app.post('/updateGroup', function (req, res) {
             });
         }
     });
-
+//res.end('<a href="+">Logout</a>');
+} else {
+    res.redirect("/Login");
+}
 });
 
 //group insertion
 app.post('/insertGroup', function (req, res) {
+    sess = req.session;
+if(sess.email) {
     console.log("In Insert");
     var groupList = [];
     var newGroup = {
@@ -730,5 +843,21 @@ app.post('/insertGroup', function (req, res) {
         }
     });
 
-
+//res.end('<a href="+">Logout</a>');
+} else {
+    res.redirect("/Login");
+}
 });
+
+app.get('/logout',function(req,res){
+    sess=req.session;
+req.session.destroy(function(err) {
+  if(err) {
+    console.log(err);
+  } else {
+      sess.email=null;
+    res.redirect('/Login');
+  }
+});
+});
+

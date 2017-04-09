@@ -11,8 +11,15 @@
   "author": "S525701",
   "contributors": [],
   "dependencies": {
+    "body-parser": "^1.17.1",
+    "debug": "^2.6.3",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "express-session": "^1.15.2",
+    "mongodb-autoincrement": "^1.0.1",
     "nodemailer": "^4.0.0",
     "nodemailer-smtp-transport": "^2.7.4",
+    "parse-server": "^2.3.7",
     "sendmail": "^1.1.1"
   }
 }
