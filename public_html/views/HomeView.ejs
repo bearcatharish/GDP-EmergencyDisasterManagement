@@ -376,7 +376,7 @@
 
                                     $scope.delete = function (x) {
                                         var _id = x._id;
-                                        $http({method: 'POST',
+                                       return $http({method: 'POST',
                                             url: '/deleteIncident',
                                             data: JSON.stringify({
                                                 _id: x._id
@@ -384,7 +384,10 @@
                                             headers: {
                                                 'Content-Type': 'application/json'
                                             }
-                                        });
+                                        }).success(function (response) {
+                                             window.location='/Home';  
+                                             
+                                         });
                                     };
                                     $scope.update = function (x) {
                                         var _id = x._id;
