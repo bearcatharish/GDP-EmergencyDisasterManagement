@@ -162,6 +162,7 @@ app.get('/Volunteers', function (req, res) {
     sess = req.session;
 if(sess.email) {
     var volunteersList = [];
+    var incidentList = [];
     mongoClient.connect(url, function (err, db) {
 
         if (err) {
@@ -172,8 +173,19 @@ if(sess.email) {
 
             console.log('Connection established ');
             var cursor = db.collection('Volunteer').find();
-            console.log('Volunteers Fetched');
+            var cursor1 = db.collection('incident').find();
+            console.log('Volunteers AND INCIDENTS Fetched');
             //console.log(cursor);
+            cursor1.forEach(function (doc, err) {
+                                        if (err) {
+                                            console.log(err);
+                                        } else {
+                                           incidentList.push(doc);
+                                        }
+                                    }
+                                    , function () {
+                                        
+                                    });
             cursor.forEach(function (doc, err) {
                 if (err) {
                     console.log(err);
@@ -183,7 +195,7 @@ if(sess.email) {
             }
             , function () {
                 db.close();
-                res.render('VolunteersView', {vol: volunteersList});
+                res.render('VolunteersView', {vol: volunteersList, incident: incidentList});
             });
         }
     });
@@ -806,7 +818,8 @@ if(sess.email) {
         gName: req.body.groupname,
         iName: req.body.incidentname,
         gLead: req.body.GroupLeadMailId,
-        comments: req.body.desc
+        comments: req.body.desc,
+        gMembers: req.body.GroupMem
     };
 
     mongoClient.connect(url, function (err, db) {

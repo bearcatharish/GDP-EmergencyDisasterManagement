@@ -314,7 +314,7 @@ and open the template in the editor.
 
                 $scope.delete = function(x){
                     var _id = x._id;
-                    $http({method: 'POST',
+                    return $http({method: 'POST',
                         url: '/deleteReport',
                         data: JSON.stringify({
                             _id: x._id
@@ -322,7 +322,10 @@ and open the template in the editor.
                         headers: {
                          'Content-Type': 'application/json'
                      }
-                 });
+                 }).success(function (response) {
+                                             window.location='/Reports';  
+                                             
+                                         });
                 };
                 $scope.update = function (x) {
                     var _id = x._id;

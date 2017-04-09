@@ -231,7 +231,9 @@ and open the template in the editor.
                             Group Name: <input class="form-control " type="text" name='groupname' required>
                         </div>
                         <div class="form-group">
-                            Incident: <input class="form-control " type="text" name='incidentname' required>
+                            Incident:<select ng-model='incidents' name="incidentname">
+                            <option ng-repeat="inc in incidents" value="inc.incidentname">{{inc.incidentName}}</option></select>
+                            <!-- <input class="form-control " type="text" name='incidentname' required> -->
                         </div>
                         <div class="row">
 
@@ -246,7 +248,7 @@ and open the template in the editor.
                         <div class="col-md-6">
                             <div class="md-form">
                                 <select ng-model='groupLead' name='GroupLeadMailId'>
-                                    <option ng-repeat = "user in volunteers| filter: groupLead | unique: 'userName' | orderBy: 'userName'">{{user.emailID}}</option>
+                                    <option ng-repeat = "user in volunteers| filter: groupLead | unique: 'emaialID' | orderBy: 'emailID'">{{user.emailID}}</option>
                                 </select>
                             </div>
                         </div>
@@ -258,13 +260,13 @@ and open the template in the editor.
                      </div>
                      <div class="col-md-6">
                         <div class="md-form">
-                            <input class="form-control " type="text" name='GroupMem' ng-model="groupLead" required>
+                            <input class="form-control " type="text" name='GroupMem' ng-model="groupMem" required>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="md-form">
-                            <select ng-model='groupMem' name='GroupMem' multiple="true">
-                                <option ng-repeat = "user in volunteers| filter: groupMem | unique: 'userName' | orderBy: 'userName'">{{user.emailID}}</option>
+                            <select ng-model='groupMem' name='GroupMem'>
+                                <option ng-repeat = "user in volunteers| filter: groupMem | unique: 'emailID' | orderBy: 'emailID'">{{user.emailID}}</option>
                             </select>
                         </div>
                     </div>
@@ -328,6 +330,8 @@ and open the template in the editor.
 //                                                        }
 //                                                        );
 $scope.volunteers = <%- JSON.stringify(vol) %>;
+$scope.incidents =  <%- JSON.stringify(incident) %>;
+incidents = $scope.incidents;
 $scope.editingData = {};
 
 for (var i = 0, length = $scope.volunteers.length; i < length; i++) {
