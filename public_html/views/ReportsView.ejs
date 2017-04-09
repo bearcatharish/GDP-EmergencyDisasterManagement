@@ -126,21 +126,21 @@ and open the template in the editor.
                             </td> -->
                             <td> <button data-toggle="modal" data-target="#mapView"><i class="fa fa-map-marker" aria-hidden="true"></i></button></td>
                             <td>
-                                <div ng-hide="editingData[x._id]" ng-bind="x.incidentName"></div>
-                                <div ng-show="editingData[x._id]"><input type="text" ng-model="x.incidentName" /></div>
+                                <div ng-hide="editingData[x.id]" ng-bind="x.incidentName"></div>
+                                <div ng-show="editingData[x.id]"><input type="text" ng-model="x.incidentName" /></div>
                             </td>
                             <td>
-                                <div ng-hide="editingData[x._id]" ng-bind="x.levelOfImpact"></div>
-                                <div ng-show="editingData[x._id]"><input type="text" ng-model="x.levelOfImpact" /></div>
+                                <div ng-hide="editingData[x.id]" ng-bind="x.levelOfImpact"></div>
+                                <div ng-show="editingData[x.id]"><input type="text" ng-model="x.levelOfImpact" /></div>
                             </td>
                             <td>
-                                <div ng-hide="editingData[x._id]" ng-bind="x.userName"></div>
-                                <div ng-show="editingData[x._id]"><input type="text" ng-model="x.userName" /></div>
+                                <div ng-hide="editingData[x.id]" ng-bind="x.userName"></div>
+                                <div ng-show="editingData[x.id]"><input type="text" ng-model="x.userName" /></div>
                             </td>
 
                             <td> 
-                                <div ng-hide="editingData[x._id]" ng-bind="x.mobileNumber"></div>
-                                <div ng-show="editingData[x._id]"><input type="text" ng-model="x.mobileNumber" /></div>
+                                <div ng-hide="editingData[x.id]" ng-bind="x.contactNo"></div>
+                                <div ng-show="editingData[x.id]"><input type="text" ng-model="x.contactNo" /></div>
                             </td>
                            <!--  <td>
                                 <div ng-hide="editingData[x._id]" ng-bind="x.createdAt"></div>
@@ -148,8 +148,8 @@ and open the template in the editor.
                             </td> -->
 
                             <td>
-                                <button ng-hide="editingData[x._id]" ng-click="modify(x)" class="btn btn-primary btn-sm"><span class="fa fa-pencil"></span></button>
-                                <button ng-show="editingData[x._id]" ng-click="update(x)" class="btn btn-warning btn-sm"><span class="fa fa-check-square"></span>Update</button>
+                                <button ng-hide="editingData[x.id]" ng-click="modify(x)" class="btn btn-primary btn-sm"><span class="fa fa-pencil"></span></button>
+                                <button ng-show="editingData[x.id]" ng-click="update(x)" class="btn btn-warning btn-sm"><span class="fa fa-check-square"></span>Update</button>
                             </td>
                             <td>   <button ng-hide="viewField" class="btn btn-danger btn-sm" ng-click="delete(x)"><span class="fa fa-trash"></span></button>
                             </td>
@@ -294,7 +294,7 @@ and open the template in the editor.
                 </script> -->
 
                 <script>
-                    var reports = [] 
+                    var reports = []
                     var app = angular.module('myApp', ['angular.filter']);
                     app.controller('myCtrl', ['$scope', '$http', '$window', function ($scope, $http, $location) {
                         $scope.reports = <%- JSON.stringify(vol) %>;
@@ -303,7 +303,7 @@ and open the template in the editor.
                    $scope.editingData = {};
 
                    for (var i = 0, length = $scope.reports.length; i < length; i++) {
-                    $scope.editingData[$scope.reports[i]._id] = false;
+                    $scope.editingData[$scope.reports[i].id] = false;
                     
                 }
 
