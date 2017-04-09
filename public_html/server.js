@@ -330,7 +330,7 @@ if(sess.email) {
                 if (err) {
                     console.log(err);
                 } else {
-                    res.render('HomeView');
+                    res.redirect('/Home');
                 }
             });
         }
