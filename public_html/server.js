@@ -24,8 +24,36 @@ var api = new ParseServer({
     serverURL: 'https://parseapi.back4app.com/' // Don't forget to change to https if needed
 });
 
+
 // Serve the Parse API on the /parse URL prefix
 app.use('/parse', api);
+
+
+//Mailing service
+const nodemailer = require('nodemailer');
+var sendmail = require('sendmail')();
+/*{
+  logger: {
+    debug: console.log,
+    info: console.info,
+    warn: console.warn,
+    error: console.error
+  },
+  silent: false,
+  dkim: { // Default: False 
+    privateKey: fs.readFileSync('./dkim-private.pem', 'utf8'),
+    keySelector: 'mydomainkey'
+  },
+  devPort: 1025 // Default: False 
+});*/
+
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'edmsystems2017@gmail.com',
+        pass: 'Admin2017'
+    }
+});
 
 const TestUtils = require('parse-server').TestUtils;
 
@@ -412,6 +440,7 @@ app.post('/deleteGroup', function (req, res) {
 //volunteer insertion
 app.post('/insertVolunteer', function (req, res) {
     var volunteersList = [];
+	var passwords= req.body.userName+randomIntInc(1000,9999);
     var newVolunteer = {
         _id: randomIntInc(0,9999),
         userName: req.body.userName,
@@ -419,11 +448,12 @@ app.post('/insertVolunteer', function (req, res) {
         address: req.body.address,
         emailID: req.body.emailID,
         cert: req.body.cert,
+		password: passwords,
         mobileNumber: req.body.mobileNumber
 
                 //        dateTo: req.body.dt1
     };
-    
+    var message= '<a href="http://tinypic.com?ref=19s0uo"  border="0" alt="Image and video hosting by TinyPic"></a> <img src="http://i65.tinypic.com/19s0uo.jpg" name="image" height="150" width="500"/> <br><br> Welcome to Emergency Disaster Management, <br><br>Thank you for creating Emergency Disaster Management account. Your account details <br><br>'+'username: '+newVolunteer.userName+ '<br>password: '+passwords+'<br><br>Please log in to our app with these credentials and update your profile soon.<br><br>Thank you for joining Emergency Disaster Management.<br><br>Sincerely.<br><br> Emergency Disaster Management Team.'; 
     mongoClient.connect(url, function (err, db) {
         if (err) {
             console.error('Error occured in database');
@@ -441,6 +471,28 @@ app.post('/insertVolunteer', function (req, res) {
                             if (err) {
                                 console.log(err);
                             } else {
+								var mailOptions = {
+    from: 'no-reply@edmsystems.com', // sender address
+    to:  newVolunteer.emailID, // list of receivers
+    subject: 'Registration succcessful', // Subject line
+    text: 'no-reply@edmsystems.com', // plain text body
+    html: message // html body
+};
+								/*sendmail({
+										from: 'no-reply@edmsystems.com',
+										to: newVolunteer.emailID,
+										subject: 'Your Username',
+										html: 'Mail of test sendmail ',
+										}, function(err, reply) {
+											console.log(err && err.stack);
+											console.dir(reply);
+										});*/
+										transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+        return console.log(error);
+    }
+    console.log('Message %s sent: %s', info.messageId, info.response);
+});
                                 res.redirect("/Volunteers");
                             }
                         });
