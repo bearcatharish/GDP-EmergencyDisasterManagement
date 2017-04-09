@@ -384,7 +384,10 @@
                                             headers: {
                                                 'Content-Type': 'application/json'
                                             }
-                                        });
+                                        }).success(function (response) {
+                                             window.location='/Home';  
+                                             
+                                         });
                                     };
                                     $scope.update = function (x) {
                                         var _id = x._id;
