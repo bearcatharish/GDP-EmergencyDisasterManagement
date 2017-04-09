@@ -111,7 +111,7 @@ app.use(express.static(__dirname));
 //Login view
 app.get('/Login', function (req, res) {
     res.sendFile(__dirname + "/LoginPage.html");
-    //res.render('/index')
+    //res.render('LoginView')
 });
 
 //calls home page
@@ -874,3 +874,67 @@ req.session.destroy(function(err) {
 });
 });
 
+app.post('/forgotPassword', function (req, res) {
+    sess = req.session;
+    console.log('in forgot password');
+    var pass;
+    var login = {
+        emailID: req.body.femailID
+    };
+    mongoClient.connect(url, function (err, db) {
+        if (err) {
+            console.error('Error occured in database');
+            res.send("Error in connection");
+
+        } else {
+            console.log('Connection established ' + url);
+            db.collection('admin').count({emailID: login.emailID}, function (err, count) {
+                console.log('db connected');
+                if (err) {
+                    console.log(err);
+                } else {
+                    if (count === 0) {
+                        res.render('LoginView', {invalid: 'email'});
+                        console.log('email invalid');
+                    } else {
+                        var cursor = db.collection('admin').find({emailID: login.emailID});
+                                    console.log('connecting to admin .........');
+                                    cursor.forEach(function (doc, err) {
+                                        if (err) {
+                                            console.log(err);
+                                        } else {
+                                            pass= JSON.stringify(doc.password);
+                                            //console.log(doc.password);
+                                            var message= '<a href="http://tinypic.com?ref=19s0uo"  border="0" alt="Image and video hosting by TinyPic"></a> <img src="http://i65.tinypic.com/19s0uo.jpg" name="image" height="150" width="500"/> <br><br> Welcome to Emergency Disaster Management, <br><br>Your account details <br>\n\
+<br>'+'username: '+login.emailID+ '<br>\n\
+password: '+pass+'<br>\n\
+<br>Please log in to our app with these credentials and update your profile soon.<br>\n\
+<br>Thank you from Emergency Disaster Management.<br><br>Sincerely.<br>\n\
+<br> Emergency Disaster Management Team.';
+//                        console.log(pass);
+//                        console.log(message);
+                        var mailOptions = {
+    from: 'no-reply@edmsystems.com', // sender address
+    to:  login.emailID, // list of receivers
+    subject: 'Emergency Disaster Management Account', // Subject line
+    text: 'no-reply@edmsystems.com', // plain text body
+    html: message // html body
+};
+transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+        return console.log(error);
+    }
+    console.log('Message %s sent: %s', info.messageId, info.response);
+});
+                                res.redirect("/Login");
+                                        }
+                                    });
+                        
+                    }
+                }
+            });
+        }
+    });
+    sess.email=req.body.emailID;
+  //res.end('done');
+});
