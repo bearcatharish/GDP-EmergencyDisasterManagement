@@ -128,7 +128,7 @@ and open the template in the editor.
         </div>
     </form>
 <!--/Form without header-->
-<form>
+<form action="/forgotPassword" method="post">
     <div class="modal fade" id="forgotPass" tabindex="-1" role="dialog" aria-labelledby="forgotPass" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -139,12 +139,12 @@ and open the template in the editor.
                 <div style="width: 450px;height: 65px;padding-left: 30px">
                     <div class="md-form">
                         <i class="fa fa-envelope prefix"></i>
-                        <input type="email" id="form2" class="form-control" style="width: 100%;" placeholder="Enter Email ID" required>
+                        <input type="email" name="femailID" id="femailID" class="form-control" style="width: 100%;" placeholder="Enter Email ID" required>
 
                     </div>
                 </div>
                 <div class="modal-footer ">
-                    <button type="button" class="btn btn-warning btn-lg" style="width: 100%;">Submit</button>
+                    <button type='submit' class="btn btn-warning btn-lg" style="width: 100%;">Submit</button>
                 </div>
             </div>
             <!-- /.modal-content --> 
