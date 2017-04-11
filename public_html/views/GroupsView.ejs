@@ -95,18 +95,19 @@ and open the template in the editor.
                 <div class="table-responsive">                           
                     <table id="mytable" class="table table-bordered table-striped">
                         <thead class="thead-inverse">                                
-                          <th><input type="checkbox" id="checkall"  /></th>
+                          <!-- <th><input type="checkbox" id="checkall"  /></th> -->
                           <!-- <th>Group Id</th> -->
                           <th>Group Name</th>                          
-                          <th>Group Lead Mail  Id</th>
+                          <th>Group Lead Mail Id</th>
+                          <th>Group Members</th>
                           <th>Incident</th>
-                          <th>Description</th>
+                          <th>Instructions for group members</th>
                           <th>Edit</th>
                           <th>Delete</th>
                       </thead>
                       <tbody>
                         <tr ng-repeat="x in Groups| filter:test">
-                            <td><input type="checkbox" class="checkthis" /></td>
+                            <!-- <td><input type="checkbox" class="checkthis" /></td> -->
                                         <!-- <td>
                                             <div ng-hide="editingData[x._id]" ng-bind="x._id"></div>
                                             <div ng-show="editingData[x._id]"><input type="text" ng-model="x._id" /></div>
@@ -121,94 +122,116 @@ and open the template in the editor.
                                             <div ng-show="editingData[x._id]"><input type="text" ng-model="x.gLead" /></div>
                                         </td>
                                         <td>
+                                            <div ng-hide="editingData[x._id]" ng-bind="x.gMembers"></div>
+                                            <div ng-show="editingData[x._id]"><input type="text" ng-model="x.gMembers" /></div>
+                                        </td>
+                                        <td>
                                             <div ng-hide="editingData[x._id]" ng-bind="x.iName"></div>
-                                            <div ng-show="editingData[x._id]"><input type="text" ng-model="x.iName" /></div>
-                                        </td>
-                                        <td>
-                                            <div ng-hide="editingData[x._id]" ng-bind="x.comments"></div>
-                                            <div ng-show="editingData[x._id]"><input type="text" ng-model="x.comments" /></div>
-                                        </td>
-                                        <td>
-                                            <button ng-hide="editingData[x._id]" ng-click="modify(x)" class="btn btn-primary btn-sm"><span class="fa fa-pencil"></span></button>
-                                            <button ng-show="editingData[x._id]" ng-click="update(x)" class="btn btn-warning btn-sm"><span class="fa fa-save"></span></button></td>
-                                            <td>   <button ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal" ng-click="delete(x)"><span class="fa fa-trash"></span></button>
+                                            <div ng-show="editingData[x._id]">
+                                            <select ng-model='x.iName' name="x.iName">
+                                                <option ng-repeat="inc in incidents">{{inc.incidentName}}</option></select></div>
                                             </td>
-                                        </tr>                            
-
-
-
-                                    </tbody>
-                                </table>                            
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
-                                    <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
-                                </div>
-                                <div class="modal-body">
-
-                                    <div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Group?</div>
-
-                                </div>
-                                <div class="modal-footer ">
-                                    <button type="button" class="btn btn-success" data-dismiss="modal"><span class="fa fa-check"></span> Yes</button>
-                                    <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="fa fa-remove"></span> No</button>
+                                            <td>
+                                                <div ng-hide="editingData[x._id]" ng-bind="x.comments"></div>
+                                                <div ng-show="editingData[x._id]"><input type="text" ng-model="x.comments" /></div>
+                                            </td>
+                                            <td>
+                                                <button ng-hide="editingData[x._id]" ng-click="modify(x)" class="btn btn-primary btn-sm"><span class="fa fa-pencil"></span></button>
+                                                <button ng-show="editingData[x._id]" ng-click="update(x)" class="btn btn-warning btn-sm"><span class="fa fa-save"></span></button></td>
+                                                <td>   <button ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal" ng-click="delete(x)"><span class="fa fa-trash"></span></button>
+                                                </td>
+                                            </tr>                          
+                                        </tbody>
+                                    </table>                            
                                 </div>
                             </div>
-                            <!-- /.modal-content --> 
                         </div>
-                        <!-- /.modal-dialog --> 
+                        <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
+                                        <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Group?</div>
+
+                                    </div>
+                                    <div class="modal-footer ">
+                                        <button type="button" class="btn btn-success" data-dismiss="modal"><span class="fa fa-check"></span> Yes</button>
+                                        <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="fa fa-remove"></span> No</button>
+                                    </div>
+                                </div>
+                                <!-- /.modal-content --> 
+                            </div>
+                            <!-- /.modal-dialog --> 
+                        </div>
                     </div>
-                </div>
-                <script>
-                    var app = angular.module('myApp', []);
-                    app.controller('myCtrl', ['$scope', '$http', '$window', function ($scope, $http, $location) {
-                        $scope.Groups = <%- JSON.stringify(gList) %>;
-                        $scope.editingData = {};
+                    <script>
+                        var app = angular.module('myApp', []);
+                        app.controller('myCtrl', ['$scope', '$http', '$window', function ($scope, $http, $location) {
+                            $scope.Groups = <%- JSON.stringify(gList) %>;
+                            $scope.incidents =  <%- JSON.stringify(inci) %>;
+                            incidents = $scope.incidents;
+                            $scope.editingData = {};
 
-                        for (var i = 0, length = $scope.Groups.length; i < length; i++) {
-                            $scope.editingData[$scope.Groups[i]._id] = false;
-                        }
+                            for (var i = 0, length = $scope.Groups.length; i < length; i++) {
+                                $scope.editingData[$scope.Groups[i]._id] = false;
+                            }
 
 
-                        $scope.modify = function (x) {
-                            $scope.editingData[x._id] = true;
-                        };
+                            $scope.modify = function (x) {
+                                $scope.editingData[x._id] = true;
+                            };
 
-                        $scope.delete = function(x){
-                            var _id = x._id;
-                            return $http({method: 'POST',
-                                url: '/deleteGroup',
-                               data: JSON.stringify({
-                                _id: x._id
-                            }),
-                               headers: {
-                                   'Content-Type': 'application/json'
+                            $scope.delete = function(x){
+                                var _id = x._id;
+                                var name = x.gName;
+                                var status = confirm("Do you want to delete "+ name +" group");
+                                if (status === true){
+                                    return $http({method: 'POST',
+                                        url: '/deleteGroup',
+                                        data: JSON.stringify({
+                                            _id: x._id
+                                        }),
+                                        headers: {
+                                           'Content-Type': 'application/json'
+                                       }
+                                   }).success(function (response) {
+                                    alert("The "+ name +" group has been deleted");
+                                    window.location='/Groups';  
+
+                                });
                                }
-                           }).success(function (response) {
-                                             window.location='/Groups';  
-                                             
-                                         });
+                               else {
+                                window.location='/Groups';
+                            }
                         };
                         $scope.update = function (x) {
                             var _id = x._id;
-                            $http({method: 'POST',
-                             url: '/updateGroup',
-                             data: JSON.stringify({
-                                _id: x._id,
-                                gName: x.gName,
-                                iName: x.iName,
-                                gLead: x.gLead,
-                                comments: x.comments        
-                            }),
-                             headers: {
-                                 'Content-Type': 'application/json'
-                             }
-                         });
+                            var name = x.gName;
+                            var status = confirm("Do you want to update "+ name +" group");
+                            if (status === true){
+                                $http({method: 'POST',
+                                 url: '/updateGroup',
+                                 data: JSON.stringify({
+                                    _id: x._id,
+                                    gName: x.gName,
+                                    iName: x.iName,
+                                    gLead: x.gLead,
+                                    gMembers: x.gMembers,
+                                    comments: x.comments        
+                                }),
+                                 headers: {
+                                     'Content-Type': 'application/json'
+                                 }
+                             });
+                                alert("The "+ name +" group has been updated");
+                            }
+                            else {
+                                window.location = '/Groups';
+                            }
                             $scope.editingData[x._id] = false;
                         };
                     }]);

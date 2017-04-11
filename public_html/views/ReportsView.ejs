@@ -25,6 +25,10 @@ and open the template in the editor.
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBy9oLNr1SQzUHSrIZuazYjsbtZIxL6B3c&callback=initMap">
 </script>
+<script src="https://maps.google.com/maps/api/js?libraries=placeses,visualization,drawing,geometry,places"></script>
+<script src="https://code.angularjs.org/1.3.15/angular.js"></script>
+<script src="https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/scripts/ng-map.js"></script>
+
 
 <!--        CDN Link for generating PDF files-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.debug.js"></script>
@@ -39,7 +43,7 @@ and open the template in the editor.
 <script type="text/javascript" src="js/mdb.min.js"></script>
 <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
 <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-
+<script src="/bower_components/ngmap/build/scripts/ng-map.min.js"></script>
 </head>
 <body>
     <div ng-app="myApp" ng-controller="myCtrl">
@@ -69,13 +73,13 @@ and open the template in the editor.
                         </ul>
 
                         <form action ="/logout">
-                         <button class="btn btn-primary btn-sm" style="float: right" type="submit">Logout</button> 
-                     </form>
-                 </div>     
-             </div>
-         </nav>       
+                           <button class="btn btn-primary btn-sm" style="float: right" type="submit">Logout</button> 
+                       </form>
+                   </div>     
+               </div>
+           </nav>       
 
-         <div class="container">
+           <div class="container">
 
             <div class="row"><br>
                 <form class="form-inline" role="search">
@@ -90,19 +94,21 @@ and open the template in the editor.
 
                     </div><br>
 
-                </form>
-
-                <div class="col-md-12 filterable" >
-                    <div class="table-responsive">                           
-                        <table id="mytable" class="table table-bordered table-striped table">
-                            <thead class="thead-inverse">
-                                <tr class="filters">
-                                    <th>Location</th>
-                                    <th>Incident name </th>
-                                    <th>Level Of Impact <br>
-                                        <select>
-                                            <option></option>
-                                            <option ng-repeat="x in reports | unique: 'levelOfImpact'">{{x.levelOfImpact}}</option>
+                </form><div map-lazy-load="https://maps.google.com/maps/api/js"
+                map-lazy-load-params="{{googleMapsUrl}}">
+                <ng-map center="41,-87" zoom="3"></ng-map>
+            </div>
+            <div class="col-md-12 filterable" > 
+                <div class="table-responsive">                           
+                    <table id="mytable" class="table table-bordered table-striped table">
+                        <thead class="thead-inverse">
+                            <tr class="filters">
+                                <th>Location</th>
+                                <th>Incident name </th>
+                                <th>Level Of Impact <br>
+                                    <select>
+                                        <option></option>
+                                        <option ng-repeat="x in reports | unique: 'levelOfImpact'">{{x.levelOfImpact}}</option>
                                     <!-- <option>Low</option>
                                     <option>Medium</option>
                                     <option>High</option> -->
@@ -119,28 +125,35 @@ and open the template in the editor.
                     </thead>
                     <tbody>
                         <tr ng-repeat="x in reports| filter:test">
-
+<div ng-model="x.location"></div>
                             <!-- <td>
                                 <div ng-hide="editingData[x.id]" ng-bind="x.location"></div>
                                 <div ng-show="editingData[x.id]"><input type="text" ng-model="x.location" /></div>
                             </td> -->
-                            <td> <button data-toggle="modal" data-target="#mapView"><i class="fa fa-map-marker" aria-hidden="true"></i></button></td>
+                            <td> <div ng-model="x.location"><button data-toggle="modal" data-target="#mapView"><i class="fa fa-map-marker" aria-hidden="true"></i></button></div></td>
                             <td>
-                                <div ng-hide="editingData[x.id]" ng-bind="x.incidentName"></div>
-                                <div ng-show="editingData[x.id]"><input type="text" ng-model="x.incidentName" /></div>
+                                <div ng-hide="editingData[x._id]" ng-bind="x.incidentName"></div>
+                                <div ng-show="editingData[x._id]" ng-bind="x.incidentName"></div>
                             </td>
                             <td>
-                                <div ng-hide="editingData[x.id]" ng-bind="x.levelOfImpact"></div>
-                                <div ng-show="editingData[x.id]"><input type="text" ng-model="x.levelOfImpact" /></div>
+                                <div ng-hide="editingData[x._id]" ng-bind="x.levelOfImpact"></div>
+                                <div ng-show="editingData[x._id]"><select ng-model="x.levelOfImpact">
+                                    <option>Low</option>
+                                    <option>Medium</option>
+                                    <option>High</option>
+                                </select></div>
+                                <!-- <div ng-show="editingData[x._id]"><input type="text" ng-model="x.levelOfImpact" /></div> -->
                             </td>
                             <td>
-                                <div ng-hide="editingData[x.id]" ng-bind="x.userName"></div>
-                                <div ng-show="editingData[x.id]"><input type="text" ng-model="x.userName" /></div>
+                                <div ng-hide="editingData[x._id]" ng-bind="x.userName"></div>
+                                <div ng-show="editingData[x._id]" ng-bind="x.userName"></div>
+                                <!-- <div ng-show="editingData[x._id]"><input type="text" ng-model="x.userName" /></div> -->
                             </td>
 
                             <td> 
-                                <div ng-hide="editingData[x.id]" ng-bind="x.mobileNumber"></div>
-                                <div ng-show="editingData[x.id]"><input type="text" ng-model="x.mobileNumber" /></div>
+                                <div ng-hide="editingData[x._id]" ng-bind="x.mobileNumber"></div>
+                                <div ng-show="editingData[x._id]" ng-bind="x.mobileNumber"></div>
+                                <!-- <div ng-show="editingData[x._id]"><input type="text" ng-model="x.mobileNumber" /></div> -->
                             </td>
                            <!--  <td>
                                 <div ng-hide="editingData[x._id]" ng-bind="x.createdAt"></div>
@@ -148,8 +161,8 @@ and open the template in the editor.
                             </td> -->
 
                             <td>
-                                <button ng-hide="editingData[x.id]" ng-click="modify(x)" class="btn btn-primary btn-sm"><span class="fa fa-pencil"></span></button>
-                                <button ng-show="editingData[x.id]" ng-click="update(x)" class="btn btn-warning btn-sm"><span class="fa fa-check-square"></span>Update</button>
+                                <button ng-hide="editingData[x._id]" ng-click="modify(x)" class="btn btn-primary btn-sm"><span class="fa fa-pencil"></span></button>
+                                <button ng-show="editingData[x._id]" ng-click="update(x)" class="btn btn-warning btn-sm"><span class="fa fa-save"></button>
                             </td>
                             <td>   <button ng-hide="viewField" class="btn btn-danger btn-sm" ng-click="delete(x)"><span class="fa fa-trash"></span></button>
                             </td>
@@ -180,7 +193,9 @@ and open the template in the editor.
 
                                 </span>
                             </div>
+                            <!-- <div id="imageField"><img src="https://parsefiles.back4app.com/QpDRrXl8eAlQTnHuY8OA1WWv12B25YM0pjXR0dEy/5ded306661e3645b2ce95ab78588b142_anirudh1994.bin" alt="ParseDatabase" style="width:104px;height:142px;"></div> -->
                         </div>
+
                         <div class="modal-footer ">
                             <button type="button" class="detail_button btn btn-primary btn-xs dtlBtn" data-dismiss="modal" aria-hidden="true" id="savePdf">Save as PDF</button>
                             <button type="button" class="detail_button btn btn-primary btn-xs dtlBtn" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -235,15 +250,15 @@ and open the template in the editor.
                 <h4 class="modal-title custom_align" id="Heading">Location</h4>                    
             </div>
             <div class="modal-body">
-             <div id="map-container" class="z-depth-1" style="height: 350px;width: 570px"></div>   
-         </div> 
-         <div class="modal-footer ">
-         </div>  
-         <!-- /.modal-content --> 
-     </div>
+               <div id="map-container" class="z-depth-1" style="height: 350px;width: 570px"></div>   
+           </div> 
+           <div class="modal-footer ">
+           </div>  
+           <!-- /.modal-content --> 
+       </div>
 
-     <!-- /.modal-dialog --> 
- </div>
+       <!-- /.modal-dialog --> 
+   </div>
             <!--<div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="create" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -299,7 +314,6 @@ and open the template in the editor.
                     app.controller('myCtrl', ['$scope', '$http', '$window', function ($scope, $http, $location) {
                         $scope.reports = <%- JSON.stringify(vol) %>;
                         reports = $scope.reports;
-                   // console.log(reports);
                    $scope.editingData = {};
 
                    for (var i = 0, length = $scope.reports.length; i < length; i++) {
@@ -314,24 +328,36 @@ and open the template in the editor.
 
                 $scope.delete = function(x){
                     var _id = x._id;
-                    return $http({method: 'POST',
-                        url: '/deleteReport',
-                        data: JSON.stringify({
-                            _id: x._id
-                        }),
-                        headers: {
-                         'Content-Type': 'application/json'
-                     }
-                 }).success(function (response) {
-                                             window.location='/Reports';  
-                                             
-                                         });
-                };
-                $scope.update = function (x) {
-                    var _id = x._id;
+                    var name = x.incidentName;
+                    var status = confirm("Do you want to delete "+ name +" report");
+                    if (status === true){
+                        return $http({method: 'POST',
+                            url: '/deleteReport',
+                            data: JSON.stringify({
+                                _id: x._id
+                            }),
+                            headers: {
+                               'Content-Type': 'application/json'
+                           }
+                       }).success(function (response) {
+                        alert("The "+ name +" report has been deleted");
+                        window.location='/Reports';  
+
+                    });
+                   }
+                   else {
+                    window.location='/Reports';
+                }
+            };
+            $scope.update = function (x) {
+
+                var _id = x._id;
+                var name = x.incidentName;
+                var status = confirm("Do you want to update "+ name +" report");
+                if (status === true){
                     $http({method: 'POST',
-                       url: '/updateReport',
-                       data: JSON.stringify({
+                     url: '/updateReport',
+                     data: JSON.stringify({
                         _id: x._id,
                         location: x.location,
                         incidentName: x.incidentName,
@@ -340,14 +366,44 @@ and open the template in the editor.
                         mobileNumber: x.mobileNumber
                         // createdAt: x.createdAt
                     }),
-                       headers: {
-                           'Content-Type': 'application/json'
-                       }
-                   });
-                    $scope.editingData[x._id] = false;
+                     headers: {
+                         'Content-Type': 'application/json'
+                     }
+                 });
+                    alert("The "+ name +" report has been updated");
+                }
+                else {
+                    window.location = '/Reports';
+                }
+                $scope.editingData[x._id] = false;
+
+            };
+            function init_map() {
+                // var latitude = $scope.x.location[0];
+                // var longitude = $scope.x.location[1];
+                var var_location = new google.maps.LatLng(40.3507, -94.8824);
+
+                var var_mapoptions = {
+                    center: var_location,
+
+                    zoom: 14
                 };
-            }]);</script>
-                    <script>function init_map() {
+
+                var var_marker = new google.maps.Marker({
+                    position: var_location,
+                    map: var_map,
+                    title: "New York"
+                });
+
+                var var_map = new google.maps.Map(document.getElementById("map-container"),
+                    var_mapoptions);
+
+                var_marker.setMap(var_map);
+
+            }
+            google.maps.event.addDomListener(window, 'click', init_map);
+        }]);</script>
+                    <!-- <script>function init_map() {
 
                         var var_location = new google.maps.LatLng(40.3507, -94.8824);
 
@@ -370,14 +426,14 @@ and open the template in the editor.
 
                     }
                     google.maps.event.addDomListener(window, 'click', init_map);
-                    // document.getElementById("map-container").innerHTML = init_map();</script>
+                    // document.getElementById("map-container").innerHTML = init_map();</script> -->
                     <script>$(document).ready(function () {
-                       $('#mytable').dataTable(
-                           { "bFilter": false, 
-                           "ordering": false,
-                           "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ] });
+                     $('#mytable').dataTable(
+                         { "bFilter": false, 
+                         "ordering": false,
+                         "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ] });
 
-                       $("#mytable #checkall").click(function () {
+                     $("#mytable #checkall").click(function () {
                         if ($("#mytable #checkall").is(':checked')) {
                             $("#mytable input[type=checkbox]").each(function () {
                                 $(this).prop("checked", true);
@@ -392,7 +448,7 @@ and open the template in the editor.
 
                         $("[data-toggle=tooltip]").tooltip();
                     });
-                       $('#yesBtn').click(function() {
+                     $('#yesBtn').click(function() {
                         // handle deletion here
                        // print("Hello");
                        // var id = $('.confrimDelete').data('title');
@@ -403,7 +459,10 @@ var id = $('.confrimDelete').data('id');
 $('[data-id='+id+']').parents('tr').remove();
 $('#myModal').modal('hide');
 });
-                       $(".dtlBtn").on("click", function (evt) {
+
+                     var name, volunteerComments, uName,lvlOfImpact,greenVic, blackVic, yellowVic, redVic, mobilenum,imageLocation;
+
+                     $(".dtlBtn").on("click", function (evt) {
                         console.log(evt);
                         var row_id = evt.target.id;
 
@@ -412,35 +471,56 @@ $('#myModal').modal('hide');
                         var slctdRow = {}
                         reports.forEach(function(row){
                             if(row._id==row_id){
-                                slctdRow = row
+                                slctdRow = row;
+                                 slctdRow1 = row;
                             }
                         });
 
-                        var formHtml = "<form >";
+                        var formHtml = "<form>";
 
                         for( key in slctdRow){
-                            if( (key != "_id" && key != "_created_at" && key != "$$hashKey" && key != "_updated_at" ))
+                            if( (key != "_id" && key != "_created_at" && key != "$$hashKey" && key != "_updated_at" && key != 'image'))
                                 formHtml += '<div class="form-group"><label for="exampleInputEmail1" class="dtl_key">'+key+': </label> <span id="'+key+'" class="dtl_value" > '+slctdRow[key]+'</span></div>';
                         }
+                        for( key in slctdRow1){
+
+
+                            if( (key == 'image' )){
+                                formHtml += '<div class="form-group"><label for="exampleInputEmail1" class="dtl_key">'+key+': </label> <span id="'+key+'" class="dtl_value"></span><img src="https://parsefiles.back4app.com/QpDRrXl8eAlQTnHuY8OA1WWv12B25YM0pjXR0dEy/'+slctdRow1[key]+'" alt="ParseDatabase" style="width:300px;height:200px;"></div>';
+                          var imageid = 'https://parsefiles.back4app.com/QpDRrXl8eAlQTnHuY8OA1WWv12B25YM0pjXR0dEy/'+slctdRow1[key];
+
+                            localStorage.setItem('imageLocation',imageid);
+                            imageLocation = localStorage.getItem('imageLocation');
+                          console.log(imageid + "image valeu");
+                           $( '#savePdf').data('imgPic', imageLocation);
+                      }
+
+                        }
+
 
                         formHtml += "" 
                         formHtml += "</form>"
-
+console.log(imageLocation);
                         $('#rowDetails').html(formHtml);
                     });
 
-                       var name, volunteerComments, uName,greenVic, blackVic,lvlOfImpact, yellowVic, redVic, mobilenum;
-                       $('.detail_button').click(function(){
+                     
+                     $('.detail_button').click(function(){
 
                         id = $('#incidentName').html();
                         comments = $('#comments').html();
                         userName = $('#userName').html();
-                        greenVictims = $('#greenVictims').html();
-                        blackVictims = $('#blackVictims').html();
                         levelOfImpact = $('#levelOfImpact').html();
+                        greenVictims = $('#greenVictims').html();
+                        blackVictims = $('#blackVictims').html();                        
                         yellowVictims = $('#yellowVictims').html();
                         redVictims = $('#redVictims').html();
                         mobileNumber = $('#mobileNumber').html();
+                        image =  $('#image').html();
+                        console.log(image )+ "dfdsfdsafadsf";
+                        console.log(mobileNumber);
+
+
 
 
 
@@ -448,12 +528,14 @@ $('#myModal').modal('hide');
                         localStorage.setItem('name',id);
                         localStorage.setItem('volunteerComments',comments);
                         localStorage.setItem('uName', userName);
-                        localStorage.setItem('greenVic',greenVictims);
-                        localStorage.setItem('blackVic',blackVictims);
                         localStorage.setItem('lvlOfImpact',levelOfImpact);
+                        localStorage.setItem('greenVic',greenVictims);
+                        localStorage.setItem('blackVic',blackVictims);                        
                         localStorage.setItem('yellowVic',yellowVictims);
                         localStorage.setItem('redVic',redVictims);
                         localStorage.setItem('mobilenum',mobileNumber);
+                        console.log(imageLocation+" dklflkdsjf ");
+
 
 
 
@@ -467,6 +549,8 @@ $('#myModal').modal('hide');
                         redVic = localStorage.getItem('redVic');
                         mobilenum = localStorage.getItem('mobilenum');
 
+                        console.log(comments);
+
                         $('#savePdf').data('whichid', id);
                         $('#savePdf').data('volComments',comments);
                         $( '#savePdf').data('usrName', userName);
@@ -476,22 +560,24 @@ $('#myModal').modal('hide');
                         $( '#savePdf').data('ylwVic',yellowVictims);
                         $( '#savePdf').data('rdVic', redVictims);
                         $( '#savePdf').data('mNum', mobileNumber);
+                     //$'#savePdf').data('imgPic', imageLocation);
 
                     });
 
 
-                       name = localStorage.getItem('name');
-                       volunteerComments = localStorage.getItem('volunteerComments');
-                       uName = localStorage.getItem('uName');
-                       greenVic = localStorage.getItem('greenVic');
-                       blackVic = localStorage.getItem('blackVic');
-                       lvlOfImpact = localStorage.getItem('lvlOfImpact');
-                       yellowVic = localStorage.getItem('yellowVic');
-                       redVic = localStorage.getItem('redVic');
-                       mobilenum = localStorage.getItem('mobilenum');
+                     name = localStorage.getItem('name');
+                     volunteerComments = localStorage.getItem('volunteerComments');
+                     uName = localStorage.getItem('uName');
+                     greenVic = localStorage.getItem('greenVic');
+                     blackVic = localStorage.getItem('blackVic');
+                     lvlOfImpact = localStorage.getItem('lvlOfImpact');
+                     yellowVic = localStorage.getItem('yellowVic');
+                     redVic = localStorage.getItem('redVic');
+                     mobilenum = localStorage.getItem('mobilenum');
 
 
 //generating a PDF
+
 $('#savePdf').click(function () {
    // var a = id;
    var a  = $('#savePdf').data('whichid');
@@ -503,32 +589,79 @@ $('#savePdf').click(function () {
    var g = $('#savePdf').data('ylwVic');
    var h = $('#savePdf').data('rdVic');
    var i = $('#savePdf').data('mNum');
+   var j = $('#savePdf').data('imgPic');
+
+  // console.log("fdlajf");
+  // console.log(j);
+
+   var impPic = 'data:image/jpeg;base64,/'+j+"'";
+console.log(impPic);
 
 
-
-  //   var lMargin=15; //left margin in mm
-   // var rMargin=15; //right margin in mm
-    //var pdfInMM=210;  // width of A4 in mm
+// var imgData = 'data:image/jpeg;base64,/http://tinypic.com/r/19s0uo/9';
     var doc = new jsPDF();
+// doc.addImage(imgData, 'bin', 15, 10, 60, 20);
+doc.setFontSize(12);
+
+doc.setFontType("bold");
+    doc.text(100, 20, a + ' Report Details ' );
+
+    doc.text(18, 40, 'Incident Name : ' + a );
+
+     
+doc.setFontType("bold");
+    doc.text(18, 50, 'User Name:');
+doc.setFontType("normal");
+    doc.text(60, 50, c);
+
+doc.setFontType("bold");
+    doc.text(18, 60, 'Green Victims:');
+doc.setFontType("normal");
+    doc.text(60, 60, d);
 
 
-    doc.text(80, 10, 'Report Details ' );
-    doc.text(10, 20, 'Id : ' + a );
-    
-    doc.text(10, 30, 'User Name:' + c);
-    doc.text(10, 40, 'Green Victims:' + d);
-    doc.text(10, 50, 'Black Victims:' + e);
-    doc.text(10,60, 'Level Of Impact:' + f);
-    doc.text(10,70, 'Yellow Victims:' + g);
-    doc.text(10,80, 'Red Victims:' + h);
-    doc.text(10,90, 'Mobile Number:' + i);
 
-    doc.text(10, 100, 'Comments: ' +b);
+doc.setFontType("bold");
+    doc.text(18, 70, 'Black Victims:');
+doc.setFontType("normal");
+    doc.text(60, 70,e);
 
 
-    doc.save('Reports.pdf');
+doc.setFontType("bold");
+    doc.text(18,80, 'Yellow Victims:');    
+doc.setFontType("normal");
+    doc.text(60,80, g);    
+
+
+doc.setFontType("bold");
+    doc.text(18,90, 'Red Victims:');
+doc.setFontType("normal");
+    doc.text(60,90, h);
+
+
+doc.setFontType("bold");
+    doc.text(18,100, 'Level Of Impact:');
+doc.setFontType("normal");
+doc.text(60,100, f);
+
+doc.setFontType("bold");
+    doc.text(18,110, 'Mobile Number:');
+doc.setFontType("normal");
+    doc.text(60,110,i);
+
+doc.setFontType("bold");
+    doc.text(18, 120, 'Comments: ');
+doc.setFontType("normal");
+    doc.text(60, 120, b);
+
+   // doc.addImage(impPic, 'JPEG', 15, 130, 60, 20);
+
+
+
+  doc.save(c + '_Incident_Reports.pdf');
 
 });
+
 
 
 

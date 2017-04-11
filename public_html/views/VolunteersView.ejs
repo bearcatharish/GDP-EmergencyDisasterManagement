@@ -52,7 +52,7 @@ and open the template in the editor.
                 <!--Navbar Brand-->
                 <!--Links-->
                 <ul class="nav navbar-nav">
-                    <li class="nav-item"><a href="/Groups">Home</a></li>
+                    <li class="nav-item"><a href="/Home">Home</a></li>
                     <li class="nav-item"><a href="/Reports">Reports</a></li>
                     <li class="nav-item active"><a href="/Volunteers">Volunteers</a></li>
                     <li class="nav-item"> <a href="/Groups">Groups</a></li> 
@@ -81,25 +81,25 @@ and open the template in the editor.
         <button style="float: right" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#create" ><span class="fa fa-plus"></span>&nbsp;Create New Volunteer</button>
         <button style="float: right" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#createGroup" ><span class="fa fa-plus"></span>&nbsp;Create Group</button>
     </form>
-    <div class="col-md-12">
+    <div>
         <div class="table-responsive">                           
             <table id="mytable" class="table table-bordered table-striped">
                 <thead class="thead-inverse">    
                     <tr class="filters">                            
-                        <th>
+                        <!-- <th>
                             <input type="checkbox" id="checkall"  />
-                        </th>
+                        </th> -->
                         <th>Username</th>                    
                         <th>Certification<br>
                             <select ng-model='test'>
                                 <option></option>
-                                <option ng-repeat = "certi in volunteers| filter: test | unique: 'cert' | orderBy: 'cert'">{{certi.cert}}</option>
+                                <option ng-repeat = "certi in volunteers | unique: 'cert' | orderBy: 'cert'">{{certi.cert}}</option>
                             </select>
                         </th>  
                         <th>Profession<br>
                             <select ng-model='test'>
                                 <option></option>
-                                <option ng-repeat = "prof in volunteers| filter: test | unique: 'profession' | orderBy: 'profession'">{{prof.profession}}</option>
+                                <option ng-repeat = "prof in volunteers | unique: 'profession' | orderBy: 'profession'">{{prof.profession}}</option>
                             </select></th>                  
                             <th>Address</th>
                             <th>Email</th>
@@ -110,7 +110,7 @@ and open the template in the editor.
                     </thead>
                     <tbody>
                         <tr ng-repeat="x in volunteers| filter:test | orderBy:'userName'">
-                            <td><input type="checkbox" class="checkthis" /></td> 
+                            <!-- <td><input type="checkbox" class="checkthis" /></td>  -->
                        <!--  <td>
                        <!-- <div ng-hide="editingData[x._id]" ng-bind="x._id"></div> -->
                        <!-- <div ng-show="editingData[x._id]"> -->
@@ -119,12 +119,18 @@ and open the template in the editor.
                        <!-- </td> --> 
                        <td>
                         <div ng-hide="editingData[x._id]" ng-bind="x.userName"></div>
-                        <div ng-show="editingData[x._id]"><input type="text" ng-model="x.userName" /></div>
+                        <div ng-show="editingData[x._id]" ng-bind="x.userName"></div>
                     </td>
 
                     <td>
                         <div ng-hide="editingData[x._id]" ng-bind="x.cert"></div>
-                        <div ng-show="editingData[x._id]"><input type="text" ng-model="x.cert" /></div>
+                        <div ng-show="editingData[x._id]"><select ng-model='x.cert'>
+                            <option value="Level 1">Level 1</option>
+                            <option value="Level 2">Level 2</option>
+                            <option value="Level 3">Level 3</option>
+                            <option value="Level 4">Level 4</option>
+                        </select></div>
+                        <!-- <div ng-show="editingData[x._id]"><input type="text" ng-model="x.cert" /></div> -->
                     </td>
                     <td>
                         <div ng-hide="editingData[x._id]" ng-bind="x.profession"></div>
@@ -136,11 +142,13 @@ and open the template in the editor.
                     </td>
                     <td>
                         <div ng-hide="editingData[x._id]" ng-bind="x.emailID"></div>
-                        <div ng-show="editingData[x._id]"><input type="text" ng-model="x.emailID" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}$" title=" Enter in this format: abc@domain.com "/></div>
+                        <div ng-show="editingData[x._id]" ng-bind="x.emailID"></div>
+                        <!-- <div ng-show="editingData[x._id]"><input type="text" ng-model="x.emailID" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}$" title=" Enter in this format: abc@domain.com "/></div> -->
                     </td>
                     <td>
                         <div ng-hide="editingData[x._id]" ng-bind="x.mobileNumber"></div>
-                        <div ng-show="editingData[x._id]"><input type="text" ng-model="x.mobileNumber" pattern="^\d{3}-\d{3}-\d{4}$" title="Please enter 10 digit contact no." /></div>
+                        <div ng-show="editingData[x._id]" ng-bind="x.mobileNumber"></div>
+                        <!-- <div ng-show="editingData[x._id]"><input type="text" ng-model="x.mobileNumber" pattern="^\d{3}-\d{3}-\d{4}$" title="Please enter 10 digit contact no." /></div> -->
                     </td>
                     <td>
                         <button ng-hide="editingData[x._id]" ng-click="modify(x)" class="btn btn-primary btn-sm">
@@ -176,11 +184,11 @@ and open the template in the editor.
             <form action="/insertVolunteer" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        Username: <input class="form-control " type="text" name='userName' required>
+                        Username*: <input class="form-control " type="text" name='userName' required>
                     </div>
 
                     <div class="form-group">
-                        Certification: <select name='cert' class="mdb-select">
+                        Certification*:&nbsp;&nbsp;&nbsp;<select name='cert' class="mdb-select">
                         <option value="" disabled selected>Choose your Level</option>
                         <option value="Level 1">Level 1</option>
                         <option value="Level 2">Level 2</option>
@@ -190,20 +198,20 @@ and open the template in the editor.
                     <!-- <input class="form-control " type="text" name='cert' required> -->
                 </div>
                 <div class="form-group">
-                    Profession:  <input class="form-control " type="text" name='profession' required>
+                    Profession*:  <input class="form-control " type="text" name='profession' required>
                 </div>
                 <div class="form-group">
 
-                    Address: <input class="form-control " type="text" name='address' placeholder="Street         City     State    Zip" required>
+                    Address*: <input class="form-control " type="text" name='address' placeholder="Street         City     State    Zip" required>
                             <!-- City: <input class="form-control " type="text" name='city' required> 
                             State: <input class="form-control " type="text" name='state' required>
                             Zip: <input class="form-control " type="text" name='zip'pattern="^\d{5}$" placeholder="zip must be 5 digits" title="Must be 5 digits only"required>   -->                   
                         </div>
                         <div class="form-group">
-                            Email:  <input class="form-control " type="email" name='emailID' pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}$" placeholder="Format:abc@domain.com" required>
+                            Email*:  <input class="form-control " type="email" name='emailID' pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}$" placeholder="Format:abc@domain.com" required>
                         </div>
                         <div class="form-group">
-                            Contact:  <input class="form-control" type="tel" name='mobileNumber' pattern="^\d{3}-\d{3}-\d{4}$" placeholder="XXX-XXX-XXXX" required>
+                            Contact*:  <input class="form-control" type="tel" name='mobileNumber' pattern="^\d{3}-\d{3}-\d{4}$" placeholder="XXX-XXX-XXXX" required>
                         </div>
                     </div>
                     <div class="modal-footer ">
@@ -228,21 +236,21 @@ and open the template in the editor.
                 <form action="/insertGroup" method="post">             
                     <div class="modal-body">
                         <div class="form-group">
-                            Group Name: <input class="form-control " type="text" name='groupname' required>
+                            Group Name*: <input class="form-control " type="text" name='groupname' required>
                         </div>
                         <div class="form-group">
-                            Incident:<select ng-model='incidents' name="incidentname">
-                            <option ng-repeat="inc in incidents" value="inc.incidentname">{{inc.incidentName}}</option></select>
+                            Incident*:&nbsp;&nbsp;&nbsp;<select ng-model='incidentname' name="incidentname">
+                            <option ng-repeat="inc in incidents">{{inc.incidentName}}</option></select>
                             <!-- <input class="form-control " type="text" name='incidentname' required> -->
                         </div>
                         <div class="row">
 
                             <div class="form-group">
-                             &nbsp;&nbsp;&nbsp; Group Lead Mail Id: 
+                             &nbsp;&nbsp;&nbsp; Group Lead Mail Id*: 
                          </div>
                          <div class="col-md-6">
                             <div class="md-form">
-                                <input class="form-control " type="text" name='GroupLeadMailId' ng-model="groupLead" required>
+                                <input class="form-control " type="text" ng-model="groupLead" required>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -256,31 +264,31 @@ and open the template in the editor.
                     <div class="row">
 
                         <div class="form-group">
-                        &nbsp;&nbsp;&nbsp; Group Members: 
-                     </div>
-                     <div class="col-md-6">
-                        <div class="md-form">
-                            <input class="form-control " type="text" name='GroupMem' ng-model="groupMem" required>
+                            &nbsp;&nbsp;&nbsp; Group Members*: 
+                        </div>
+                        <div class="col-md-6">
+                            <div class="md-form">
+                                <input class="form-control " type="text" ng-model="groupMem" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="md-form">
+                                <select ng-model='groupMem' name='GroupMem'>
+                                    <option ng-repeat = "user in volunteers| filter: groupMem | unique: 'emailID' | orderBy: 'emailID'">{{user.emailID}}</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="md-form">
-                            <select ng-model='groupMem' name='GroupMem'>
-                                <option ng-repeat = "user in volunteers| filter: groupMem | unique: 'emailID' | orderBy: 'emailID'">{{user.emailID}}</option>
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        Instructions to group members*: <textarea type="text" class="md-textarea" name='desc' required></textarea>
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="submit" class="btn btn-success btn-lg" style="width: 100%;"><span class="fa fa-check-square"></span>Add Group</button>
                     </div>
                 </div>
-                <div class="form-group">
-                    Description : <textarea type="text" class="md-textarea" name='desc' required></textarea>
-                </div>
-                <div class="modal-footer ">
-                    <button type="submit" class="btn btn-success btn-lg" style="width: 100%;"><span class="fa fa-check-square"></span>Add Group</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 </div>
 <!-- <form action="/deleteVolunteer" method="post"> -->
 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
@@ -345,21 +353,32 @@ $scope.modify = function (x) {
 
 $scope.delete = function(x){
     var _id = x._id;
-    return $http({method: 'POST',
-       url: '/deleteVolunteer',
-       data: JSON.stringify({
-        _id: x._id
-    }),
-       headers: {
-           'Content-Type': 'application/json'
-       }
-   }).success(function (response) {
-                                             window.location='/Volunteers';  
-                                             
-                                         });
+    var name = x.userName;
+    var status = confirm("Do you want to delete "+ name +" ");
+    if (status === true){
+        return $http({method: 'POST',
+           url: '/deleteVolunteer',
+           data: JSON.stringify({
+            _id: x._id
+        }),
+           headers: {
+               'Content-Type': 'application/json'
+           }
+       }).success(function (response) {
+        alert("The "+ name +" has been deleted");
+        window.location='/Volunteers';  
+
+    });
+   }
+   else {
+    window.location='/Volunteers';
+}
 };
 $scope.update = function (x) {
     var _id = x._id;
+    var name = x.userName;
+                var status = confirm("Do you want to update "+ name +" volunteer");
+                if (status === true){
     $http({method: 'POST',
        url: '/updateVolunteer',
        data: JSON.stringify({
@@ -376,6 +395,11 @@ $scope.update = function (x) {
            'Content-Type': 'application/json'
        }
    });
+    alert("The "+ name +" volunteer has been updated");
+                }
+                else {
+                    window.location = '/Volunteers';
+               }
     $scope.editingData[x._id] = false;
 };
 }]);

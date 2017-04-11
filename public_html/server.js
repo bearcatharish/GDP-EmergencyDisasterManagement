@@ -78,12 +78,12 @@ var transporter = nodemailer.createTransport({
 
 const TestUtils = require('parse-server').TestUtils;
 var transporter = nodemailer.createTransport({
-     service: 'gmail',
-     auth: {
-         user: 'edmsystems2017@gmail.com',
-         pass: 'Admin2017'
-     }
- });
+   service: 'gmail',
+   auth: {
+       user: 'edmsystems2017@gmail.com',
+       pass: 'Admin2017'
+   }
+});
 
 app.get('/clear', (req, res) => {
     TestUtils.destroyAllDataPermanently().then(() => {
@@ -122,32 +122,32 @@ var called= false;
 
 app.get('/Home', function (req, res) {
     sess = req.session;
-if(sess.email) {
-    var incidentList = [];
-    mongoClient.connect(url, function (err, db) {
+    if(sess.email) {
+        var incidentList = [];
+        mongoClient.connect(url, function (err, db) {
 
-        if (err) {
-            console.error('Error occured in database');
-            res.send("Error in connection");
+            if (err) {
+                console.error('Error occured in database');
+                res.send("Error in connection");
 
-        } else {
+            } else {
 
-            console.log('Connection established ');
-            var cursor = db.collection('incident').find();
-                                    cursor.forEach(function (doc, err) {
-                                        if (err) {
-                                            console.log(err);
-                                        } else {
-                                            incidentList.push(doc);
-                                        }
-                                    }
-                                    , function () {
-                                    res.render('HomeView', {Username : name, incident: incidentList});
+                console.log('Connection established ');
+                var cursor = db.collection('incident').find();
+                cursor.forEach(function (doc, err) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        incidentList.push(doc);
+                    }
+                }
+                , function () {
+                    res.render('HomeView', {Username : name, incident: incidentList});
                                         //console.log(userList.Username);
                                         db.close();
                                     });
-        }
-    });
+            }
+        });
 //res.end('<a href="+">Logout</a>');
 } else {
     res.redirect("/Login");
@@ -160,32 +160,32 @@ if(sess.email) {
 //calls volunteer page
 app.get('/Volunteers', function (req, res) {
     sess = req.session;
-if(sess.email) {
-    var volunteersList = [];
-    var incidentList = [];
-    mongoClient.connect(url, function (err, db) {
+    if(sess.email) {
+        var volunteersList = [];
+        var incidentList = [];
+        mongoClient.connect(url, function (err, db) {
 
-        if (err) {
-            console.error('Error occured in database');
-            res.send("Error in connection");
+            if (err) {
+                console.error('Error occured in database');
+                res.send("Error in connection");
 
-        } else {
+            } else {
 
-            console.log('Connection established ');
-            var cursor = db.collection('Volunteer').find();
-            var cursor1 = db.collection('incident').find();
-            console.log('Volunteers AND INCIDENTS Fetched');
+                console.log('Connection established ');
+                var cursor = db.collection('Volunteer').find();
+                var cursor1 = db.collection('incident').find();
+                console.log('Volunteers AND INCIDENTS Fetched');
             //console.log(cursor);
             cursor1.forEach(function (doc, err) {
-                                        if (err) {
-                                            console.log(err);
-                                        } else {
-                                           incidentList.push(doc);
-                                        }
-                                    }
-                                    , function () {
-                                        
-                                    });
+                if (err) {
+                    console.log(err);
+                } else {
+                 incidentList.push(doc);
+             }
+         }
+         , function () {
+
+         });
             cursor.forEach(function (doc, err) {
                 if (err) {
                     console.log(err);
@@ -202,7 +202,7 @@ if(sess.email) {
 //res.end('<a href="+">Logout</a>');
 } else {
     res.redirect("/Login");
-    }
+}
 });
 
 //validation logins
@@ -248,7 +248,7 @@ app.post('/Login', function (req, res) {
                                         }
                                     }
                                     , function () {
-                                        
+
                                     });
                                     cursor = db.collection('incident').find();
                                     cursor.forEach(function (doc, err) {
@@ -261,7 +261,7 @@ app.post('/Login', function (req, res) {
                                         }
                                     }
                                     , function () {
-                                    res.render('HomeView', {Username : name, incident: incidentName});
+                                        res.render('HomeView', {Username : name, incident: incidentName});
                                         console.log(name);
                                         console.log(incidentName)
                                         db.close();
@@ -280,36 +280,36 @@ app.post('/Login', function (req, res) {
 });
 app.post('/updateIncident', function (req, res) {
     sess = req.session;
-if(sess.email) {
-    var incidentList = [];
-    var updatedIncident = req.body;
-    mongoClient.connect(url, function (err, db) {
-        if (err) {
-            console.error('Error occured in database');
-            res.send("Error in connection");
+    if(sess.email) {
+        var incidentList = [];
+        var updatedIncident = req.body;
+        mongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.error('Error occured in database');
+                res.send("Error in connection");
 
-        } else {
-            console.log('Connection established ' + url);
-            db.collection('incident').update({"_id": updatedIncident._id}, {$set: updatedIncident}, function (err, result) {
-                if (err) {
-                    console.log(err);
-                } else {
+            } else {
+                console.log('Connection established ' + url);
+                db.collection('incident').update({"_id": updatedIncident._id}, {$set: updatedIncident}, function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    } else {
 
-                    mongoClient.connect(url, function (err, db) {
+                        mongoClient.connect(url, function (err, db) {
 
-                        if (err) {
-                            console.error('Error occured in database');
-                            res.send("Error in connection");
+                            if (err) {
+                                console.error('Error occured in database');
+                                res.send("Error in connection");
 
-                        } else {
+                            } else {
 
-                            res.redirect("/Home");
-                        }
-                    });
-                }
-            });
-        }
-    });
+                                res.redirect("/Home");
+                            }
+                        });
+                    }
+                });
+            }
+        });
 //res.end('<a href="+">Logout</a>');
 } else {
     res.redirect("/Login");
@@ -318,23 +318,23 @@ if(sess.email) {
 
 app.post('/deleteIncident', function (req, res) {
     sess = req.session;
-if(sess.email) {
-    var deleteIncident = req.body;
-    mongoClient.connect(url, function (err, db) {
-        if (err) {
-            console.error('Error occured in database');
-            res.send("Error in connection");
+    if(sess.email) {
+        var deleteIncident = req.body;
+        mongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.error('Error occured in database');
+                res.send("Error in connection");
 
-        } else {
-            db.collection('incident').remove(deleteIncident, function (err, result) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    res.redirect('/Home');
-                }
-            });
-        }
-    });
+            } else {
+                db.collection('incident').remove(deleteIncident, function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.redirect('/Home');
+                    }
+                });
+            }
+        });
 //res.end('<a href="+">Logout</a>');
 } else {
     res.redirect("/Login");
@@ -346,48 +346,48 @@ function randomIntInc (low, high) {
 
 app.post('/insertIncident', function (req, res) {
     sess = req.session;
-if(sess.email) {
-    var incidentList = [];
-    var newIncident = {
-        _id: randomIntInc(0,9999),
-        incidentName: req.body.incidentName
+    if(sess.email) {
+        var incidentList = [];
+        var newIncident = {
+            _id: randomIntInc(0,9999),
+            incidentName: req.body.incidentName
 
                 //        dateTo: req.body.dt1
-    };
+            };
 
-    mongoClient.connect(url, function (err, db) {
-        if (err) {
-            console.error('Error occured in database');
-            res.send("Error in connection");
-
-        } else {
-            console.log('Connection established ' + url);
-            db.collection('incident').count({incidentName: newIncident.incidentName}, function (err, count) {
+            mongoClient.connect(url, function (err, db) {
                 if (err) {
-                    console.log(err);
+                    console.error('Error occured in database');
+                    res.send("Error in connection");
+
                 } else {
-                    console.log(count);
-                    if (count === 0) {
-                        db.collection('incident').insert(newIncident, function (err, result) {
-                            if (err) {
-                                console.log(err);
+                    console.log('Connection established ' + url);
+                    db.collection('incident').count({incidentName: newIncident.incidentName}, function (err, count) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            console.log(count);
+                            if (count === 0) {
+                                db.collection('incident').insert(newIncident, function (err, result) {
+                                    if (err) {
+                                        console.log(err);
+                                    } else {
+                                        res.redirect("/Home");
+                                    }
+                                });
+
                             } else {
-                                res.redirect("/Home");
+                                res.send("already exists");
+                                db.close();
+
                             }
-                        });
+                        }
 
-                    } else {
-                        res.send("already exists");
-                        db.close();
 
-                    }
+                    });
+
                 }
-
-
             });
-
-        }
-    });
 
 //res.end('<a href="+">Logout</a>');
 } else {
@@ -397,67 +397,67 @@ if(sess.email) {
 
 app.post('/Reports', function (req, res) {
     sess = req.session;
-if(sess.email) {
-    console.log("In open reports");
-    var openIncident = req.body.incidentName;
-    console.log(name);
-    var reportsList = [];
-    incidentsName = openIncident;
-    mongoClient.connect(url, function (err, db) {
+    if(sess.email) {
+        console.log("In open reports");
+        var openIncident = req.body.incidentName;
+        console.log(name);
+        var reportsList = [];
+        incidentsName = openIncident;
+        mongoClient.connect(url, function (err, db) {
 
-        if (err) {
-            console.error('Error occured in database');
-            res.send("Error in connection");
+            if (err) {
+                console.error('Error occured in database');
+                res.send("Error in connection");
 
-        } else {
+            } else {
 
-            console.log('Connection established ');
-            var cursor = db.collection('Disaster').find({incidentName: openIncident});
-            console.log('Reports Fetched');
-            cursor.forEach(function (doc, err) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    reportsList.push(doc);
-                }
+                console.log('Connection established ');
+                var cursor = db.collection('Disaster').find({incidentName: openIncident});
+                console.log('Reports Fetched');
+                cursor.forEach(function (doc, err) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        reportsList.push(doc);
+                        console.log(reportsList);
+                    }
+                }, function () {
+                    // db.close();
+                    console.log(reportsList);
+                    called = true;
+                    res.render('ReportsView', {incidentName: openIncident, vol: reportsList});
+                    incidentReportList = reportsList;
+
+                });
             }
-            , function () {
-                db.close();
-                console.log(reportsList);
-                called = true;
-                res.render('ReportsView', {incidentName: openIncident, vol: reportsList});
-                incidentReportList = reportsList;
-
-            });
-        }
-    });
+        });
     //res.end('<a href="+">Logout</a>');
 } else {
     res.redirect("/Login");
 }
-    });
+});
 //Reports Deletion
 app.post('/deleteReport', function (req, res) {
     sess = req.session;
-if(sess.email) {
-    console.log("In deleteReport");
-    console.log(req.body);
-    var deleteReport = req.body;
-    mongoClient.connect(url, function (err, db) {
-        if (err) {
-            console.error('Error occured in database');
-            res.send("Error in connection");
+    if(sess.email) {
+        console.log("In deleteReport");
+        console.log(req.body);
+        var deleteReport = req.body;
+        mongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.error('Error occured in database');
+                res.send("Error in connection");
 
-        } else {
-            db.collection('Disaster').remove(deleteReport, function (err, result) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    res.redirect("/Reports");
-                }
-            });
-        }
-    });
+            } else {
+                db.collection('Disaster').remove(deleteReport, function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.redirect("/Reports");
+                    }
+                });
+            }
+        });
 //res.end('<a href="+">Logout</a>');
 } else {
     res.redirect("/Login");
@@ -467,8 +467,8 @@ if(sess.email) {
 app.post('/updateReport', function (req, res) {
     // console.log("In updateVolunteer");
     sess = req.session;
-if(sess.email) {
-    console.log(req.body);
+    if(sess.email) {
+        console.log(req.body);
     //res.render('VolunteersView');
     var reportList = [];
     var updatedReport = req.body;
@@ -510,36 +510,36 @@ app.post('/updateVolunteer', function (req, res) {
     // console.log(req.body);
     //res.render('VolunteersView');
     sess = req.session;
-if(sess.email) {
-    var volunteersList = [];
-    var updatedVolunteer = req.body;
-    mongoClient.connect(url, function (err, db) {
-        if (err) {
-            console.error('Error occured in database');
-            res.send("Error in connection");
+    if(sess.email) {
+        var volunteersList = [];
+        var updatedVolunteer = req.body;
+        mongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.error('Error occured in database');
+                res.send("Error in connection");
 
-        } else {
-            console.log('Connection established ' + url);
-            db.collection('Volunteer').update({"_id": updatedVolunteer._id}, {$set: updatedVolunteer}, function (err, result) {
-                if (err) {
-                    console.log(err);
-                } else {
+            } else {
+                console.log('Connection established ' + url);
+                db.collection('Volunteer').update({"_id": updatedVolunteer._id}, {$set: updatedVolunteer}, function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    } else {
 
-                    mongoClient.connect(url, function (err, db) {
+                        mongoClient.connect(url, function (err, db) {
 
-                        if (err) {
-                            console.error('Error occured in database');
-                            res.send("Error in connection");
+                            if (err) {
+                                console.error('Error occured in database');
+                                res.send("Error in connection");
 
-                        } else {
+                            } else {
 
-                            res.redirect("/Volunteers");
-                        }
-                    });
-                }
-            });
-        }
-    });
+                                res.redirect("/Volunteers");
+                            }
+                        });
+                    }
+                });
+            }
+        });
 //res.end('<a href="+">Logout</a>');
 } else {
     res.redirect("/Login");
@@ -549,25 +549,25 @@ if(sess.email) {
 //volunteer deletion
 app.post('/deleteVolunteer', function (req, res) {
     sess = req.session;
-if(sess.email) {
-    console.log("In deleteVolunteer");
-    console.log(req.body);
-    var deleteVolunteer = req.body;
-    mongoClient.connect(url, function (err, db) {
-        if (err) {
-            console.error('Error occured in database');
-            res.send("Error in connection");
+    if(sess.email) {
+        console.log("In deleteVolunteer");
+        console.log(req.body);
+        var deleteVolunteer = req.body;
+        mongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.error('Error occured in database');
+                res.send("Error in connection");
 
-        } else {
-            db.collection('Volunteer').remove(deleteVolunteer, function (err, result) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    res.redirect("/Volunteers");
-                }
-            });
-        }
-    });
+            } else {
+                db.collection('Volunteer').remove(deleteVolunteer, function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.redirect("/Volunteers");
+                    }
+                });
+            }
+        });
 //res.end('<a href="+">Logout</a>');
 } else {
     res.redirect("/Login");
@@ -577,25 +577,25 @@ if(sess.email) {
 //Group Deletion
 app.post('/deleteGroup', function (req, res) {
     sess = req.session;
-if(sess.email) {
-    console.log("In deleteGroup");
-    console.log(req.body);
-    var deleteGroup = req.body;
-    mongoClient.connect(url, function (err, db) {
-        if (err) {
-            console.error('Error occured in database');
-            res.send("Error in connection");
+    if(sess.email) {
+        console.log("In deleteGroup");
+        console.log(req.body);
+        var deleteGroup = req.body;
+        mongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.error('Error occured in database');
+                res.send("Error in connection");
 
-        } else {
-            db.collection('groups').remove(deleteGroup, function (err, result) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    res.redirect("/Groups");
-                }
-            });
-        }
-    });
+            } else {
+                db.collection('groups').remove(deleteGroup, function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.redirect("/Groups");
+                    }
+                });
+            }
+        });
 //res.end('<a href="+">Logout</a>');
 } else {
     res.redirect("/Login");
@@ -605,40 +605,40 @@ if(sess.email) {
 //volunteer insertion
 app.post('/insertVolunteer', function (req, res) {
     sess = req.session;
-if(sess.email) {
-    var volunteersList = [];
-	var passwords= req.body.userName+randomIntInc(1000,9999);
-    var newVolunteer = {
-        _id: randomIntInc(0,9999),
-        userName: req.body.userName,
-        profession: req.body.profession,
-        address: req.body.address,
-        emailID: req.body.emailID,
-        cert: req.body.cert,
-		password: passwords,
-        mobileNumber: req.body.mobileNumber
+    if(sess.email) {
+        var volunteersList = [];
+        var passwords= req.body.userName+randomIntInc(1000,9999);
+        var newVolunteer = {
+            _id: randomIntInc(0,9999),
+            userName: req.body.userName,
+            profession: req.body.profession,
+            address: req.body.address,
+            emailID: req.body.emailID,
+            cert: req.body.cert,
+            password: passwords,
+            mobileNumber: req.body.mobileNumber
 
                 //        dateTo: req.body.dt1
-    };
-    var message= '<a href="http://tinypic.com?ref=19s0uo"  border="0" alt="Image and video hosting by TinyPic"></a> <img src="http://i65.tinypic.com/19s0uo.jpg" name="image" height="150" width="500"/> <br><br> Welcome to Emergency Disaster Management, <br><br>Thank you for creating Emergency Disaster Management account. Your account details <br><br>'+'username: '+newVolunteer.userName+ '<br>password: '+passwords+'<br><br>Please log in to our app with these credentials and update your profile soon.<br><br>Thank you for joining Emergency Disaster Management.<br><br>Sincerely.<br><br> Emergency Disaster Management Team.'; 
-    mongoClient.connect(url, function (err, db) {
-        if (err) {
-            console.error('Error occured in database');
-            res.send("Error in connection");
-
-        } else {
-            console.log('Connection established ' + url);
-            db.collection('Volunteer').count({emailID: newVolunteer.emailID}, function (err, count) {
+            };
+            var message= '<a href="http://tinypic.com?ref=19s0uo"  border="0" alt="Image and video hosting by TinyPic"></a> <img src="http://i65.tinypic.com/19s0uo.jpg" name="image" height="150" width="500"/> <br><br> Welcome to Emergency Disaster Management, <br><br>Thank you for creating Emergency Disaster Management account. Your account details <br><br>'+'username: '+newVolunteer.userName+ '<br>password: '+passwords+'<br><br>Please log in to our app with these credentials and update your profile soon.<br><br>Thank you for joining Emergency Disaster Management.<br><br>Sincerely.<br><br> Emergency Disaster Management Team.'; 
+            mongoClient.connect(url, function (err, db) {
                 if (err) {
-                    console.log(err);
+                    console.error('Error occured in database');
+                    res.send("Error in connection");
+
                 } else {
-                    console.log(count);
-                    if (count === 0) {
-                        db.collection('Volunteer').insert(newVolunteer, function (err, result) {
-                            if (err) {
-                                console.log(err);
-                            } else {
-								var mailOptions = {
+                    console.log('Connection established ' + url);
+                    db.collection('Volunteer').count({emailID: newVolunteer.emailID}, function (err, count) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            console.log(count);
+                            if (count === 0) {
+                                db.collection('Volunteer').insert(newVolunteer, function (err, result) {
+                                    if (err) {
+                                        console.log(err);
+                                    } else {
+                                        var mailOptions = {
     from: 'no-reply@edmsystems.com', // sender address
     to:  newVolunteer.emailID, // list of receivers
     subject: 'Registration succcessful', // Subject line
@@ -655,27 +655,27 @@ if(sess.email) {
 											console.dir(reply);
 										});*/
 										transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-        return console.log(error);
-    }
-    console.log('Message %s sent: %s', info.messageId, info.response);
-});
-                                res.redirect("/Volunteers");
+                                            if (error) {
+                                                return console.log(error);
+                                            }
+                                            console.log('Message %s sent: %s', info.messageId, info.response);
+                                        });
+                                        res.redirect("/Volunteers");
+                                    }
+                                });
+
+                            } else {
+                                res.send("already exists");
+                                db.close();
+
                             }
-                        });
+                        }
 
-                    } else {
-                        res.send("already exists");
-                        db.close();
 
-                    }
+                    });
+
                 }
-
-
             });
-
-        }
-    });
 
 //res.end('<a href="+">Logout</a>');
 } else {
@@ -686,19 +686,32 @@ if(sess.email) {
 //groups retrieval
 app.get('/Groups', function (req, res) {
     sess = req.session;
-if(sess.email) {
-    var groupList = [];
-    mongoClient.connect(url, function (err, db) {
+    if(sess.email) {
+        var groupList = [];
+        var incidentList=[];
+        mongoClient.connect(url, function (err, db) {
 
-        if (err) {
-            console.error('Error occured in database');
-            res.send("Error in connection");
+            if (err) {
+                console.error('Error occured in database');
+                res.send("Error in connection");
 
-        } else {
+            } else {
 
-            console.log('Connection established ' + url);
-            var cursor = db.collection('groups').find();
-            console.log('Groups Fetched');
+                console.log('Connection established ' + url);
+                var cursor = db.collection('groups').find();
+                console.log('Groups Fetched');
+                var cursor1 = db.collection('incident').find();
+                console.log('Volunteers AND INCIDENTS Fetched');
+            //console.log(cursor);
+            cursor1.forEach(function (doc, err) {
+                if (err) {
+                    console.log(err);
+                } else {
+                 incidentList.push(doc);
+             }
+         }, function () {
+
+         });
             cursor.forEach(function (doc, err) {
                 if (err) {
                     console.log(err);
@@ -708,7 +721,7 @@ if(sess.email) {
             }
             , function () {
                 db.close();
-                res.render('GroupsView', {gList: groupList});
+                res.render('GroupsView', {gList: groupList, inci: incidentList});
             });
         }
     });
@@ -721,23 +734,23 @@ if(sess.email) {
 //Reports page
 app.get('/Reports', function (req, res) {
     sess = req.session;
-if(sess.email) {
-    var reportsList = [];
-    console.log('-------------');
+    if(sess.email) {
+        var reportsList = [];
+        console.log('-------------');
 //    console.log(req.body.reportsList);
 //    reportsList = req.body.reportsList;
 if(!called){
-     mongoClient.connect(url, function (err, db) {
+   mongoClient.connect(url, function (err, db) {
 
-        if (err) {
-            console.error('Error occured in database');
-            res.send("Error in connection");
+    if (err) {
+        console.error('Error occured in database');
+        res.send("Error in connection");
 
-        } else {
+    } else {
 
-            console.log('Connection established ');
-            var cursor = db.collection('Disaster').find();
-            console.log('Reports Fetched');
+        console.log('Connection established ');
+        var cursor = db.collection('Disaster').find();
+        console.log('Reports Fetched');
             //console.log(cursor);
             cursor.forEach(function (doc, err) {
                 if (err) {
@@ -769,8 +782,8 @@ else{
 app.post('/updateGroup', function (req, res) {
     // console.log("In updateVolunteer");
     sess = req.session;
-if(sess.email) {
-    console.log(req.body);
+    if(sess.email) {
+        console.log(req.body);
     //res.render('VolunteersView');
     var groupList = [];
     var updatedGroup = req.body;
@@ -810,51 +823,51 @@ if(sess.email) {
 //group insertion
 app.post('/insertGroup', function (req, res) {
     sess = req.session;
-if(sess.email) {
-    console.log("In Insert");
-    var groupList = [];
-    var newGroup = {
-        _id: randomIntInc(0,9999),
-        gName: req.body.groupname,
-        iName: req.body.incidentname,
-        gLead: req.body.GroupLeadMailId,
-        comments: req.body.desc,
-        gMembers: req.body.GroupMem
-    };
+    if(sess.email) {
+        console.log("In Insert");
+        var groupList = [];
+        var newGroup = {
+            _id: randomIntInc(0,9999),
+            gName: req.body.groupname,
+            iName: req.body.incidentname,
+            gLead: req.body.GroupLeadMailId,
+            comments: req.body.desc,
+            gMembers: req.body.GroupMem
+        };
 
-    mongoClient.connect(url, function (err, db) {
-        if (err) {
-            console.error('Error occured in database');
-            res.send("Error in connection");
+        mongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.error('Error occured in database');
+                res.send("Error in connection");
 
-        } else {
-            console.log('Connection established ' + url);
-            db.collection('groups').count({gName: newGroup.gName}, function (err, count) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log(count);
-                    if (count === 0) {
-                        db.collection('groups').insert(newGroup, function (err, result) {
-                            if (err) {
-                                console.log(err);
-                            } else {
-                                res.redirect('/Groups');
-                            }
-                        });
-
+            } else {
+                console.log('Connection established ' + url);
+                db.collection('groups').count({gName: newGroup.gName}, function (err, count) {
+                    if (err) {
+                        console.log(err);
                     } else {
-                        res.send("already exists");
-                        db.close();
+                        console.log(count);
+                        if (count === 0) {
+                            db.collection('groups').insert(newGroup, function (err, result) {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    res.redirect('/Groups');
+                                }
+                            });
 
+                        } else {
+                            res.send("already exists");
+                            db.close();
+
+                        }
                     }
-                }
 
 
-            });
+                });
 
-        }
-    });
+            }
+        });
 
 //res.end('<a href="+">Logout</a>');
 } else {
@@ -864,12 +877,12 @@ if(sess.email) {
 
 app.get('/logout',function(req,res){
     sess=req.session;
-req.session.destroy(function(err) {
-  if(err) {
-    console.log(err);
-  } else {
+    req.session.destroy(function(err) {
+      if(err) {
+        console.log(err);
+    } else {
       sess.email=null;
-    res.redirect('/Login');
+      res.redirect('/Login');
   }
 });
 });
@@ -898,22 +911,22 @@ app.post('/forgotPassword', function (req, res) {
                         console.log('email invalid');
                     } else {
                         var cursor = db.collection('admin').find({emailID: login.emailID});
-                                    console.log('connecting to admin .........');
-                                    cursor.forEach(function (doc, err) {
-                                        if (err) {
-                                            console.log(err);
-                                        } else {
-                                            pass= JSON.stringify(doc.password);
+                        console.log('connecting to admin .........');
+                        cursor.forEach(function (doc, err) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                pass= JSON.stringify(doc.password);
                                             //console.log(doc.password);
                                             var message= '<a href="http://tinypic.com?ref=19s0uo"  border="0" alt="Image and video hosting by TinyPic"></a> <img src="http://i65.tinypic.com/19s0uo.jpg" name="image" height="150" width="500"/> <br><br> Welcome to Emergency Disaster Management, <br><br>Your account details <br>\n\
-<br>'+'username: '+login.emailID+ '<br>\n\
-password: '+pass+'<br>\n\
-<br>Please log in to our app with these credentials and update your profile soon.<br>\n\
-<br>Thank you from Emergency Disaster Management.<br><br>Sincerely.<br>\n\
-<br> Emergency Disaster Management Team.';
+                                            <br>'+'username: '+login.emailID+ '<br>\n\
+                                            password: '+pass+'<br>\n\
+                                            <br>Please log in to our app with these credentials and update your profile soon.<br>\n\
+                                            <br>Thank you from Emergency Disaster Management.<br><br>Sincerely.<br>\n\
+                                            <br> Emergency Disaster Management Team.';
 //                        console.log(pass);
 //                        console.log(message);
-                        var mailOptions = {
+var mailOptions = {
     from: 'no-reply@edmsystems.com', // sender address
     to:  login.emailID, // list of receivers
     subject: 'Emergency Disaster Management Account', // Subject line
@@ -926,9 +939,9 @@ transporter.sendMail(mailOptions, (error, info) => {
     }
     console.log('Message %s sent: %s', info.messageId, info.response);
 });
-                                res.redirect("/Login");
-                                        }
-                                    });
+res.render('LoginView', {invalid: 'femail'});
+}
+});
                         
                     }
                 }
