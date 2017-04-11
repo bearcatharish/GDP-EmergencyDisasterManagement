@@ -268,12 +268,12 @@ and open the template in the editor.
                         </div>
                         <div class="col-md-6">
                             <div class="md-form">
-                                <input class="form-control " type="text" ng-model="groupMem" required>
+                                <input class="form-control " type="text" ng-model="groupMem" name='GroupMem' required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="md-form">
-                                <select ng-model='groupMem' name='GroupMem'>
+                                <select ng-model='groupMem'>
                                     <option ng-repeat = "user in volunteers| filter: groupMem | unique: 'emailID' | orderBy: 'emailID'">{{user.emailID}}</option>
                                 </select>
                             </div>
