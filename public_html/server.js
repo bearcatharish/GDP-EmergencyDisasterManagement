@@ -68,14 +68,6 @@ var sendmail = require('sendmail')();
   devPort: 1025 // Default: False 
 });*/
 
-var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'edmsystems2017@gmail.com',
-        pass: 'Admin2017'
-    }
-});
-
 const TestUtils = require('parse-server').TestUtils;
 var transporter = nodemailer.createTransport({
    service: 'gmail',
@@ -119,8 +111,16 @@ var name="";
 var incidentsName="";
 var incidentReportList=[];
 var called= false;
-
+var newCount = 0;       
+var oldIncident = [];       
+var incidentCount = 0;
 app.get('/Home', function (req, res) {
+    var incidentName = [];
+    var details = {
+                _id : 0,        
+                        incidentName: "",       
+                        count : 0       
+                };
     sess = req.session;
     if(sess.email) {
         var incidentList = [];
@@ -133,24 +133,75 @@ app.get('/Home', function (req, res) {
             } else {
 
                 console.log('Connection established ');
-                var cursor = db.collection('incident').find();
-                cursor.forEach(function (doc, err) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        incidentList.push(doc);
-                    }
-                }
-                , function () {
-                    res.render('HomeView', {Username : name, incident: incidentList});
-                                        //console.log(userList.Username);
-                                        db.close();
-                                    });
-            }
-        });
+                var cursor1 = db.collection('incident').find();
+   cursor1.forEach(function (doc, err) {
+if (err) {
+console.log(err);
+} else {
+
+if (doc.newCount == 0){
+db.collection('Disaster').count({"incidentName": doc.incidentName}, function (err, count){
+if (err) {
+console.log(err);
+} else {
+var updatedCount = {
+"_id": doc._id,
+"incidentName": doc.incidentName,
+"newCount": count
+}
+db.collection('incident').update({"_id": doc._id}, {$set: updatedCount}, function (err, result) {
+if (err) {
+console.log(err);
+} else {}
+});
+}
+});
+
+}
+db.collection('Disaster').count({"incidentName": doc.incidentName}, function (err, count){
+if (err) {
+console.log(err);
+} else {
+var updatedCount = {
+"_id": doc._id,
+"incidentName": doc.incidentName,
+"newCount": count
+};
+db.collection('incident').update({"_id": doc._id}, {$set: updatedCount}, function (err, result) {
+if (err) {
+console.log(err);
+} else {}
+});
+}
+});
+}
+},function(){});
+var cursor2 = db.collection('incident').find();
+cursor2.forEach(function (doc, err) {
+if (err) {
+console.log(err);
+} else {
+var notifyCount = 0;
+notifyCount = doc.newCount - doc.readCount;
+details._id = doc._id;
+details.incidentName = doc.incidentName;
+details.count = notifyCount;
+console.log(details);
+
+
+incidentName.push(details);
+//                                console.log(details);
+details = {_id : 0, incidentName: "", count : 0};
+}
+},function(){
+res.render('HomeView', {Username : name, incident: incidentName});
+console.log(incidentName);
+});
+}
+});
 //res.end('<a href="+">Logout</a>');
 } else {
-    res.redirect("/Login");
+res.redirect("/Login");
 //res.render('LoginPage.html');
 //    res.write('<h1>Please login first.</h1>');
 //    res.end('<a href="./LoginPage.html">Login</a>');
@@ -207,13 +258,21 @@ app.get('/Volunteers', function (req, res) {
 
 //validation logins
 app.post('/Login', function (req, res) {
-    sess = req.session;
     var incidentName = [];
+            var attribute;
+            var c;
+    sess = req.session;
+    // var incidentName = [];
     var login = {
         emailID: req.body.emailID,
         password: req.body.password
 
     };
+    var details = {
+                "_id" : 0,
+                "incidentName": "",
+                "count" : 0
+            };
     mongoClient.connect(url, function (err, db) {
         if (err) {
             console.error('Error occured in database');
@@ -250,34 +309,86 @@ app.post('/Login', function (req, res) {
                                     , function () {
 
                                     });
-                                    cursor = db.collection('incident').find();
-                                    cursor.forEach(function (doc, err) {
+                                    cursor1 = db.collection('incident').find();
+                                    cursor1.forEach(function (doc, err) {
                                         if (err) {
                                             console.log(err);
                                         } else {
-                                            incidentName.push(doc);
-                                            //console.log(incidentName);
-                                            //console.log(name);
-                                        }
+                                           if (doc.newCount == 0){
+                            db.collection('Disaster').count({incidentName: doc.incidentName}, function (err, count){
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    console.log('checking');
+                                    console.log({incidentName: doc.incidentName});
+                                    console.log('counting..........');
+                                    console.log(count);
+                                    var updatedCount = {
+                                        "_id": doc._id,
+                                        "incidentName": doc.incidentName,
+                                        "newCount": count
                                     }
-                                    , function () {
-                                        res.render('HomeView', {Username : name, incident: incidentName});
-                                        console.log(name);
-                                        console.log(incidentName)
-                                        db.close();
-                                    });
+                                    console.log(updatedCount);
+                                    db.collection('incident').update({"_id": doc._id}, {$set: updatedCount}, function (err, result) {
+                                        if (err) {
+                                            console.log(err);
+                                        } else {
+                            //console.log(doc.oldCount);
+                            console.log('Updated........');
+                        }
+                    });
                                 }
+                            });
+                            
+                        }
+                        db.collection('Disaster').count({"incidentName": doc.incidentName}, function (err, count){
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                var updatedCount = {
+                                    "_id": doc._id,
+                                    "incidentName": doc.incidentName,
+                                    "newCount": count
+                                };
+                                db.collection('incident').update({"_id": doc._id}, {$set: updatedCount}, function (err, result) {
+                                    if (err) {
+                                        console.log(err);
+                                    } else {}
+                                });
                             }
                         });
-
                     }
-                }
-            });
-        }
-    });
-    sess.email=req.body.emailID;
-  //res.end('done');
+                },function(){});
+                                            var cursor2 = db.collection('incident').find();
+                                            cursor2.forEach(function (doc, err) {
+                                                if (err) {
+                                                    console.log(err);
+                                                } else {
+                                                    var notifyCount = 0;
+                                                    notifyCount = doc.newCount - doc.readCount;
+                                                    details._id = doc._id;
+                                                    details.incidentName = doc.incidentName;
+                                                    details.count = notifyCount;
+                                                    console.log(details);
+                                                    incidentName.push(details);
+                                                    console.log(details);
+                                                    details = {"_id" : 0, "incidentName": "", "count" : 0};
+                                                }
+                                            },function(){
+                                                res.render('HomeView', {Username : name, incident: incidentName});
+                                                console.log(incidentName);
+                                            });
+                                        }
+                                    }});
+}
+}
 });
+}
+            //db.close(); 
+        });
+sess.email = req.body.emailID;
+                //res.end('done');
+            });
 app.post('/updateIncident', function (req, res) {
     sess = req.session;
     if(sess.email) {
@@ -349,8 +460,10 @@ app.post('/insertIncident', function (req, res) {
     if(sess.email) {
         var incidentList = [];
         var newIncident = {
-            _id: randomIntInc(0,9999),
-            incidentName: req.body.incidentName
+            _id: randomIntInc(0, 9999),
+                    incidentName: req.body.incidentName,
+                    newCount: 0,
+                    readCount:0
 
                 //        dateTo: req.body.dt1
             };
@@ -412,30 +525,49 @@ app.post('/Reports', function (req, res) {
             } else {
 
                 console.log('Connection established ');
-                var cursor = db.collection('Disaster').find({incidentName: openIncident});
-                console.log('Reports Fetched');
-                cursor.forEach(function (doc, err) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        reportsList.push(doc);
-                        console.log(reportsList);
+                var cursor1 = db.collection('incident').find();
+                        console.log('---------------');
+                        
+                        cursor1.forEach(function (doc, err) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                var updatedCount = {
+                                    "_id": doc._id,
+                                    "incidentName": doc.incidentName,
+                                    "readCount": doc.newCount
+                                };
+                                
+                                db.collection('incident').update({"_id": doc._id}, {$set: updatedCount}, function (err, result) {
+                                    if (err) {
+                                        console.log(err);
+                                    } else {}
+                                });
+                            }
+                        },function(){});
+                        var cursor = db.collection('Disaster').find({incidentName: openIncident});
+                        console.log('Reports Fetched');
+                        cursor.forEach(function (doc, err) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                reportsList.push(doc);
+                            }
+                        }
+                        , function () {
+                            db.close();
+                            console.log(reportsList);
+                            called = true;
+                            res.render('ReportsView', {incidentName: openIncident, vol: reportsList});
+                            incidentReportList = reportsList;
+                        });
                     }
-                }, function () {
-                    // db.close();
-                    console.log(reportsList);
-                    called = true;
-                    res.render('ReportsView', {incidentName: openIncident, vol: reportsList});
-                    incidentReportList = reportsList;
-
                 });
+                //res.end('<a href="+">Logout</a>');
+            } else {
+                res.redirect("/Login");
             }
         });
-    //res.end('<a href="+">Logout</a>');
-} else {
-    res.redirect("/Login");
-}
-});
 //Reports Deletion
 app.post('/deleteReport', function (req, res) {
     sess = req.session;
@@ -749,34 +881,53 @@ if(!called){
     } else {
 
         console.log('Connection established ');
-        var cursor = db.collection('Disaster').find();
-        console.log('Reports Fetched');
-            //console.log(cursor);
-            cursor.forEach(function (doc, err) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    reportsList.push(doc);
-                    
+        var cursor1 = db.collection('incident').find();
+                            console.log('---------------');
+                            
+                            cursor1.forEach(function (doc, err) {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    var updatedCount = {
+                                        "_id": doc._id,
+                                        "incidentName": doc.incidentName,
+                                        "readCount": doc.newCount
+                                    };
+                                    notifyCount = doc.newCount - doc.readCount;
+                                    db.collection('incident').update({"_id": doc._id}, {$set: updatedCount}, function (err, result) {
+                                        if (err) {
+                                            console.log(err);
+                                        } else {}
+                                    });
+                                }
+                            },function(){});
+                            var cursor = db.collection('Disaster').find();
+                            console.log('Reports Fetched');
+                //console.log(cursor);
+                cursor.forEach(function (doc, err) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        reportsList.push(doc);
+                    }
                 }
+                , function () {
+                    db.close();
+                    return res.render('ReportsView', {incidentName: "Full", vol: reportsList});
+                });
             }
-            , function () {
-                db.close();
-                return res.render('ReportsView', {incidentName: "Full",vol: reportsList});
-            });
-        }
-    });
-}
-else{
-    res.render('ReportsView', {incidentName: incidentsName,vol: incidentReportList});
-    called=false;
-    incidentReportList = [];
-    incidentsName="";
-}
-//res.end('<a href="+">Logout</a>');
-} else {
-    res.redirect("/Login");
-}
+        });
+                }
+                else{
+                    res.render('ReportsView', {incidentName: incidentsName, vol: incidentReportList});
+                    called = false;
+                    incidentReportList = [];
+                    incidentsName = "";
+                }
+        //res.end('<a href="+">Logout</a>');
+    } else {
+        res.redirect("/Login");
+    }
 });
 //groups update
 app.post('/updateGroup', function (req, res) {

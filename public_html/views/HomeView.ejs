@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-
+    <meta http-equiv="refresh content="30;URL=http://localhost:3001/Home">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -229,7 +229,6 @@
                                     <ul class="row list-unstyled" style="list-style-type:none">
                                         <li class="col-md-4" ng-repeat="x in incidents| orderBy:'_id'"> 
                                             <div class="card card-block">
-
                                                 <button style="float:left" type='submit' id="deleteDemo" ng-model="x._id" ng-hide="viewField" class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal" ng-click="delete(x)">
                                                     <span class="fa fa-trash"></span>
                                                 </button>
@@ -251,7 +250,7 @@
 
 
                                                <button style="float:left" type='submit' ng-click="openReports(x)" ng-model="x._id"  class="btn btn-primary btn-sm">
-                                                <span class="glyphicon glyphicon-bell"></span> Open reports</button>
+                                                <span class="glyphicon glyphicon-bell"><b><sup id="super" ng-bind="x.count"></sup></b></span> Open reports</button>
 
                                                 <!--</form>-->
                                             </div>
@@ -373,7 +372,9 @@
                                     $scope.modify = function (x) {
                                         $scope.editingData[x._id] = true;
                                     };
-
+                                    setTimeout(function(){      
+                                    window.location.reload(1);      
+                                    }, 30000);
                                     $scope.delete = function (x) {
                                         var _id = x._id;
                                         var name = x.incidentName;
