@@ -1003,6 +1003,27 @@ app.post('/insertGroup', function (req, res) {
                                 if (err) {
                                     console.log(err);
                                 } else {
+                                    var message= '<a href="http://tinypic.com?ref=19s0uo"  border="0" alt="Image and video hosting by TinyPic"></a> <img src="http://i65.tinypic.com/19s0uo.jpg" name="image" height="150" width="500"/> <br><br> Greetings from Emergency Disaster Management,<br>\n\
+<br> Your Group Name: '+newGroup.gName+'<br>Team Lead: '+newGroup.gLead+'<br>Team Members: '+newGroup.gMembers+'<br><br> Rescue operation details: <br> Incident: '+newGroup.iName+ '<br>\n\
+                                            Full Description: '+newGroup.comments+'<br>\n\
+                                            <br>Please log in to our EDM app in iOS and report the disaster ASAP.<br>"Saving a life gives more happiness than anything else!"\n\
+                                            <br>Thank you from Emergency Disaster Management.<br><br>Sincerely.\n\
+                                            <br> Emergency Disaster Management Team.';
+//                        console.log(pass);
+//                        console.log(message);
+var mailOptions = {
+    from: 'no-reply@edmsystems.com', // sender address
+    to:  newGroup.gLead+','+newGroup.gMembers, // list of receivers
+    subject: 'Emergency Disaster Management Account', // Subject line
+    text: 'no-reply@edmsystems.com', // plain text body
+    html: message // html body
+};
+transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+        return console.log(error);
+    }
+    console.log('Message %s sent: %s', info.messageId, info.response);
+});
                                     res.redirect('/Groups');
                                 }
                             });
